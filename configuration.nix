@@ -52,11 +52,6 @@
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
-  
-  # Install fonts.
-  fonts.fonts = with pkgs; [
-    noto-fonts-cjk
-  ];
 
   services = {
     xserver = {
@@ -95,13 +90,6 @@
     };
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget vim
-    glxinfo firefox
-  ];
-
   programs = {
     # Enable SUID wrappers.
     mtr.enable = true;
@@ -116,6 +104,33 @@
       theme = "agnoster";
     };
   };
+
+  fonts = {
+    # Install fonts.
+    fonts = with pkgs; [
+      noto-fonts-cjk
+    ];
+    fontconfig = {
+      defaultFonts = {
+        sansSerif = [ 
+          "Noto Sans CJK SC" 
+          "Noto Sans CJK TC" 
+          "Noto Sans CJK JP" 
+        ];
+        monospace = [ 
+          "Noto Sans CJK SC" 
+          "Noto Sans CJK TC" 
+          "Noto Sans CJK JP" 
+        ];
+      };
+    };
+  };
+
+  # Install system packages explicitly.
+  environment.systemPackages = with pkgs; [
+    wget vim
+    glxinfo firefox
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
