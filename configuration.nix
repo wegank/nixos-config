@@ -44,7 +44,10 @@
     inputMethod = {
       # Enable Fcitx.
       enabled = "fcitx";
-      fcitx.engines = with pkgs.fcitx-engines; [ libpinyin cloudpinyin ];
+      fcitx.engines = with pkgs.fcitx-engines; [ 
+        libpinyin
+        cloudpinyin 
+      ];
     };
   };
 
@@ -90,21 +93,6 @@
     };
   };
 
-  programs = {
-    # Enable SUID wrappers.
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-    # Enable Oh my ZSH.
-    zsh.ohMyZsh = {
-      enable = true;
-      plugins = [ "git" "python" "man" ];
-      theme = "agnoster";
-    };
-  };
-
   fonts = {
     # Install fonts.
     fonts = with pkgs; [
@@ -126,10 +114,27 @@
     };
   };
 
-  # Install system packages explicitly.
+  programs = {
+    # Enable SUID wrappers.
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    # Enable Oh my ZSH.
+    zsh.ohMyZsh = {
+      enable = true;
+      plugins = [ "git" "python" "man" ];
+      theme = "agnoster";
+    };
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   environment.systemPackages = with pkgs; [
-    wget vim
-    glxinfo firefox
+    firefox
   ];
 
   # This value determines the NixOS release from which the default
