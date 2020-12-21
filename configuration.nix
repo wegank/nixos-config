@@ -1,6 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# System configuration.
 
 { config, pkgs, ... }:
 
@@ -57,6 +55,7 @@
       # Configure keymap in X11.
       layout = "us";
       xkbOptions = "eurosign:e";
+      xkbVariant = "intl";
 
       displayManager = {
         # Enable SDDM.
@@ -125,7 +124,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    firefox
+    chromium
   ];
 
   # NixOS release.
