@@ -83,7 +83,7 @@
     users.weijia = {
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
-      password = import ./password.nix;
+      initialPassword = "changeme";
     };
   };
 

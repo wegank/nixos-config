@@ -11,5 +11,4 @@ mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
 nixos-generate-config --root /mnt
 cp configuration.nix /mnt/etc/nixos/
-cp password.nix /mnt/etc/nixos/
 nixos-install --no-root-passwd
