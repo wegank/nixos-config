@@ -2,11 +2,13 @@
 
 { config, pkgs, ... }:
 
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+{ 
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    # Include Home Manager.
+    <home-manager/nixos>
+  ];
 
   boot = {
     # Use the latest Linux kernel.
@@ -54,18 +56,37 @@
       enable = true;
       # Configure keymap in X11.
       layout = "us";
-      xkbOptions = "eurosign:e";
       xkbVariant = "intl";
 
-      displayManager = {
-        # Enable SDDM.
-        sddm.enable = true;
-        # Enable autologin.
-        autoLogin.enable = true;
-        autoLogin.user = "weijia";
+      desktopManager = {
+        xterm.enable = false;
       };
-      # Enable the Plasme 5 desktop.
-      desktopManager.plasma5.enable = true;
+
+      displayManager = {
+        # Enable LightDM.
+        lightdm.enable = true;
+        # Enable autologin.
+        autoLogin = {
+          enable = true;
+          user = "weijia";
+        };
+      };
+
+      # Enable the i3 tiling window manager.
+      windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+        extraPackages = with pkgs; [
+          dmenu
+          i3blocks
+          i3lock
+          i3status
+          lxappearance
+          networkmanagerapplet
+          rxvt-unicode
+        ];
+      };
+
       # Enable touchpad support.
       libinput.enable = true;
     };
@@ -79,10 +100,12 @@
 
   # Define a user account.
   users = {
-    mutableUsers = false;
     users.weijia = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" ];
+      extraGroups = [
+        "wheel"
+        "networkmanager" 
+      ];
       initialPassword = "changeme";
     };
   };
@@ -90,7 +113,11 @@
   fonts = {
     # Install fonts.
     fonts = with pkgs; [
+      hack-font
+      noto-fonts
       noto-fonts-cjk
+      noto-fonts-emoji
+      noto-fonts-extra
     ];
     fontconfig = {
       defaultFonts = {
@@ -99,33 +126,25 @@
           "Noto Sans CJK TC" 
           "Noto Sans CJK JP" 
         ];
-        monospace = [ 
-          "Noto Sans CJK SC" 
-          "Noto Sans CJK TC" 
-          "Noto Sans CJK JP" 
-        ];
       };
     };
   };
 
-  programs = {
-    # Enable SUID wrappers.
-    mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-    # Enable Oh my ZSH.
-    zsh.ohMyZsh = {
-      enable = true;
-      plugins = [ "git" "python" "man" ];
-      theme = "agnoster";
+  environment = {
+    pathsToLink = [
+      "/libexec"
+    ];
+    variables = {
+      EDITOR = "urxvt";
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    chromium
-  ];
+  # Enable Home Manager.
+  home-manager = {
+    useUserPackages = true;
+    useGlobalPkgs = true;
+    users.weijia = import ./home.nix;
+  };
 
   # NixOS release.
   system.stateVersion = "20.09";
