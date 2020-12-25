@@ -26,7 +26,8 @@
   networking = {
     # Set hostname.
     hostName = "workstation";
-    # Disable wireless support.
+    # Enable NetworkManager.
+    networkmanager.enable = true;
     wireless.enable = false;
     # Enable DHCP.
     useDHCP = false;
@@ -51,6 +52,17 @@
     keyMap = "us";
   };
 
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    extraConfig = "
+      load-module 
+      module-native-protocol-tcp 
+      auth-ip-acl=127.0.0.1
+    ";
+  };
+
   services = {
     xserver = {
       enable = true;
@@ -63,8 +75,8 @@
       };
 
       displayManager = {
-        # Enable LightDM.
-        lightdm.enable = true;
+        # Enable GDM.
+        gdm.enable = true;
         # Enable autologin.
         autoLogin = {
           enable = true;
@@ -72,31 +84,23 @@
         };
       };
 
-      # Enable the i3 tiling window manager.
-      windowManager.i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
-        extraPackages = with pkgs; [
-          dmenu
-          i3blocks
-          i3lock
-          i3status
-          lxappearance
-          networkmanagerapplet
-          rxvt-unicode
-        ];
-      };
-
       # Enable touchpad support.
       libinput.enable = true;
     };
     # Enable CUPS to print documents.
     printing.enable = true;
-  };
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+    mpd = {
+      enable = true;
+      extraConfig = ''
+        audio_output {
+          type "pulse"
+          name "Pulseaudio"
+          server "127.0.0.1"
+        }
+      '';
+    };
+  };
 
   # Define a user account.
   users = {
@@ -118,6 +122,7 @@
       noto-fonts-cjk
       noto-fonts-emoji
       noto-fonts-extra
+      powerline-fonts
     ];
     fontconfig = {
       defaultFonts = {
@@ -134,8 +139,12 @@
     pathsToLink = [
       "/libexec"
     ];
-    variables = {
-      EDITOR = "urxvt";
+  };
+
+  # Enable the Sway tiling compositor.
+  programs = {
+    sway = {
+      enable = true;
     };
   };
 

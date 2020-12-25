@@ -3,26 +3,41 @@
 { pkgs, ... }: 
 
 {
+  wayland.windowManager.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+    config = {
+      modifier = "Mod4";
+      terminal = "alacritty";
+      gaps = {
+        inner = 4;
+        outer = 2;
+      };
+    };
+  };
+
   home.packages = with pkgs; [
+    # Sway
+    alacritty
+    kanshi
+    mako  # notification daemon.
+    networkmanagerapplet
+    swayidle
+    swaylock  # lockscreen.
+    waybar  # status bar.
+    wl-clipboard
+    wofi
+    xwayland  # for legacy apps.
+
     neofetch
-    vscodium
   ];
   
   programs = {
     chromium = {
       enable = true;
       extensions = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm"  # ublock origin
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm"  # ublock origin.
       ];
-    };
-
-    urxvt = {
-      enable = true;
-      fonts = [ "xft:Hack:size=9" ];
-      extraConfig = {
-        background = "black";
-        foreground = "white";
-      };
     };
 
     vscode = {
