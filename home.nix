@@ -5,14 +5,28 @@
 {
   wayland.windowManager.sway = {
     enable = true;
-    wrapperFeatures.gtk = true;
     config = {
-      modifier = "Mod4";
-      terminal = "alacritty";
       gaps = {
         inner = 4;
         outer = 2;
       };
+      input = {
+        "*" = {
+          xkb_variant = "intl";
+        };
+      };
+      modifier = "Mod4";
+      terminal = "alacritty";
+    };
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      ibus-daemon -drx
+    '';
+    wrapperFeatures = {
+      gtk = true;
     };
   };
 
@@ -46,6 +60,12 @@
       extensions = with pkgs.vscode-extensions; [ 
         bbenoist.Nix
       ];
+      userSettings = {
+        "update.mode" = "none";
+        "terminal.integrated.fontFamily" = "
+          'Meslo LG S for Powerline'
+        ";
+      };
     };
 
     zsh = {

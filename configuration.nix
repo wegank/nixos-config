@@ -38,11 +38,10 @@
   i18n = {
     defaultLocale = "fr_FR.UTF-8";
     inputMethod = {
-      # Enable Fcitx.
-      enabled = "fcitx";
-      fcitx.engines = with pkgs.fcitx-engines; [ 
+      # Enable iBus.
+      enabled = "ibus";
+      ibus.engines = with pkgs.ibus-engines; [ 
         libpinyin
-        cloudpinyin 
       ];
     };
   };
@@ -69,7 +68,7 @@
       # Configure keymap in X11.
       layout = "us";
       xkbVariant = "intl";
-
+      
       desktopManager = {
         xterm.enable = false;
       };
@@ -111,6 +110,7 @@
         "networkmanager" 
       ];
       initialPassword = "changeme";
+      shell = pkgs.zsh;
     };
   };
 
@@ -138,6 +138,9 @@
   environment = {
     pathsToLink = [
       "/libexec"
+    ];
+    systemPackages = with pkgs; [
+      qt5.qtwayland
     ];
   };
 
