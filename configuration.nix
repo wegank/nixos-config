@@ -38,10 +38,11 @@
   i18n = {
     defaultLocale = "fr_FR.UTF-8";
     inputMethod = {
-      # Enable iBus.
-      enabled = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [ 
+      # Enable Fcitx.
+      enabled = "fcitx";
+      fcitx.engines = with pkgs.fcitx-engines; [ 
         libpinyin
+        cloudpinyin
       ];
     };
   };
@@ -68,21 +69,19 @@
       # Configure keymap in X11.
       layout = "us";
       xkbVariant = "intl";
-      
-      desktopManager = {
-        xterm.enable = false;
-      };
-
       displayManager = {
-        # Enable GDM.
-        gdm.enable = true;
+        lightdm.enable = true;
         # Enable autologin.
         autoLogin = {
           enable = true;
           user = "weijia";
         };
       };
-
+      # Enable the i3 tiling window manager.
+      windowManager.i3 = {
+        enable = true;
+        package = pkgs.i3-gaps;
+      };
       # Enable touchpad support.
       libinput.enable = true;
     };
@@ -105,12 +104,12 @@
   users = {
     users.weijia = {
       isNormalUser = true;
+      initialPassword = "changeme";
+      shell = pkgs.zsh;
       extraGroups = [
         "wheel"
         "networkmanager" 
       ];
-      initialPassword = "changeme";
-      shell = pkgs.zsh;
     };
   };
 
@@ -139,14 +138,10 @@
     pathsToLink = [
       "/libexec"
     ];
-    systemPackages = with pkgs; [
-      qt5.qtwayland
-    ];
   };
 
-  # Enable the Sway tiling compositor.
   programs = {
-    sway = {
+    dconf = {
       enable = true;
     };
   };
