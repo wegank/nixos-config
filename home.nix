@@ -52,6 +52,8 @@
     networkmanagerapplet
 
     # userland.
+    gitAndTools.gitFull
+    gitAndTools.gh
     neofetch
   ];
   
