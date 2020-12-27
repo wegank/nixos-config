@@ -1,6 +1,6 @@
 # nixos-config
 
 ```bash
-sudo ./install.sh
+sudo ./tools/install.sh
 reboot
 ```
