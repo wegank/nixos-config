@@ -23,7 +23,11 @@ format_and_mount () {
 }
 
 install () {
-    nixos-install --no-root-passwd --flake ".#$1"
+    nix-shell -p nixUnstable --run \
+        "nix build --experimental-features \
+        'flakes nix-command' \
+        .#nixosConfigurations.$1.config.system.build.toplevel"
+    nixos-install --no-root-passwd --root /mnt --system ./result
 }
 
 upgrade () {
