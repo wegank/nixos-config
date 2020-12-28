@@ -13,12 +13,12 @@
         system = "x86_64-linux";
         modules = [
           ./hardware/parallels.nix
-          ./configuration.nix
+          ./system/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
               useUserPackages = true;
               useGlobalPkgs = true;
-              users.weijia = import ./home.nix;
+              users.weijia = import ./user/home.nix;
             };
           }
         ];
