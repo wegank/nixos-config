@@ -1,12 +1,15 @@
 #!/run/current-system/sw/bin/bash
-if [[ $(id -u) -ne 0 ]]; then
-    echo "Please run as root."
-    exit 1
-fi
-if [[ $1 == "upgrade" ]] && [[ $2 == "" ]]; then
-    nixos-rebuild switch --upgrade --flake '.#parallels' --no-write-lock-file
-    exit
-elif [[ $1 == "install" ]] && [[ $2 == "" ]]; then
+
+default=parallels
+
+check_root () {
+    if [[ $(id -u) -ne 0 ]]; then
+        echo "Please run as root."
+        exit 1
+    fi
+}
+
+format_and_mount () {
     parted -s /dev/sda mklabel gpt
     parted -s /dev/sda mkpart ESP fat32 1MiB 512MiB
     parted -s /dev/sda set 1 esp on
@@ -17,10 +20,27 @@ elif [[ $1 == "install" ]] && [[ $2 == "" ]]; then
     mount /dev/disk/by-label/nixos /mnt
     mkdir -p /mnt/boot
     mount /dev/disk/by-label/boot /mnt/boot
-    sleep 1
-    nixos-install --no-root-passwd --flake '.#parallels'
+}
+
+install () {
+    nixos-install --no-root-passwd --flake ".#$1"
+}
+
+upgrade () {
+    nixos-rebuild switch --upgrade --flake ".#$1" --no-write-lock-file
+}
+
+if [[ $1 == "upgrade" ]] && [[ $3 == "" ]]; then
+    check_root
+    upgrade ${2:-$default}
     exit
-else
-    echo "Unrecognized command."
-    exit 1
+elif [[ $1 == "install" ]] && [[ $3 == "" ]]; then
+    check_root
+    format_and_mount
+    sleep 1
+    install ${2:-$default}
+    exit
 fi
+
+echo "Unrecognized command."
+exit 1
