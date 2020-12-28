@@ -10,13 +10,6 @@
     '';
   };
 
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    # Include Home Manager.
-    <home-manager/nixos>
-  ];
-
   boot = {
     # Use the latest Linux kernel.
     kernelPackages = pkgs.linuxPackages_latest;
