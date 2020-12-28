@@ -8,11 +8,11 @@
   };
 
   outputs = { self, home-manager, nixpkgs }: {
-    nixosConfigurations = {
-      parallels = nixpkgs.lib.nixosSystem {
+    nixosConfigurations = builtins.mapAttrs ( hostname: _: 
+      nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hardware/parallels.nix
+          (./hardware + "/${hostname}" + /hardware-configuration.nix)
           ./system/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
@@ -22,7 +22,7 @@
             };
           }
         ];
-      };
-    };
+      }
+    ) (builtins.readDir ./hardware);
   };
 }
