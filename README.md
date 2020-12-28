@@ -6,7 +6,7 @@
 curl https://raw.githubusercontent.com/wegank/nixos-config/main/naive | sudo bash -s -- netinstall
 ```
 
-or, equivalently,
+Or, equivalently, after cloning the repo:
 
 ```bash
 sudo ./naive install
