@@ -1,6 +1,5 @@
 # nixos-config
 
 ```bash
-sudo ./naive install
-reboot
+curl https://raw.githubusercontent.com/wegank/nixos-config/main/naive | sudo bash -s -- netinstall
 ```

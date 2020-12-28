@@ -53,12 +53,14 @@ elif [[ $1 == "install" ]] && [[ $3 == "" ]]; then
     format_and_mount
     sleep 1
     install ${2:-$default}
+    reboot
     exit
 elif [[ $1 == "netinstall" ]] && [[ $2 == "" ]]; then
     check_root
     format_and_mount
     sleep 1
     netinstall
+    reboot
     exit
 fi
 
