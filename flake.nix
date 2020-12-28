@@ -9,10 +9,10 @@
 
   outputs = { self, home-manager, nixpkgs }: {
     nixosConfigurations = {
-      workstation = nixpkgs.lib.nixosSystem {
+      parallels = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hardware-configuration.nix
+          ./hardware/parallels.nix
           ./configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager = {
