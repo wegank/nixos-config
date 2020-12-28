@@ -152,13 +152,6 @@
     };
   };
 
-  # Enable Home Manager.
-  home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
-    users.weijia = import ./home.nix;
-  };
-
   # NixOS release.
   system.stateVersion = "20.09";
 }
