@@ -2,7 +2,7 @@
 
 { config, pkgs, ... }:
 
-{ 
+{
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -144,7 +144,7 @@
       enable = true;
     };
   };
-
+  
   # NixOS release.
   system.stateVersion = "20.09";
 }

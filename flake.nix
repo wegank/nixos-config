@@ -5,15 +5,26 @@
     home-manager.url = 
       "github:nix-community/home-manager/release-20.09";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, home-manager, nixpkgs }: {
+  outputs = { self, home-manager, nixpkgs, nixpkgs-unstable }: {
     nixosConfigurations = builtins.mapAttrs ( hostname: _: 
       nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
+        modules = let defaults = { pkgs, ... }: {
+          _module.args.nixpkgs-unstable = 
+            import nixpkgs-unstable {
+              config.allowUnfree = true;
+              inherit (pkgs.stdenv.targetPlatform) system; 
+            };
+        }; in [
+          defaults
+          # Hardware configuration
           (./hardware + "/${hostname}" + /hardware-configuration.nix)
+          # System configuration
           ./system/configuration.nix
+          # Home Manager
           home-manager.nixosModules.home-manager {
             home-manager = {
               useUserPackages = true;

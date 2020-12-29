@@ -1,5 +1,5 @@
 # Hardware configuration.
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, nixpkgs-unstable, ... }:
 
 {
   imports = [ 
@@ -34,4 +34,10 @@
   };
 
   swapDevices = [ ];
+
+  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = [
+    (config.boot.kernelPackages.callPackage ./prl-tools.nix {})
+    # (nixpkgs-unstable.pkgs.linuxPackages.callPackage ./prl-tools.nix {})
+  ];
 }

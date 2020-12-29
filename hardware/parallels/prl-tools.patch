@@ -1,0 +1,28 @@
+diff -puNr build/prl-tools-build/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c /build/prl-tools-build/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
+--- build/prl-tools-build/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
++++ build/prl-tools-build/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
+@@ -55,7 +55,11 @@ void init_buffer_descriptor(struct buffe
+ 	bd->buf = buf;
+ 	bd->len = len;
+ 	bd->write = (write == 0) ? 0 : 1;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 9, 0)
++	bd->user = (user == 0) ? 0 : uaccess_kernel() ? 0 : 1;
++#else
+ 	bd->user = (user == 0) ? 0 : segment_eq(get_fs(), USER_DS) ? 1 : 0;
++#endif
+ 	bd->flags = TG_REQ_COMMON;
+ }
+ 
+diff -puNr /build/prl-tools-build/kmods/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.c /build/prl-tools-build/kmods/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.c
+--- /build/prl-tools-build/kmods/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.c
++++ /build/prl-tools-build/kmods/prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.c
+@@ -20,6 +20,9 @@
+ #include <linux/workqueue.h>
+ #include <linux/namei.h>
+ #include <linux/slab.h>
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 9, 0)
++#include <linux/blkdev.h>
++#endif
+ #include <asm/uaccess.h>
+ #include "prlfs_freeze_compat.h"
+
