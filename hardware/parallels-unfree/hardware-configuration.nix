@@ -34,4 +34,9 @@
   };
 
   swapDevices = [ ];
+
+  nixpkgs.config.allowUnfree = true;
+  environment.systemPackages = [
+    (config.boot.kernelPackages.callPackage ./prl-tools.nix {})
+  ];
 }

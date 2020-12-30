@@ -15,7 +15,6 @@
         modules = let defaults = { pkgs, ... }: {
           _module.args.nixpkgs-unstable = 
             import nixpkgs-unstable {
-              config.allowUnfree = true;
               inherit (pkgs.stdenv.targetPlatform) system; 
             };
         }; in [
