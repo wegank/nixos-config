@@ -112,7 +112,7 @@ stdenv.mkDerivation rec {
         cp ../parallels-video.rules 99-parallels-video.rules
         cp ../xorg-prlmouse.rules 69-xorg-prlmouse.rules
         for i in *.rules; do
-          sed 's,/bin/bash,${stdenv.shell},g' $i > $out/lib/udev/rules.d/$i
+          sed 's,/bin/sh,${stdenv.shell},g' $i > $out/lib/udev/rules.d/$i
         done
         
         (
