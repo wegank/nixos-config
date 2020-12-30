@@ -42,7 +42,7 @@ stdenv.mkDerivation rec {
     ( cd $sourceRoot/tools/tools${if x64 then "64" else "32"} )
   '';
 
-  patches = [ "./prl-tools.patch" ];
+  patches = [ ./prl-tools.patch ];
 
   kernelVersion = if libsOnly then "" else lib.getVersion kernel.name;
   kernelDir = if libsOnly then "" else "${kernel.dev}/lib/modules/${kernelVersion}";
@@ -83,7 +83,7 @@ stdenv.mkDerivation rec {
     fi
 
     ( # tools
-      cd tools
+      cd tools/tools${if x64 then "64" else "32"}
       mkdir -p $out/lib
 
       if test -z "$libsOnly"; then
@@ -104,7 +104,7 @@ stdenv.mkDerivation rec {
         done
 
         mkdir -p $out/bin
-        install -Dm755 ../installer/prlfsmountd.sh $out/sbin/prlfsmountd
+        install -Dm755 ../../tools/prlfsmountd.sh $out/sbin/prlfsmountd
         wrapProgram $out/sbin/prlfsmountd \
           --prefix PATH ':' "$scriptPath"
 
