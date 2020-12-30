@@ -1,7 +1,7 @@
 { stdenv, lib, makeWrapper, p7zip
 , gawk, utillinux, xorg, glib, dbus-glib, zlib
 , kernel ? null, libsOnly ? false
-, fetchurl, undmg
+, fetchurl, undmg, python3, autoPatchelfHook, addOpenGLRunpath
 }:
 
 assert (!libsOnly) -> kernel != null;
@@ -26,8 +26,12 @@ stdenv.mkDerivation rec {
 
   hardeningDisable = [ "pic" "format" ];
 
-  # also maybe python2 to generate xorg.conf
-  nativeBuildInputs = [ p7zip undmg ] ++ lib.optionals (!libsOnly) [ makeWrapper ] ++ kernel.moduleBuildDependencies;
+  # also maybe python3 to generate xorg.conf
+  nativeBuildInputs = [ p7zip undmg python3 autoPatchelfHook addOpenGLRunpath ] 
+    ++ lib.optionals (!libsOnly) [ makeWrapper ] ++ kernel.moduleBuildDependencies;
+
+  buildInputs = with xorg; [ stdenv.cc.cc libXrandr libXext libX11 libXcomposite libXinerama ]
+    ++ lib.optionals (!libsOnly) [ libXi glib dbus-glib zlib ];
 
   inherit libsOnly;
 
@@ -61,7 +65,7 @@ stdenv.mkDerivation rec {
       )
 
       # Xorg config (maybe would be useful for other versions)
-      #python2 installer/xserver-config.py xorg ${xorgVer} /dev/null parallels.conf
+      python3 installer/xserver-config.py xorg ${xorgVer} /dev/null parallels.conf
     fi
   '';
 
@@ -93,13 +97,6 @@ stdenv.mkDerivation rec {
           install -Dm755 $i $out/$i
         done
 
-        for i in $out/bin/* $out/sbin/*; do
-          patchelf \
-            --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-            --set-rpath "$out/lib:$libPath" \
-            $i || true
-        done
-
         mkdir -p $out/bin
         install -Dm755 ../../tools/prlfsmountd.sh $out/sbin/prlfsmountd
         wrapProgram $out/sbin/prlfsmountd \
@@ -110,12 +107,25 @@ stdenv.mkDerivation rec {
         done
 
         mkdir -p $out/lib/udev/rules.d
-        cp ../parallels-video.rules 99-parallels-video.rules
-        cp ../xorg-prlmouse.rules 69-xorg-prlmouse.rules
-        for i in *.rules; do
-          sed 's,/bin/sh,${stdenv.shell},g' $i > $out/lib/udev/rules.d/$i
-        done
+        install -Dm644 ../xorg-prlmouse.rules $out/lib/udev/rules.d/69-xorg-prlmouse.rules
         
+        mkdir -p $out/etc/udev/rules.d
+        sed 's,/bin/sh,${stdenv.shell},g' ../parallels-video.rules > ../parallels-video.rules
+        install -Dm644 ../parallels-video.rules $out/etc/udev/rules.d/99-parallels-video.rules
+
+        mkdir -p $out/share/X11/xorg.conf.d
+        install -Dm644 ../prlmouse.conf $out/lib/share/X11/xorg.conf.d/90-xorg-prlmouse.conf
+        install -Dm644 ../../parallels.conf $out/lib/share/X11/xorg.conf.d/40-prltools.conf
+
+        mkdir -p $out/etc/modprobe.d
+        install -Dm644 ../../installer/blacklist-parallels.conf $out/etc/modprobe.d
+        
+        mkdir -p $out/share/man/man8
+        install -Dm644 ../mount.prl_fs.8 $out/share/man/man8
+
+        mkdir -p $out/etc/pm/sleep.d
+        install -Dm644 ../99prltoolsd-hibernate $out/etc/pm/sleep.d
+
         (
           cd xorg.${xorgVer}
           # Install the X modules.
@@ -142,11 +152,7 @@ stdenv.mkDerivation rec {
         )
       fi
       
-      cd $out
-      find -name \*.so\* -type f -exec \
-        patchelf --set-rpath "$out/lib:$libPath" {} \;
-
-      cd lib
+      cd $out/lib
       libGLname=$(echo libGL.so*)
       ln -s $libGLname libGL.so
       ln -s $libGLname libGL.so.1
@@ -158,8 +164,10 @@ stdenv.mkDerivation rec {
     )
   '';
 
-  dontStrip = true;
-  dontPatchELF = true;
+  postFixup = ''
+    addOpenGLRunpath $out/lib/xorg/modules/extensions/libglx.so
+    addOpenGLRunpath $out/lib/xorg/modules/drivers/*.so
+  '';
 
   meta = with stdenv.lib; {
     description = "Parallels Tools for Linux guests";

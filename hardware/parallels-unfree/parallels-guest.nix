@@ -46,20 +46,30 @@ in
 
   config = mkIf config.hardware.parallels.enable {
     services.xserver = {
+      drivers = singleton {
+        name = "prlvideo";
+        modules = [ prl-tools ];
+        display = true;
+      };
+
       screenSection = ''
         Option "NoMTRR"
       '';
 
       config = ''
         Section "InputClass"
-          Identifier "prlmouse"
-          MatchIsPointer "on"
-          MatchTag "prlmouse"
-          Driver "prlmouse"
+          Identifier      "prlmouse"
+          MatchIsPointer  "on"
+          MatchTag        "prlmouse"
+          Driver          "prlmouse"
         EndSection
       '';
     };
-    
+
+    hardware.opengl.package = prl-tools;
+    hardware.opengl.package32 = pkgs.pkgsi686Linux.linuxPackages.prl-tools.override { libsOnly = true; kernel = null; };
+    # hardware.opengl.setLdLibraryPath = true;
+
     services.udev.packages = [ prl-tools ];
 
     environment.systemPackages = [ prl-tools ];
@@ -67,6 +77,8 @@ in
     boot.extraModulePackages = [ prl-tools ];
 
     boot.kernelModules = [ "prl_tg" "prl_eth" "prl_fs" "prl_fs_freeze" "prl_vid" ];
+
+    # boot.blacklistedKernelModules = [ "iCTO_wdt" "virtio_gpu" ];
 
     services.timesyncd.enable = false;
 
