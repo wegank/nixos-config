@@ -2,8 +2,11 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
+  disabledModules = [ "virtualisation/parallels-guest.nix" ];
+
   imports = [ 
     (modulesPath + "/profiles/qemu-guest.nix")
+    ./parallels-guest.nix
   ];
   
   boot = {
@@ -36,7 +39,8 @@
   swapDevices = [ ];
 
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = [
-    (config.boot.kernelPackages.callPackage ./prl-tools.nix {})
-  ];
+  hardware.parallels = {
+    enable = true;
+    package = (config.boot.kernelPackages.callPackage ./prl-tools.nix {});
+  };
 }
