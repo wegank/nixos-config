@@ -91,10 +91,6 @@ stdenv.mkDerivation rec {
         for i in bin/* sbin/prl_nettool sbin/prl_snapshot; do
           install -Dm755 $i $out/$i
         done
-        # other binaries
-        for i in xorg.7.1/usr/bin/*; do
-          cp $i $out/bin
-        done
 
         for i in $out/bin/* $out/sbin/*; do
           patchelf \
@@ -108,16 +104,12 @@ stdenv.mkDerivation rec {
         wrapProgram $out/sbin/prlfsmountd \
           --prefix PATH ':' "$scriptPath"
 
-        for i in lib/*.a; do
-          cp $i $out/lib
-        done
-
-        for i in xorg.7.1/usr/lib/libprl_wmouse_watcher.*; do
+        for i in lib/*.0.0; do
           cp $i $out/lib
         done
 
         mkdir -p $out/lib/udev/rules.d
-        for i in *.rules; do
+        for i in ../*.rules; do
           sed 's,/bin/bash,${stdenv.shell},g' $i > $out/lib/udev/rules.d/$i
         done
 
@@ -139,11 +131,7 @@ stdenv.mkDerivation rec {
           )
         )
       fi
-
-      for i in xorg.7.1/usr/lib/libGL.*; do
-        cp $i $out/lib
-      done
-
+      
       cd $out
       find -name \*.so\* -type f -exec \
         patchelf --set-rpath "$out/lib:$libPath" {} \;
@@ -152,6 +140,9 @@ stdenv.mkDerivation rec {
       libGLname=$(echo libGL.so*)
       ln -s $libGLname libGL.so
       ln -s $libGLname libGL.so.1
+
+      ln -s libPrlDRI.so.1.0.0 libPrlDRI.so.1
+      ln -s libPrlWl.so.1.0.0 libPrlWl.so.1
     )
   '';
 
