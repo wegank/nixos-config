@@ -46,8 +46,6 @@ in
 
   config = mkIf config.hardware.parallels.enable {
     services.xserver = {
-      videoDrivers = mkOverride 50 [ "prlvideo" ];
-
       screenSection = ''
         Option "NoMTRR"
       '';
@@ -61,11 +59,7 @@ in
         EndSection
       '';
     };
-
-    hardware.opengl.package = prl-tools;
-    hardware.opengl.package32 = pkgs.pkgsi686Linux.linuxPackages.prl-tools.override { libsOnly = true; kernel = null; };
-    hardware.opengl.setLdLibraryPath = true;
-
+    
     services.udev.packages = [ prl-tools ];
 
     environment.systemPackages = [ prl-tools ];
