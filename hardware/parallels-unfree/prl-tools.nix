@@ -153,6 +153,8 @@ stdenv.mkDerivation rec {
 
       ln -s libPrlDRI.so.1.0.0 libPrlDRI.so.1
       ln -s libPrlWl.so.1.0.0 libPrlWl.so.1
+      ln -s libEGL.so.1.0.0 libEGL.so.1
+      ln -s libgbm.so.1.0.0 libgbm.so.1
     )
   '';
 
