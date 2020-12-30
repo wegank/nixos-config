@@ -109,10 +109,12 @@ stdenv.mkDerivation rec {
         done
 
         mkdir -p $out/lib/udev/rules.d
-        for i in ../*.rules; do
+        cp ../parallels-video.rules 99-parallels-video.rules
+        cp ../xorg-prlmouse.rules 69-xorg-prlmouse.rules
+        for i in *.rules; do
           sed 's,/bin/bash,${stdenv.shell},g' $i > $out/lib/udev/rules.d/$i
         done
-
+        
         (
           cd xorg.${xorgVer}
           # Install the X modules.
