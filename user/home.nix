@@ -21,12 +21,12 @@
       terminal = "alacritty";
     };
   };
-
+  
   xdg = {
     enable = true;
     userDirs.enable = true;
   };
-
+  
   gtk = {
     enable = true;
     font = {

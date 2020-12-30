@@ -130,6 +130,13 @@ stdenv.mkDerivation rec {
             ln -s $libGLXname $out/lib/xorg/modules/extensions/libglx.so.1
           )
         )
+
+        (
+          cd x-server/modules
+          for i in */*; do
+            install -Dm755 $i $out/lib/xorg/modules/$i
+          done
+        )
       fi
       
       cd $out
