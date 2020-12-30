@@ -19,11 +19,11 @@
             };
         }; in [
           defaults
-          # Hardware configuration
+          # Hardware configuration.
           (./hardware + "/${hostname}" + /hardware-configuration.nix)
-          # System configuration
+          # System configuration.
           ./system/configuration.nix
-          # Home Manager
+          # Home Manager.
           home-manager.nixosModules.home-manager {
             home-manager = {
               useUserPackages = true;
