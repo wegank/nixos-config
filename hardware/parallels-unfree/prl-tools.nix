@@ -1,7 +1,7 @@
 { stdenv, lib, makeWrapper, p7zip
 , gawk, utillinux, xorg, glib, dbus-glib, zlib
 , kernel ? null, libsOnly ? false
-, fetchurl, undmg, python3, autoPatchelfHook, addOpenGLRunpath
+, fetchurl, undmg, perl, python3, autoPatchelfHook, addOpenGLRunpath
 }:
 
 assert (!libsOnly) -> kernel != null;
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
   hardeningDisable = [ "pic" "format" ];
 
   # also maybe python3 to generate xorg.conf
-  nativeBuildInputs = [ p7zip undmg python3 autoPatchelfHook addOpenGLRunpath ] 
+  nativeBuildInputs = [ p7zip undmg python3 perl autoPatchelfHook addOpenGLRunpath ] 
     ++ lib.optionals (!libsOnly) [ makeWrapper ] ++ kernel.moduleBuildDependencies;
 
   buildInputs = with xorg; [ stdenv.cc.cc libXrandr libXext libX11 libXcomposite libXinerama ]
@@ -147,16 +147,21 @@ stdenv.mkDerivation rec {
         (
           cd x-server/modules
           for i in */*; do
+            install -Dm755 $i $out/lib/$i
             install -Dm755 $i $out/lib/xorg/modules/$i
           done
         )
       fi
       
-      cd $out/lib
-      libGLname=$(echo libGL.so*)
-      ln -s $libGLname libGL.so
-      ln -s $libGLname libGL.so.1
+      mkdir -p $out/lib/drivers
+      perl -pi -e 's/prl_vtg/\/prl_tg/s' $out/lib/xorg/modules/drivers/prlvidel_drv.so
+      cp $out/lib/xorg/modules/drivers/prlvidel_drv.so $out/lib/prlvidel_drv.so
+      cp $out/lib/prlvidel_drv.so $out/lib/drivers/prlvidel_drv.so 
+      # cp $out/lib/prlvidel_drv.so $out/lib/xorg/modules/prlvidel_drv.so
 
+      cd $out/lib
+      ln -s libGL.so.1.0.0 libGL.so
+      ln -s libGL.so.1.0.0 libGL.so.1
       ln -s libPrlDRI.so.1.0.0 libPrlDRI.so.1
       ln -s libPrlWl.so.1.0.0 libPrlWl.so.1
       ln -s libEGL.so.1.0.0 libEGL.so.1
@@ -165,6 +170,7 @@ stdenv.mkDerivation rec {
   '';
 
   postFixup = ''
+    cd tools/tools${if x64 then "64" else "32"}
     addOpenGLRunpath $out/lib/xorg/modules/extensions/libglx.so
     addOpenGLRunpath $out/lib/xorg/modules/drivers/*.so
   '';

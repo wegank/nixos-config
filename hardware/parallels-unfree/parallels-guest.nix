@@ -46,28 +46,24 @@ in
 
   config = mkIf config.hardware.parallels.enable {
     services.xserver = {
+      videoDrivers = [ "prlvideo" ];
+      /*
       drivers = singleton {
         name = "prlvideo";
         modules = [ prl-tools ];
-        display = true;
+        display = false;
       };
-
+      */
       screenSection = ''
         Option "NoMTRR"
       '';
 
-      config = ''
-        Section "InputClass"
-          Identifier      "prlmouse"
-          MatchIsPointer  "on"
-          MatchTag        "prlmouse"
-          Driver          "prlmouse"
-        EndSection
-      '';
+      # config = mkOverride 50 (builtins.readFile ./xserver.conf);
     };
 
     hardware.opengl.package = prl-tools;
     hardware.opengl.package32 = pkgs.pkgsi686Linux.linuxPackages.prl-tools.override { libsOnly = true; kernel = null; };
+    hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
     # hardware.opengl.setLdLibraryPath = true;
 
     services.udev.packages = [ prl-tools ];
