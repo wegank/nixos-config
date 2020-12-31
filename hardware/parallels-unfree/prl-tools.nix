@@ -45,7 +45,7 @@ stdenv.mkDerivation rec {
     ( cd $sourceRoot/tools/tools${if x64 then "64" else "32"} )
   '';
 
-  patches = [ ./prl-tools.patch ];
+  patches = if stdenv.lib.versionAtLeast kernel.version "5.9" then [ ./prl-tools.patch ] else [ ];
 
   kernelVersion = if libsOnly then "" else lib.getVersion kernel.name;
   kernelDir = if libsOnly then "" else "${kernel.dev}/lib/modules/${kernelVersion}";
