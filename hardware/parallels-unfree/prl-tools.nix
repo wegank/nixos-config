@@ -29,7 +29,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ p7zip undmg perl autoPatchelfHook ] 
     ++ lib.optionals (!libsOnly) [ makeWrapper ] ++ kernel.moduleBuildDependencies;
 
-  buildInputs = with xorg; [ stdenv.cc.cc libXrandr libXext libX11 libXcomposite libXinerama xf86videofbdev xf86videovesa ]
+  buildInputs = with xorg; [ stdenv.cc.cc libXrandr libXext libX11 libXcomposite libXinerama ]
     ++ lib.optionals (!libsOnly) [ libXi glib dbus-glib zlib ];
 
   inherit libsOnly;

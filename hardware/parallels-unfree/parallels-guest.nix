@@ -47,6 +47,16 @@ in
   config = mkIf config.hardware.parallels.enable {
     services.xserver = {
       videoDrivers = [ "prlvideo" ];
+      modules = [ prl-tools ];
+      config = ''
+        Section "InputClass"
+          Identifier      "prlmouse"
+          MatchIsPointer  "on"
+          MatchTag        "prlmouse"
+          Driver          "prlmouse"
+        EndSection
+      '';
+      
       /*
       drivers = singleton {
         name = "prlvideo";
@@ -55,46 +65,12 @@ in
       };
       config = mkOverride 50 (builtins.readFile ./xserver.conf);
       */
-      
-      deviceSection = ''
-        Identifier      "Parallels Video"
-        # Driver        "prlvideo"
-      '';
-
-      monitorSection = ''
-        VendorName      "Parallels Inc."
-        ModelName       "Parallels Monitor"
-      '';
-
-      screenSection = ''
-        Identifier      "Parallels Screen"
-        Device          "Parallels Video"
-        Monitor         "Parallels Monitor"
-        Option          "NoMTRR"
-      '';
-
-      serverFlagsSection = ''
-        Option          "AllowEmptyInput"       "yes"
-        Option          "AutoAddDevices"        "yes"
-      '';
-
-      /*
-      serverLayoutSection = ''
-        Screen          "Parallels Screen"
-      '';
-
-      inputClassSections = [ ''
-        Identifier      "prlmouse"
-        MatchIsPointer  "on"
-        MatchTag        "prlmouse"
-        Driver          "prlmouse"
-      '' ];
-      */
     };
 
     hardware.opengl.package = prl-tools;
     hardware.opengl.package32 = pkgs.pkgsi686Linux.linuxPackages.prl-tools.override { libsOnly = true; kernel = null; };
     hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
+    hardware.opengl.extraPackages32 = [ pkg.pkgsi686Linux.mesa.drivers ];
 
     services.udev.packages = [ prl-tools ];
 
