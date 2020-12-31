@@ -1,7 +1,7 @@
 { stdenv, lib, makeWrapper, p7zip
 , gawk, utillinux, xorg, glib, dbus-glib, zlib
 , kernel ? null, libsOnly ? false
-, fetchurl, undmg, perl, python3, autoPatchelfHook, addOpenGLRunpath
+, fetchurl, undmg, perl, autoPatchelfHook
 }:
 
 assert (!libsOnly) -> kernel != null;
@@ -26,11 +26,10 @@ stdenv.mkDerivation rec {
 
   hardeningDisable = [ "pic" "format" ];
 
-  # also maybe python3 to generate xorg.conf
-  nativeBuildInputs = [ p7zip undmg python3 perl autoPatchelfHook addOpenGLRunpath ] 
+  nativeBuildInputs = [ p7zip undmg perl autoPatchelfHook ] 
     ++ lib.optionals (!libsOnly) [ makeWrapper ] ++ kernel.moduleBuildDependencies;
 
-  buildInputs = with xorg; [ stdenv.cc.cc libXrandr libXext libX11 libXcomposite libXinerama ]
+  buildInputs = with xorg; [ stdenv.cc.cc libXrandr libXext libX11 libXcomposite libXinerama xf86videofbdev xf86videovesa ]
     ++ lib.optionals (!libsOnly) [ libXi glib dbus-glib zlib ];
 
   inherit libsOnly;
@@ -63,16 +62,8 @@ stdenv.mkDerivation rec {
           SRC=$kernelDir/build \
           KVER=$kernelVersion
       )
-
-      # Xorg config (maybe would be useful for other versions)
-      python3 installer/xserver-config.py xorg ${xorgVer} /dev/null parallels.conf
     fi
   '';
-
-  libPath = with xorg;
-            stdenv.lib.makeLibraryPath ([ stdenv.cc.cc libXrandr libXext libX11 libXcomposite libXinerama ]
-            ++ lib.optionals (!libsOnly) [ libXi glib dbus-glib zlib ]);
-
 
   installPhase = ''
     if test -z "$libsOnly"; then
@@ -113,13 +104,6 @@ stdenv.mkDerivation rec {
         sed 's,/bin/sh,${stdenv.shell},g' ../parallels-video.rules > ../parallels-video.rules
         install -Dm644 ../parallels-video.rules $out/etc/udev/rules.d/99-parallels-video.rules
 
-        mkdir -p $out/share/X11/xorg.conf.d
-        install -Dm644 ../prlmouse.conf $out/lib/share/X11/xorg.conf.d/90-xorg-prlmouse.conf
-        install -Dm644 ../../parallels.conf $out/lib/share/X11/xorg.conf.d/40-prltools.conf
-
-        mkdir -p $out/etc/modprobe.d
-        install -Dm644 ../../installer/blacklist-parallels.conf $out/etc/modprobe.d
-        
         mkdir -p $out/share/man/man8
         install -Dm644 ../mount.prl_fs.8 $out/share/man/man8
 
@@ -139,8 +123,9 @@ stdenv.mkDerivation rec {
             cd usr/lib
             libGLXname=$(echo libglx.so*)
             install -Dm755 $libGLXname $out/lib/xorg/modules/extensions/$libGLXname
-            ln -s $libGLXname $out/lib/xorg/modules/extensions/libglx.so
-            ln -s $libGLXname $out/lib/xorg/modules/extensions/libglx.so.1
+            # disabled libglx.so; won't boot
+            # ln -s $libGLXname $out/lib/xorg/modules/extensions/libglx.so
+            # ln -s $libGLXname $out/lib/xorg/modules/extensions/libglx.so.1
           )
         )
 
@@ -154,10 +139,9 @@ stdenv.mkDerivation rec {
       fi
       
       mkdir -p $out/lib/drivers
+      
       perl -pi -e 's/prl_vtg/\/prl_tg/s' $out/lib/xorg/modules/drivers/prlvidel_drv.so
-      cp $out/lib/xorg/modules/drivers/prlvidel_drv.so $out/lib/prlvidel_drv.so
-      cp $out/lib/prlvidel_drv.so $out/lib/drivers/prlvidel_drv.so 
-      # cp $out/lib/prlvidel_drv.so $out/lib/xorg/modules/prlvidel_drv.so
+      cp $out/lib/xorg/modules/drivers/prlvidel_drv.so $out/lib/drivers/prlvidel_drv.so
 
       cd $out/lib
       ln -s libGL.so.1.0.0 libGL.so
@@ -169,12 +153,6 @@ stdenv.mkDerivation rec {
     )
   '';
 
-  postFixup = ''
-    cd tools/tools${if x64 then "64" else "32"}
-    addOpenGLRunpath $out/lib/xorg/modules/extensions/libglx.so
-    addOpenGLRunpath $out/lib/xorg/modules/drivers/*.so
-  '';
-
   meta = with stdenv.lib; {
     description = "Parallels Tools for Linux guests";
     homepage = "https://parallels.com";
@@ -183,5 +161,6 @@ stdenv.mkDerivation rec {
     # I was making this package blindly and requesting testing from the real user,
     # so I can't even test it by myself and won't provide future updates.
     maintainers = with maintainers; [ abbradar ];
+    priority = 4;
   };
 }

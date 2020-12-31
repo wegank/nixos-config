@@ -51,20 +51,50 @@ in
       drivers = singleton {
         name = "prlvideo";
         modules = [ prl-tools ];
-        display = false;
+        display = true;
       };
+      config = mkOverride 50 (builtins.readFile ./xserver.conf);
       */
-      screenSection = ''
-        Option "NoMTRR"
+      
+      deviceSection = ''
+        Identifier      "Parallels Video"
+        # Driver        "prlvideo"
       '';
 
-      # config = mkOverride 50 (builtins.readFile ./xserver.conf);
+      monitorSection = ''
+        VendorName      "Parallels Inc."
+        ModelName       "Parallels Monitor"
+      '';
+
+      screenSection = ''
+        Identifier      "Parallels Screen"
+        Device          "Parallels Video"
+        Monitor         "Parallels Monitor"
+        Option          "NoMTRR"
+      '';
+
+      serverFlagsSection = ''
+        Option          "AllowEmptyInput"       "yes"
+        Option          "AutoAddDevices"        "yes"
+      '';
+
+      /*
+      serverLayoutSection = ''
+        Screen          "Parallels Screen"
+      '';
+
+      inputClassSections = [ ''
+        Identifier      "prlmouse"
+        MatchIsPointer  "on"
+        MatchTag        "prlmouse"
+        Driver          "prlmouse"
+      '' ];
+      */
     };
 
     hardware.opengl.package = prl-tools;
     hardware.opengl.package32 = pkgs.pkgsi686Linux.linuxPackages.prl-tools.override { libsOnly = true; kernel = null; };
     hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
-    # hardware.opengl.setLdLibraryPath = true;
 
     services.udev.packages = [ prl-tools ];
 
@@ -73,8 +103,6 @@ in
     boot.extraModulePackages = [ prl-tools ];
 
     boot.kernelModules = [ "prl_tg" "prl_eth" "prl_fs" "prl_fs_freeze" "prl_vid" ];
-
-    # boot.blacklistedKernelModules = [ "iCTO_wdt" "virtio_gpu" ];
 
     services.timesyncd.enable = false;
 
