@@ -107,6 +107,7 @@
       shell = pkgs.zsh;
       extraGroups = [
         "wheel"
+        "adbusers"
         "networkmanager" 
       ];
     };
@@ -140,6 +141,9 @@
   };
 
   programs = {
+    adb = {
+      enable = true;
+    };
     dconf = {
       enable = true;
     };
