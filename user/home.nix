@@ -84,6 +84,7 @@
           "'Meslo LG S for Powerline'";
         "git.enableSmartCommit" = true;
         "update.mode" = "none";
+        "diffEditor.ignoreTrimWhitespace" = false;
       };
     };
 
