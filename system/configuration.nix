@@ -39,10 +39,9 @@
     defaultLocale = "fr_FR.UTF-8";
     inputMethod = {
       # Enable Fcitx.
-      enabled = "fcitx";
-      fcitx.engines = with pkgs.fcitx-engines; [ 
-        libpinyin
-        cloudpinyin
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [ 
+        fcitx5-chinese-addons
       ];
     };
   };

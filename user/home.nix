@@ -14,7 +14,7 @@
       modifier = "Mod4";
       startup = [
         {
-          command = "fcitx -d";
+          command = "fcitx5 -d";
           notification = false;
         }
       ];
@@ -35,11 +35,11 @@
     };
     iconTheme = {
       name = "breeze-dark";
-      package = pkgs.kdeFrameworks.breeze-icons;
+      package = pkgs.breeze-icons;
     };
     theme = {
       name = "Breeze-Dark";
-      package = pkgs.plasma5.breeze-gtk;
+      package = pkgs.breeze-gtk;
     };
   };
 
