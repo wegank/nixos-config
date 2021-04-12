@@ -42,11 +42,19 @@ upgrade () {
     nixos-rebuild switch --upgrade --flake ".#$1" --no-write-lock-file
 }
 
+clean () {
+    nix-collect-garbage -d
+}
+
 trap 'exit 1' ERR
 
 if [[ $1 == "upgrade" ]] && [[ $3 == "" ]]; then
     check_root
     upgrade ${2:-$default}
+    exit
+elif [[ $1 == "clean" ]] && [[ $2 == "" ]]; then
+    check_root
+    clean
     exit
 elif [[ $1 == "install" ]] && [[ $3 == "" ]]; then
     check_root
