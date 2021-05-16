@@ -103,6 +103,7 @@
   fonts = {
     # Install fonts.
     fonts = with pkgs; [
+      font-awesome
       hack-font
       noto-fonts
       noto-fonts-cjk

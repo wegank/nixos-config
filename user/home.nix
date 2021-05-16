@@ -55,7 +55,6 @@
     mako
     swaylock
     swayidle
-    waybar
     wl-clipboard
     wofi
 
