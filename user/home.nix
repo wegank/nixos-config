@@ -3,23 +3,28 @@
 { pkgs, ... }: 
 
 {
-  xsession.windowManager.i3 = {
+  wayland.windowManager.sway = {
     enable = true;
-    package = pkgs.i3-gaps;
     config = {
       gaps = {
         inner = 4;
         outer = 2;
       };
       modifier = "Mod4";
-      startup = [
-        {
-          command = "fcitx5 -d";
-          notification = false;
-        }
-      ];
+      output = {
+        "Virtual-1" = {
+          mode = "--custom 1680x945@60Hz";
+        };
+      };
       terminal = "alacritty";
     };
+    extraSessionCommands = ''
+      export WLR_NO_HARDWARE_CURSORS=1
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      export _JAVA_AWT_WM_NONREPARENTING=1
+    '';
   };
   
   xdg = {
@@ -44,14 +49,23 @@
   };
 
   home.packages = with pkgs; [
-    # i3.
-    dmenu
-    i3lock
-    i3blocks
-    lxappearance
+    # Sway.
+    kanshi
     networkmanagerapplet
+    mako
+    swaylock
+    swayidle
+    waybar
+    wl-clipboard
+    wofi
 
-    # userland.
+    # Theming.
+    gtk-engine-murrine
+    gtk_engines
+    gsettings-desktop-schemas
+    lxappearance
+
+    # Userland.
     gitAndTools.gitFull
     gitAndTools.gh
     neofetch
@@ -67,10 +81,6 @@
       extensions = [
         "cjpalhdlnbpafiamejdnhcphjbkeiagm"  # ublock origin.
       ];
-    };
-
-    i3status = {
-      enable = true;
     };
 
     vscode = {
@@ -99,10 +109,6 @@
   };
 
   services = {
-    dunst = {
-      enable = true;
-    };
-
     gpg-agent = {
       enable = true;
       defaultCacheTtl = 1800;

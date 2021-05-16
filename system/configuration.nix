@@ -51,16 +51,10 @@
     keyMap = "us";
   };
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    extraConfig = 
-      "load-module " +
-      "module-native-protocol-tcp " + 
-      "auth-ip-acl=127.0.0.1";
+  security = {
+    rtkit.enable = true;
   };
-
+  
   services = {
     xserver = {
       enable = true;
@@ -68,17 +62,13 @@
       layout = "us";
       xkbVariant = "intl";
       displayManager = {
-        lightdm.enable = true;
+        gdm.enable = true;
         # Enable autologin.
         autoLogin = {
           enable = true;
           user = "weijia";
         };
-      };
-      # Enable the i3 tiling window manager.
-      windowManager.i3 = {
-        enable = true;
-        package = pkgs.i3-gaps;
+        defaultSession = "sway";
       };
       # Enable touchpad support.
       libinput.enable = true;
@@ -86,15 +76,13 @@
     # Enable CUPS to print documents.
     printing.enable = true;
 
-    mpd = {
+    pipewire = {
       enable = true;
-      extraConfig = ''
-        audio_output {
-          type "pulse"
-          name "Pulseaudio"
-          server "127.0.0.1"
-        }
-      '';
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
     };
   };
 
@@ -140,12 +128,9 @@
   };
 
   programs = {
-    adb = {
-      enable = true;
-    };
-    dconf = {
-      enable = true;
-    };
+    adb.enable = true;
+    dconf.enable = true;
+    sway.enable = true;
   };
   
   # NixOS release.
