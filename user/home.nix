@@ -10,14 +10,19 @@
         inner = 4;
         outer = 2;
       };
+      menu = "bemenu-run";
       modifier = "Mod4";
       output = {
         "Virtual-1" = {
-          mode = "--custom 1680x945@60Hz";
+          mode = "1920x1080";
+          scale = "1.1";
         };
       };
       terminal = "alacritty";
     };
+    extraConfig = ''
+      xwayland disable
+    '';
     extraSessionCommands = ''
       export WLR_NO_HARDWARE_CURSORS=1
       export SDL_VIDEODRIVER=wayland
@@ -25,6 +30,7 @@
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
       export _JAVA_AWT_WM_NONREPARENTING=1
     '';
+    xwayland = false;
   };
   
   xdg = {
@@ -50,23 +56,24 @@
 
   home.packages = with pkgs; [
     # Sway.
+    bemenu
     kanshi
     networkmanagerapplet
     mako
-    swaylock
     swayidle
+    swaylock
     wl-clipboard
     wofi
 
     # Theming.
+    gsettings-desktop-schemas
     gtk-engine-murrine
     gtk_engines
-    gsettings-desktop-schemas
     lxappearance
 
     # Userland.
-    gitAndTools.gitFull
     gitAndTools.gh
+    gitAndTools.gitFull
     neofetch
   ];
   
