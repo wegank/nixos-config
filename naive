@@ -1,6 +1,6 @@
 #!/run/current-system/sw/bin/bash
 
-default=parallels
+default=vmware
 
 check_root () {
     if [[ $(id -u) -ne 0 ]]; then
