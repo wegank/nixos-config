@@ -97,7 +97,14 @@
 
     vscode = {
       enable = true;
-      package = pkgs.vscodium;
+      package = (pkgs.vscode-with-extensions.override {
+        vscode = pkgs.vscodium;
+        vscodeExtensions = with pkgs.vscode-extensions; [ 
+          bbenoist.nix
+        ];
+      }).overrideAttrs (old: {
+        inherit (pkgs.vscodium) pname version;
+      });
       extensions = with pkgs.vscode-extensions; [ 
         bbenoist.nix
       ];
