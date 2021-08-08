@@ -29,9 +29,7 @@
     # Enable NetworkManager.
     networkmanager.enable = true;
     wireless.enable = false;
-    # Enable DHCP.
     useDHCP = false;
-    interfaces.enp0s5.useDHCP = true;
   };
 
   # Select internationalisation properties.
