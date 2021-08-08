@@ -1,3 +1,19 @@
 # nixos-config
 
-This project is no longer active, since [Sway does not run in VMWare Fusion](https://github.com/swaywm/sway/issues/5834).
+## Install
+
+```bash
+curl https://raw.githubusercontent.com/wegank/nixos-config/main/naive | sudo bash -s -- netinstall
+```
+
+Or, equivalently, after cloning the repo:
+
+```bash
+sudo ./naive install
+```
+
+## Upgrade
+
+```bash
+sudo ./naive upgrade
+```
