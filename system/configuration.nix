@@ -132,6 +132,10 @@
   programs = {
     adb.enable = true;
     dconf.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
     sway.enable = true;
   };
   
