@@ -124,6 +124,9 @@
     pathsToLink = [
       "/libexec"
     ];
+    systemPackages = with pkgs; [
+      git
+    ];
   };
 
   programs = {
