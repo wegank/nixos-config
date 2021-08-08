@@ -29,7 +29,7 @@ install () {
 
 netinstall () {
     nix-shell -p nixUnstable --run \
-        "nixos-install --no-root-passwd --root /mnt --flake .#github:wegank/nixos-config#$1"
+        "nixos-install --no-root-passwd --root /mnt --flake github:wegank/nixos-config#$1"
 }
 
 upgrade () {
