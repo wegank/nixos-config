@@ -93,7 +93,7 @@
       enable = true;
       package = pkgs.vscodium;
       extensions = with pkgs.vscode-extensions; [ 
-        bbenoist.Nix
+        bbenoist.nix
       ];
       userSettings = {
         "terminal.integrated.fontFamily" =
