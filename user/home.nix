@@ -54,6 +54,12 @@
     };
   };
 
+  manual = {
+    manpages = {
+      enable = false;
+    };
+  };
+
   home.packages = with pkgs; [
     # Sway.
     bemenu
