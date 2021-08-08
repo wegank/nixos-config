@@ -105,9 +105,6 @@
       }).overrideAttrs (old: {
         inherit (pkgs.vscodium) pname version;
       });
-      extensions = with pkgs.vscode-extensions; [ 
-        bbenoist.nix
-      ];
       userSettings = {
         "terminal.integrated.fontFamily" =
           "'Meslo LG S for Powerline'";
