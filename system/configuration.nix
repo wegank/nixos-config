@@ -130,7 +130,7 @@
   };
 
   programs = {
-    adb.enable = true;
+    # adb.enable = true;
     dconf.enable = true;
     gnupg.agent = {
       enable = true;
