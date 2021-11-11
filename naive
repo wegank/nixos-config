@@ -37,6 +37,10 @@ upgrade () {
     nixos-rebuild switch --upgrade --flake ".#$1" --no-write-lock-file
 }
 
+full_upgrade () {
+    nixos-rebuild switch --upgrade --flake ".#$1" --recreate-lock-file
+}
+
 clean () {
     nix-collect-garbage -d
 }
@@ -46,6 +50,10 @@ trap 'exit 1' ERR
 if [[ $1 == "upgrade" ]] && [[ $3 == "" ]]; then
     check_root
     upgrade ${2:-$default}
+    exit
+elif [[ $1 == "full-upgrade" ]] && [[ $3 == "" ]]; then
+    check_root
+    full_upgrade ${2:-$default}
     exit
 elif [[ $1 == "clean" ]] && [[ $2 == "" ]]; then
     check_root
