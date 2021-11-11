@@ -59,6 +59,7 @@
       # Configure keymap in X11.
       layout = "us";
       xkbVariant = "intl";
+      exportConfiguration = true;
       displayManager = {
         gdm.enable = true;
         # Enable autologin.
