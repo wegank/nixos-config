@@ -21,7 +21,7 @@
       output = {
         "Virtual-1" = {
           mode = "1680x1050";
-          # scale = "1.1";
+          scale = "1.1";
         };
       };
       terminal = "alacritty";
