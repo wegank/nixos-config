@@ -14,10 +14,10 @@
       kernelModules = [ ];
     };
     kernelModules = [ ];
-    extraModulePackages = [ ];
-    extraKernelParams = [
+    kernelParams = [
       "root=/dev/sda2"
     ];
+    extraModulePackages = [ ];
   };
 
   fileSystems = {
