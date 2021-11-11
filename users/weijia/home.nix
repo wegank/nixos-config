@@ -86,6 +86,7 @@
     # Userland.
     android-tools
     neofetch
+    pandoc
   ];
   
   programs = {
