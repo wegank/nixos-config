@@ -124,13 +124,9 @@
     pathsToLink = [
       "/libexec"
     ];
-    systemPackages = with pkgs; [
-      git
-    ];
   };
 
   programs = {
-    # adb.enable = true;
     dconf.enable = true;
     gnupg.agent = {
       enable = true;
