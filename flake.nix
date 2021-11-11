@@ -9,7 +9,10 @@
   outputs = { self, home-manager, nixpkgs }: {
     nixosConfigurations = builtins.mapAttrs ( hostname: _: 
       nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = {
+          parallels = "aarch64-linux";
+          vmware = "x86_64-linux";
+        }.hostname;
         modules = [
           # Hardware configuration.
           (./hardware + "/${hostname}" + /hardware-configuration.nix)
