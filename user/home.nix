@@ -10,6 +10,12 @@
         inner = 4;
         outer = 2;
       };
+      input = {
+        "*" = {
+          xkb_layout = "fr";
+          xkb_variant = "mac";
+        }; 
+      };
       menu = "bemenu-run";
       modifier = "Mod4";
       output = {
