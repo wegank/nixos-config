@@ -84,6 +84,7 @@
     lxappearance
 
     # Userland.
+    android-tools
     neofetch
   ];
   
