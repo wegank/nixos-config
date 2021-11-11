@@ -10,6 +10,7 @@ check_root () {
 }
 
 format_and_mount () {
+    umount -R /mnt
     parted -s /dev/sda mklabel gpt
     parted -s /dev/sda mkpart ESP fat32 1MiB 512MiB
     parted -s /dev/sda set 1 esp on
