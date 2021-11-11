@@ -15,6 +15,9 @@
     };
     kernelModules = [ ];
     extraModulePackages = [ ];
+    extraKernelParams = [
+      "root=/dev/sda2"
+    ];
   };
 
   fileSystems = {
