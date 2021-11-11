@@ -46,7 +46,7 @@
 
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "fr";
+    useXkbConfig = true;
   };
 
   security = {
