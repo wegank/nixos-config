@@ -23,7 +23,9 @@
             home-manager = {
               useUserPackages = true;
               useGlobalPkgs = true;
-              users.weijia = import ./user/home.nix;
+              users = builtins.mapAttrs ( username: _:
+                ./users + "/${username}" + /home.nix
+              ) (builtins.readDir ./users);
             };
           }
         ];
