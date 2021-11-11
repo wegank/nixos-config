@@ -12,7 +12,7 @@
         system = {
           parallels = "aarch64-linux";
           vmware = "x86_64-linux";
-        }.hostname;
+        }.${hostname};
         modules = [
           # Hardware configuration.
           (./hardware + "/${hostname}" + /hardware-configuration.nix)
