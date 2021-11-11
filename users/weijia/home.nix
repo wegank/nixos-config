@@ -84,8 +84,6 @@
     lxappearance
 
     # Userland.
-    gitAndTools.gh
-    gitAndTools.gitFull
     neofetch
   ];
   
@@ -99,6 +97,25 @@
       extensions = [
         "cjpalhdlnbpafiamejdnhcphjbkeiagm"  # ublock origin.
       ];
+    };
+
+    gh = {
+      enable = true;
+      enableGitCredentialHelper = true;
+      settings = {
+        git_protocol = "https";
+        prompt = "enabled";
+        aliases = {
+          co = "pr checkout";
+        };
+      };
+    };
+
+    git = {
+      enable = true;
+      package = pkgs.gitAndTools.gitFull;
+      userName = "Weijia Wang";
+      userEmail = "9713184+wegank@users.noreply.github.com";
     };
 
     vscode = {
