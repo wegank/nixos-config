@@ -46,7 +46,7 @@
 
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "us";
+    keyMap = "fr";
   };
 
   security = {
@@ -57,9 +57,8 @@
     xserver = {
       enable = true;
       # Configure keymap in X11.
-      layout = "us";
-      xkbVariant = "intl";
-      exportConfiguration = true;
+      layout = "fr";
+      xkbVariant = "mac";
       displayManager = {
         gdm.enable = true;
         # Enable autologin.
