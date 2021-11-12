@@ -42,9 +42,7 @@ stdenv.mkDerivation rec {
     fi
     ( cd $sourceRoot/tools/tools${if aarch64 then "-arm64" else if x86_64 then "64" else "32"} )
   '';
-
-  # patches = if stdenv.lib.versionAtLeast kernel.version "5.9" then [ ./prl-tools.patch ] else [ ];
-
+  
   kernelVersion = if libsOnly then "" else lib.getVersion kernel.name;
   kernelDir = if libsOnly then "" else "${kernel.dev}/lib/modules/${kernelVersion}";
   scriptPath = lib.concatStringsSep ":" (lib.optionals (!libsOnly) [ "${utillinux}/bin" "${gawk}/bin" ]);
