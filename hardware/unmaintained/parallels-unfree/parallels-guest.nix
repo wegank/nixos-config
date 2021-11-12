@@ -78,7 +78,7 @@ in
 
     boot.extraModulePackages = [ prl-tools ];
 
-    boot.kernelModules = [ "prl_tg" "prl_eth" "prl_fs" "prl_fs_freeze" "prl_vid" ];
+    boot.kernelModules = [ "prl_fs" "prl_fs_freeze" "prl_nofifier" "prl_tg" ];
 
     services.timesyncd.enable = false;
 
