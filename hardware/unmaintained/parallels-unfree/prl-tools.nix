@@ -13,8 +13,8 @@ let xorgFullVer = lib.getVersion xorg.xorgserver;
           else throw "Parallels Tools for Linux only support {x86-64,i686}-linux targets";
 in
 stdenv.mkDerivation rec {
-  version = "${prl_major}.1.2-49151";
-  prl_major = "16";
+  version = "${prl_major}.1.0-51516";
+  prl_major = "17";
   pname = "prl-tools";
 
   # We download the full distribution to extract prl-tools-lin.iso from
