@@ -11,6 +11,7 @@
       nixpkgs.lib.nixosSystem {
         system = {
           parallels = "aarch64-linux";
+          parallels-unfree = "aarch64-linux";
           vmware = "x86_64-linux";
         }.${hostname};
         modules = [

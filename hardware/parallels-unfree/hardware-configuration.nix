@@ -11,17 +11,17 @@
   
   boot = {
     initrd = {
-      availableKernelModules = [ 
-        "uhci_hcd" 
+      availableKernelModules = [
         "xhci_pci" 
-        "ehci_pci" 
-        "ata_piix" 
-        "sd_mod" 
+        "usbhid"
         "sr_mod" 
       ];
       kernelModules = [ ];
     };
     kernelModules = [ ];
+    kernelParams = [
+      "root=/dev/sda2"
+    ];
     extraModulePackages = [ ];
   };
 
