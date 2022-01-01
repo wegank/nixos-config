@@ -108,6 +108,10 @@
       ];
     };
 
+    firefox = {
+      enable = true;
+    };
+
     gh = {
       enable = true;
       enableGitCredentialHelper = true;
