@@ -157,6 +157,9 @@
         plugins = [ "git" "python" "man" ];
         theme = "agnoster";
       };
+      shellAliases = {
+        "codium" = "codium --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      };
     };
   };
 
