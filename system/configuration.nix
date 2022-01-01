@@ -132,7 +132,11 @@
       enable = true;
       enableSSHSupport = true;
     };
-    sway.enable = true;
+    sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+      extraPackages = [];
+    };
   };
   
   # NixOS release.
