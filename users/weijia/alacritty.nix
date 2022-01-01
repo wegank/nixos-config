@@ -74,6 +74,8 @@ rustPlatform.buildRustPackage rec {
       --replace xdg-open ${xdg-utils}/bin/xdg-open
   '';
 
+  checkFlags = [ "--skip=term::test::mock_term" ];
+
   postInstall = (
     if stdenv.isDarwin then ''
       mkdir $out/Applications
