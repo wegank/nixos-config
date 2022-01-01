@@ -35,13 +35,6 @@
   # Select internationalisation properties.
   i18n = {
     defaultLocale = "fr_FR.UTF-8";
-    inputMethod = {
-      # Enable Fcitx.
-      enabled = "fcitx5";
-      fcitx5.addons = with pkgs; [ 
-        fcitx5-chinese-addons
-      ];
-    };
   };
 
   console = {
