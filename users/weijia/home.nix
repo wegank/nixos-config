@@ -92,6 +92,7 @@
   programs = {
     alacritty = {
       enable = true;
+      package = pkgs.callPackage ./alacritty.nix {};
     };
 
     chromium = {
