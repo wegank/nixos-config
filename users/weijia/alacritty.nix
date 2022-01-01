@@ -24,15 +24,6 @@
 , libxkbcommon
 , wayland
 , xdg-utils
-
-  # Darwin Frameworks
-, AppKit
-, CoreGraphics
-, CoreServices
-, CoreText
-, Foundation
-, libiconv
-, OpenGL
 }:
 let
   rpathLibs = [
@@ -74,16 +65,7 @@ rustPlatform.buildRustPackage rec {
     python3
   ];
 
-  buildInputs = rpathLibs
-    ++ lib.optionals stdenv.isDarwin [
-    AppKit
-    CoreGraphics
-    CoreServices
-    CoreText
-    Foundation
-    libiconv
-    OpenGL
-  ];
+  buildInputs = rpathLibs;
 
   outputs = [ "out" "terminfo" ];
 
