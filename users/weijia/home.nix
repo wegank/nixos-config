@@ -76,29 +76,31 @@
     };
   };
 
-  home.packages = with pkgs; [
-    # Sway.
-    bemenu
-    kanshi
-    networkmanagerapplet
-    mako
-    swayidle
-    swaylock
-    wl-clipboard
-    wofi
+  home = {
+    packages = with pkgs; [
+      # Sway.
+      bemenu
+      kanshi
+      networkmanagerapplet
+      mako
+      swayidle
+      swaylock
+      wl-clipboard
+      wofi
+      # Theming.
+      gsettings-desktop-schemas
+      gtk-engine-murrine
+      gtk_engines
+      lxappearance
+      # Userland.
+      android-tools
+      neofetch
+    ];
+    shellAliases = {
+      "codium" = "codium --enable-features=UseOzonePlatform --ozone-platform=wayland";
+    };
+  };
 
-    # Theming.
-    gsettings-desktop-schemas
-    gtk-engine-murrine
-    gtk_engines
-    lxappearance
-
-    # Userland.
-    android-tools
-    neofetch
-    pandoc
-  ];
-  
   programs = {
     alacritty = {
       enable = true;
@@ -166,9 +168,6 @@
         enable = true;
         plugins = [ "git" "python" "man" ];
         theme = "agnoster";
-      };
-      shellAliases = {
-        "codium" = "codium --enable-features=UseOzonePlatform --ozone-platform=wayland";
       };
     };
   };
