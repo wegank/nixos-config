@@ -131,6 +131,12 @@
       extraPackages = [];
     };
   };
+
+  boot.binfmt = {
+    emulatedSystems = [
+      "riscv64-linux"
+    ];
+  };
   
   # NixOS release.
   system.stateVersion = "20.09";
