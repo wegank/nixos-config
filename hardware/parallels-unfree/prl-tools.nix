@@ -30,6 +30,8 @@ stdenv.mkDerivation rec {
   buildInputs = with xorg; [ stdenv.cc.cc libXrandr libXext libX11 libXcomposite libXinerama ]
     ++ lib.optionals (!libsOnly) [ libXi glib dbus-glib zlib ];
 
+  runtimeDependencies = [ glib xorg.libXrandr ];
+
   inherit libsOnly;
 
   unpackPhase = ''
@@ -42,7 +44,7 @@ stdenv.mkDerivation rec {
     fi
     ( cd $sourceRoot/tools/tools${if aarch64 then "-arm64" else if x86_64 then "64" else "32"} )
   '';
-  
+
   kernelVersion = if libsOnly then "" else lib.getVersion kernel.name;
   kernelDir = if libsOnly then "" else "${kernel.dev}/lib/modules/${kernelVersion}";
   scriptPath = lib.concatStringsSep ":" (lib.optionals (!libsOnly) [ "${utillinux}/bin" "${gawk}/bin" ]);
@@ -100,7 +102,7 @@ stdenv.mkDerivation rec {
         ${if aarch64 then "" else "
         mkdir -p $out/lib/udev/rules.d
         install -Dm644 ../xorg-prlmouse.rules $out/lib/udev/rules.d/69-xorg-prlmouse.rules
-        
+
         mkdir -p $out/etc/udev/rules.d
         sed 's,/bin/sh,${stdenv.shell},g' ../parallels-video.rules > ../parallels-video.rules
         install -Dm644 ../parallels-video.rules $out/etc/udev/rules.d/99-parallels-video.rules
