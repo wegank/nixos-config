@@ -13,7 +13,7 @@ let
   x86_64 = (stdenv.hostPlatform.system == "x86_64-linux");
 in
 stdenv.mkDerivation rec {
-  version = "${prl_major}.1.0-51516";
+  version = "${prl_major}.1.1-51537";
   prl_major = "17";
   pname = "prl-tools";
 
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
   # => ${dmg}/Parallels\ Desktop.app/Contents/Resources/Tools/prl-tools-lin.iso
   src = fetchurl {
     url =  "https://download.parallels.com/desktop/v${prl_major}/${version}/ParallelsDesktop-${version}.dmg";
-    sha256 = "sha256-jROtrSqL233TR9LGolLvn/fleiYfO02CFCCmtpSLLfQ=";
+    sha256 = "sha256-vXvi300bNQjBJ88dnB75PN2mM4S884k6d/vJ8RaXZak=";
   };
 
   hardeningDisable = [ "pic" "format" ];
