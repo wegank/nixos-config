@@ -51,12 +51,17 @@
       package = pkgs.noto-fonts;
     };
     iconTheme = {
-      name = "breeze-dark";
-      package = pkgs.breeze-icons;
+      name = "Adwaita";
+      package = pkgs.gnome.gnome_themes_standard;
     };
     theme = {
-      name = "Breeze-Dark";
-      package = pkgs.breeze-gtk;
+      name = "Adwaita";
+      package = pkgs.gnome.gnome_themes_standard;
+    };
+    gtk3 = {
+      extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+      };
     };
   };
 
