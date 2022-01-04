@@ -68,8 +68,13 @@ stdenv.mkDerivation rec {
         mkdir -p $out/lib/modules/${kernelVersion}/extra
         cp prl_fs/SharedFolders/Guest/Linux/prl_fs/prl_fs.ko $out/lib/modules/${kernelVersion}/extra
         cp prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.ko $out/lib/modules/${kernelVersion}/extra
-        cp prl_notifier/Installation/lnx/prl_notifier/prl_notifier.ko $out/lib/modules/${kernelVersion}/extra
         cp prl_tg/Toolgate/Guest/Linux/prl_tg/prl_tg.ko $out/lib/modules/${kernelVersion}/extra
+        ${if aarch64 then "
+        cp prl_notifier/Installation/lnx/prl_notifier/prl_notifier.ko $out/lib/modules/${kernelVersion}/extra
+        " else "
+        cp prl_eth/pvmnet/prl_eth.ko $out/lib/modules/${kernelVersion}/extra
+        cp prl_vid/Video/Guest/Linux/kmod/prl_vid.ko $out/lib/modules/${kernelVersion}/extra
+        "}
       )
     fi
 
@@ -92,15 +97,66 @@ stdenv.mkDerivation rec {
           cp $i $out/lib
         done
 
+        ${if aarch64 then "" else "
+        mkdir -p $out/lib/udev/rules.d
+        install -Dm644 ../xorg-prlmouse.rules $out/lib/udev/rules.d/69-xorg-prlmouse.rules
+        
+        mkdir -p $out/etc/udev/rules.d
+        sed 's,/bin/sh,${stdenv.shell},g' ../parallels-video.rules > ../parallels-video.rules
+        install -Dm644 ../parallels-video.rules $out/etc/udev/rules.d/99-parallels-video.rules
+        "}
+
         mkdir -p $out/share/man/man8
         install -Dm644 ../mount.prl_fs.8 $out/share/man/man8
 
         mkdir -p $out/etc/pm/sleep.d
         install -Dm644 ../99prltoolsd-hibernate $out/etc/pm/sleep.d
+
+        ${if aarch64 then "" else "
+        (
+          cd xorg.${xorgVer}
+          # Install the X modules.
+          (
+            cd x-server/modules
+            for i in */*; do
+              install -Dm755 $i $out/lib/xorg/modules/$i
+            done
+          )
+          (
+            cd usr/lib
+            libGLXname=$(echo libglx.so*)
+            install -Dm755 $libGLXname $out/lib/xorg/modules/extensions/$libGLXname
+            # ln -s $libGLXname $out/lib/xorg/modules/extensions/libglx.so
+            # ln -s $libGLXname $out/lib/xorg/modules/extensions/libglx.so.1
+          )
+        )
+
+        (
+          cd x-server/modules
+          for i in */*; do
+            install -Dm755 $i $out/lib/$i
+            install -Dm755 $i $out/lib/xorg/modules/$i
+          done
+        )
+        "}
       fi
-      
+
+      ${if aarch64 then "" else "
+      mkdir -p $out/lib/drivers
+
+      perl -pi -e 's/prl_vtg/\/prl_tg/s' $out/lib/xorg/modules/drivers/prlvidel_drv.so
+      cp $out/lib/xorg/modules/drivers/prlvidel_drv.so $out/lib/drivers/prlvidel_drv.so
+      "}
+
       cd $out/lib
       ln -s libPrlWl.so.1.0.0 libPrlWl.so.1
+      ${if aarch64 then "" else "
+      ln -s libGL.so.1.0.0 libGL.so
+      ln -s libGL.so.1.0.0 libGL.so.1
+      ln -s libPrlDRI.so.1.0.0 libPrlDRI.so.1
+      ln -s libEGL.so.1.0.0 libEGL.so.1
+      ln -s libgbm.so.1.0.0 libgbm.so.1
+      "}
     )
   '';
 
