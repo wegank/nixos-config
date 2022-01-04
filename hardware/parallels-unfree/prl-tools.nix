@@ -7,6 +7,8 @@
 assert (!libsOnly) -> kernel != null;
 
 let 
+  xorgFullVer = lib.getVersion xorg.xorgserver;
+  xorgVer = lib.versions.majorMinor xorgFullVer;
   aarch64 = (stdenv.hostPlatform.system == "aarch64-linux");
   x86_64 = (stdenv.hostPlatform.system == "x86_64-linux");
 in
