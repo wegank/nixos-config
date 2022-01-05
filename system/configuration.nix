@@ -58,6 +58,11 @@
       # Configure keymap in X11.
       layout = "fr";
       xkbVariant = "mac";
+      desktopManager = {
+        gnome = {
+          enable = true;
+        };
+      };
       displayManager = {
         gdm.enable = true;
         # Enable autologin.
