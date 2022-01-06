@@ -100,6 +100,8 @@
       # Userland.
       android-tools
       neofetch
+      # Custom.
+      (pkgs.callPackage ./aegisub/default.nix {})
     ];
     shellAliases = {
       "codium" = "codium --enable-features=UseOzonePlatform --ozone-platform=wayland";
@@ -109,7 +111,7 @@
   programs = {
     alacritty = {
       enable = true;
-      package = pkgs.callPackage ./alacritty.nix {};
+      package = pkgs.callPackage ./alacritty/default.nix {};
     };
 
     chromium = {
