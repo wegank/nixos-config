@@ -142,8 +142,8 @@ stdenv.mkDerivation rec {
 
   postPatch = ''
     sed -i 's/-Wno-c++11-narrowing/-Wno-narrowing/' configure.ac src/Makefile
-    substituteInPlace tools/respack.lua --replace "/usr/bin/lua" "${lua5_1}/bin/lua"
     find . -type f '(' -name "*.lua" -o -name "*.moon" ')' -print0 | xargs -0 dos2unix
+    substituteInPlace tools/respack.lua --replace "/usr/bin/lua" "${lua5_1}/bin/lua"
   '';
 
   # compat with icu61+
