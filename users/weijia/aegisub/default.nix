@@ -3,7 +3,6 @@
 , stdenv
 , fetchurl
 , fetchpatch
-, fetchzip
 , fetchFromGitHub
 , boost
 , dos2unix
@@ -52,7 +51,6 @@ in
 stdenv.mkDerivation rec {
   pname = "aegisub";
   version = "3.2.2";
-  debian_revision = "6";
 
   src = fetchFromGitHub {
     owner = pname;
@@ -62,23 +60,25 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-iLfDv/pgBuP8drEGJ/hI4NsF7ScMdhE80at4GFiLLPE=";
   };
 
-  debian_patches = fetchzip {
-    url = "http://deb.debian.org/debian/pool/main/a/aegisub/aegisub_${version}+dfsg-${debian_revision}.debian.tar.xz";
-    sha256 = "sha256-DWk5SlWD8QGwm7TT6jbC4sAVzb9AdKsvnwODwAbszEA=";
-    name = "debian_patches";
-  };
+  patches = [
+    # Compatibility with ICU 59
+    (fetchpatch {
+      url = "https://github.com/Aegisub/Aegisub/commit/dd67db47cb2203e7a14058e52549721f6ff16a49.patch";
+      sha256 = "sha256-R2rN7EiyA5cuBYIAMpa0eKZJ3QZahfnRp8R4HyejGB8=";
+    })
 
-  debian_patches_blacklist = [
-    "integrate-appdata-with-build.patch"
-  ];
+    # Compatbility with Boost 1.69
+    (fetchpatch {
+      url = "https://github.com/Aegisub/Aegisub/commit/c3c446a8d6abc5127c9432387f50c5ad50012561.patch";
+      sha256 = "sha256-7nlfojrb84A0DT82PqzxDaJfjIlg5BvWIBIgoqasHNk=";
+    })
 
-  patches = builtins.map (x : "${debian_patches}/patches/" + x) (
-    builtins.filter (x: !(builtins.elem x debian_patches_blacklist)) (
-      lib.splitString "\n" (
-        lib.fileContents "${debian_patches}/patches/series"
-      )
-    )
-  ) ++ [
+    # Compatbility with make 4.3
+    (fetchpatch {
+      url = "https://github.com/Aegisub/Aegisub/commit/6bd3f4c26b8fc1f76a8b797fcee11e7611d59a39.patch";
+      sha256 = "sha256-rG8RJokd4V4aSYOQw2utWnrWPVrkqSV3TAvnGXNhLOk=";
+    })
+
     # Compatibility with ffms2
     (fetchpatch {
       url = "https://github.com/Aegisub/Aegisub/commit/1aa9215e7fc360de05da9b7ec2cd68f1940af8b2.patch";
@@ -91,6 +91,12 @@ stdenv.mkDerivation rec {
     (fetchpatch {
       url = "https://github.com/Aegisub/Aegisub/commit/7a6da26be6a830f4e1255091952cc0a1326a4520.patch";
       sha256 = "sha256-/aTcIjFlZY4N9+IyHL4nwR0hUR4HTJM7ibbdKmNxq0w=";
+    })
+
+    # Remove vendor luajit dependency
+    (fetchpatch {
+      url = "https://sources.debian.org/data/main/a/aegisub/3.2.2%2Bdfsg-6/debian/patches/remove-vendor-luajit-dependency.patch";
+      sha256 = "sha256-XS+LW62J26YalL2qccQv3JJ+RwTGq4ew8Ig56+FebsA=";
     })
   ];
 
