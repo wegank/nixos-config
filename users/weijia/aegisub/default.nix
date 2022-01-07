@@ -21,7 +21,7 @@
 , libiconv
 , lua5_1
 , pkg-config
-, wxGTK30
+, wxGTK30-gtk3
 , zlib
 
 , spellcheckSupport ? true
@@ -68,8 +68,12 @@ stdenv.mkDerivation rec {
     name = "debian_patches";
   };
 
+  debian_patches_blacklist = [
+    "integrate-appdata-with-build.patch"
+  ];
+
   patches = builtins.map (x : "${debian_patches}/patches/" + x) (
-    builtins.filter (x: x != "integrate-appdata-with-build.patch") (
+    builtins.filter (x: !(builtins.elem x debian_patches_blacklist)) (
       lib.splitString "\n" (
         lib.fileContents "${debian_patches}/patches/series"
       )
@@ -109,7 +113,7 @@ stdenv.mkDerivation rec {
     libass
     libiconv
     lua5_1
-    wxGTK30
+    wxGTK30-gtk3
     zlib
   ]
   ++ optional alsaSupport alsa-lib
