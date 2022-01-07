@@ -4,6 +4,10 @@
 , fetchurl
 , fetchpatch
 , fetchFromGitHub
+
+, intltool
+, pkg-config
+
 , boost
 , dos2unix
 , ffmpeg
@@ -12,14 +16,13 @@
 , fontconfig
 , freetype
 , icu
-, intltool
 , libGL
 , libGLU
 , libX11
 , libass
 , libiconv
 , lua5_1
-, pkg-config
+, makeWrapper
 , wxGTK30-gtk3
 , zlib
 
@@ -119,6 +122,7 @@ stdenv.mkDerivation rec {
     libass
     libiconv
     lua5_1
+    makeWrapper
     wxGTK30-gtk3
     zlib
   ]
@@ -150,7 +154,10 @@ stdenv.mkDerivation rec {
   # should be fine remove on next release (if one ever happens)
   NIX_LDFLAGS = "-lpthread";
 
-  postInstall = "ln -s $out/bin/aegisub-* $out/bin/aegisub";
+  postInstall = ''
+    wrapProgram $out/bin/aegisub-* --prefix GDK_BACKEND : x11
+    ln -s $out/bin/aegisub-* $out/bin/aegisub
+  '';
 
   meta = with lib; {
     homepage = "https://github.com/Aegisub/Aegisub";
