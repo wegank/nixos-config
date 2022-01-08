@@ -58,7 +58,7 @@ in
     # services.timesyncd.enable = false;
 
     systemd.services.prltoolsd = {
-      description = "Parallels Tools' service";
+      description = "Parallels Tools Service";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         ExecStart = "${prl-tools}/bin/prltoolsd -f";
@@ -67,7 +67,7 @@ in
     };
 
     systemd.services.prlfsmountd = mkIf config.hardware.parallels.autoMountShares {
-      description = "Parallels Shared Folders Daemon";
+      description = "Parallels Guest File System Sharing Tool";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = rec {
         ExecStart = "${prl-tools}/sbin/prlfsmountd ${PIDFile}";
@@ -78,7 +78,7 @@ in
     };
 
     systemd.services.prlshprint = {
-      description = "Parallels Shared Printer Tool";
+      description = "Parallels Printing Tool";
       wantedBy = [ "multi-user.target" ];
       bindsTo = [ "cups.service" ];
       serviceConfig = {
@@ -96,14 +96,14 @@ in
         };
       };
       prldnd = {
-        description = "Parallels Control Center";
+        description = "Parallels Drag And Drop Tool";
         wantedBy = [ "graphical-session.target" ];
         serviceConfig = {
           ExecStart = "${prl-tools}/bin/prldnd";
         };
       };
       prlcp = {
-        description = "Parallels CopyPaste Tool";
+        description = "Parallels Copy Paste Tool";
         wantedBy = [ "graphical-session.target" ];
         serviceConfig = {
           ExecStart = "${prl-tools}/bin/prlcp";
@@ -125,6 +125,5 @@ in
         };
       };
     };
-
   };
 }
