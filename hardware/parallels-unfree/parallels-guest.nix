@@ -107,6 +107,7 @@ in
         wantedBy = [ "graphical-session.target" ];
         serviceConfig = {
           ExecStart = "${prl-tools}/bin/prlcp";
+          Restart = "always";
         };
       };
       prlsga = {
