@@ -55,7 +55,7 @@ in
 
     boot.kernelModules = [ "prl_fs" "prl_fs_freeze" "prl_tg" ] ++ optional aarch64 "prl_notifier";
 
-    services.timesyncd.enable = false;
+    # services.timesyncd.enable = false;
 
     systemd.services.prltoolsd = {
       description = "Parallels Tools' service";
