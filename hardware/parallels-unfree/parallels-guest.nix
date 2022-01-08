@@ -4,6 +4,7 @@ with lib;
 
 let
   prl-tools = config.hardware.parallels.package;
+  aarch64 = pkgs.stdenv.hostPlatform.system == "aarch64-linux";
 in
 
 {
@@ -35,7 +36,7 @@ in
         type = types.nullOr types.package;
         default = config.boot.kernelPackages.prl-tools;
         defaultText = "config.boot.kernelPackages.prl-tools";
-        example = literalExample "config.boot.kernelPackages.prl-tools";
+        example = literalExpression "config.boot.kernelPackages.prl-tools";
         description = ''
           Defines which package to use for prl-tools. Override to change the version.
         '';
@@ -47,7 +48,9 @@ in
   config = mkIf config.hardware.parallels.enable {
     services.xserver = {
       videoDrivers = [ "prlvideo" ];
+
       modules = [ prl-tools ];
+
       config = ''
         Section "InputClass"
           Identifier      "prlmouse"
@@ -56,15 +59,10 @@ in
           Driver          "prlmouse"
         EndSection
       '';
-      
-      /*
-      drivers = singleton {
-        name = "prlvideo";
-        modules = [ prl-tools ];
-        display = true;
-      };
-      config = mkOverride 50 (builtins.readFile ./xserver.conf);
-      */
+
+      screenSection = ''
+        Option "NoMTRR"
+      '';
     };
 
     hardware.opengl.package = prl-tools;
@@ -78,7 +76,7 @@ in
 
     boot.extraModulePackages = [ prl-tools ];
 
-    boot.kernelModules = [ "prl_fs" "prl_fs_freeze" "prl_nofifier" "prl_tg" ];
+    boot.kernelModules = if aarch64 then [ "prl_fs" "prl_fs_freeze" "prl_notifier" "prl_tg" ] else [ "prl_fs" "prl_fs_freeze" "prl_tg" ];
 
     services.timesyncd.enable = false;
 
