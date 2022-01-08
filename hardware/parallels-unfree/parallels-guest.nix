@@ -46,25 +46,7 @@ in
   };
 
   config = mkIf config.hardware.parallels.enable {
-    services.xserver = {
-      videoDrivers = [ "prlvideo" ];
-
-      modules = [ prl-tools ];
-
-      config = ''
-        Section "InputClass"
-          Identifier      "prlmouse"
-          MatchIsPointer  "on"
-          MatchTag        "prlmouse"
-          Driver          "prlmouse"
-        EndSection
-      '';
-
-      screenSection = ''
-        Option "NoMTRR"
-      '';
-    };
-
+    
     services.udev.packages = [ prl-tools ];
 
     environment.systemPackages = [ prl-tools ];
