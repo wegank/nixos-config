@@ -76,7 +76,7 @@ in
 
     boot.extraModulePackages = [ prl-tools ];
 
-    boot.kernelModules = if aarch64 then [ "prl_fs" "prl_fs_freeze" "prl_notifier" "prl_tg" ] else [ "prl_fs" "prl_fs_freeze" "prl_tg" ];
+    boot.kernelModules = [ "prl_fs" "prl_fs_freeze" "prl_tg" ] ++ optional aarch64 "prl_notifier";
 
     services.timesyncd.enable = false;
 
