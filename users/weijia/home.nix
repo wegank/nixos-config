@@ -100,6 +100,8 @@
       # Userland.
       android-tools
       neofetch
+      nixpkgs-fmt
+      rnix-lsp
       # Custom.
       (pkgs.callPackage ./aegisub/default.nix {})
     ];
@@ -154,8 +156,8 @@
       enable = true;
       package = (pkgs.vscode-with-extensions.override {
         vscode = pkgs.vscodium;
-        vscodeExtensions = with pkgs.vscode-extensions; [ 
-          bbenoist.nix
+        vscodeExtensions = with pkgs.vscode-extensions; [
+          jnoortheen.nix-ide
         ];
       }).overrideAttrs (old: {
         inherit (pkgs.vscodium) pname version;
@@ -166,6 +168,7 @@
         "git.enableSmartCommit" = true;
         "update.mode" = "none";
         "diffEditor.ignoreTrimWhitespace" = false;
+        "nix.enableLanguageServer" = true;
       };
     };
 
