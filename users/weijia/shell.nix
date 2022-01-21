@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -13,7 +13,7 @@ pkgs.mkShell {
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-libav
     libplist
-    openssl 
+    openssl
     pkg-config
     SDL2
     SDL2_ttf

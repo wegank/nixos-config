@@ -9,12 +9,12 @@
   boot = {
     initrd = {
       availableKernelModules = [
-        "ata_piix" 
-        "mptspi" 
-        "uhci_hcd" 
-        "ehci_pci" 
-        "sd_mod" 
-        "sr_mod" 
+        "ata_piix"
+        "mptspi"
+        "uhci_hcd"
+        "ehci_pci"
+        "sd_mod"
+        "sr_mod"
       ];
       kernelModules = [ ];
     };
@@ -34,7 +34,7 @@
   };
 
   swapDevices = [ ];
-  
+
   networking.interfaces.ens33.useDHCP = true;
 
   virtualisation.vmware.guest.enable = true;

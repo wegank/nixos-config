@@ -46,7 +46,7 @@ in
   };
 
   config = mkIf config.hardware.parallels.enable {
-    
+
     services.udev.packages = [ prl-tools ];
 
     environment.systemPackages = [ prl-tools ];

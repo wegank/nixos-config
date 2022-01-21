@@ -1,6 +1,6 @@
 # Home configuration.
 
-{ pkgs, ... }: 
+{ pkgs, ... }:
 
 {
   wayland.windowManager.sway = {
@@ -14,7 +14,7 @@
         "*" = {
           xkb_layout = "fr";
           xkb_variant = "mac";
-        }; 
+        };
       };
       menu = "bemenu-run";
       modifier = "Mod4";
@@ -38,12 +38,12 @@
     '';
     xwayland = false;
   };
-  
+
   xdg = {
     enable = true;
     userDirs.enable = true;
   };
-  
+
   gtk = {
     enable = true;
     font = {
@@ -69,7 +69,7 @@
     inputMethod = {
       # Enable Fcitx.
       enabled = "fcitx5";
-      fcitx5.addons = with pkgs; [ 
+      fcitx5.addons = with pkgs; [
         fcitx5-chinese-addons
       ];
     };
@@ -103,7 +103,7 @@
       nixpkgs-fmt
       rnix-lsp
       # Custom.
-      (pkgs.callPackage ./aegisub/default.nix {})
+      (pkgs.callPackage ./aegisub/default.nix { })
     ];
     shellAliases = {
       "codium" = "codium --enable-features=UseOzonePlatform --ozone-platform=wayland";
@@ -113,7 +113,7 @@
   programs = {
     alacritty = {
       enable = true;
-      package = pkgs.callPackage ./alacritty/default.nix {};
+      package = pkgs.callPackage ./alacritty/default.nix { };
     };
 
     chromium = {
@@ -125,7 +125,7 @@
         ];
       });
       extensions = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm"  # ublock origin.
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin.
       ];
     };
 

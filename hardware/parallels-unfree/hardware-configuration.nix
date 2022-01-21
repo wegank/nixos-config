@@ -4,17 +4,17 @@
 {
   disabledModules = [ "virtualisation/parallels-guest.nix" ];
 
-  imports = [ 
+  imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
     ./parallels-guest.nix
   ];
-  
+
   boot = {
     initrd = {
       availableKernelModules = [
-        "xhci_pci" 
+        "xhci_pci"
         "usbhid"
-        "sr_mod" 
+        "sr_mod"
       ];
       kernelModules = [ ];
     };
@@ -43,6 +43,6 @@
   nixpkgs.config.allowUnfree = true;
   hardware.parallels = {
     enable = true;
-    package = (config.boot.kernelPackages.callPackage ./prl-tools.nix {});
+    package = (config.boot.kernelPackages.callPackage ./prl-tools.nix { });
   };
 }

@@ -45,7 +45,7 @@
   security = {
     rtkit.enable = true;
   };
-  
+
   hardware = {
     pulseaudio = {
       enable = false;
@@ -97,7 +97,7 @@
       extraGroups = [
         "wheel"
         "adbusers"
-        "networkmanager" 
+        "networkmanager"
       ];
     };
   };
@@ -115,10 +115,10 @@
     ];
     fontconfig = {
       defaultFonts = {
-        sansSerif = [ 
-          "Noto Sans CJK SC" 
-          "Noto Sans CJK TC" 
-          "Noto Sans CJK JP" 
+        sansSerif = [
+          "Noto Sans CJK SC"
+          "Noto Sans CJK TC"
+          "Noto Sans CJK JP"
         ];
       };
     };
@@ -139,7 +139,7 @@
     sway = {
       enable = true;
       wrapperFeatures.gtk = true;
-      extraPackages = [];
+      extraPackages = [ ];
     };
   };
 
@@ -148,7 +148,7 @@
       "riscv64-linux"
     ];
   };
-  
+
   # NixOS release.
   system.stateVersion = "20.09";
 }

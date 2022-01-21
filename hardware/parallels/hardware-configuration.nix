@@ -3,13 +3,13 @@
 
 {
   imports = [ ];
-  
+
   boot = {
     initrd = {
       availableKernelModules = [
-        "xhci_pci" 
+        "xhci_pci"
         "usbhid"
-        "sr_mod" 
+        "sr_mod"
       ];
       kernelModules = [ ];
     };

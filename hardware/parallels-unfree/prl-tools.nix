@@ -1,7 +1,19 @@
-{ stdenv, lib, makeWrapper, p7zip
-, gawk, util-linux, xorg, glib, dbus-glib, zlib
-, kernel ? null, libsOnly ? false
-, fetchurl, undmg, perl, autoPatchelfHook
+{ stdenv
+, lib
+, makeWrapper
+, p7zip
+, gawk
+, util-linux
+, xorg
+, glib
+, dbus-glib
+, zlib
+, kernel ? null
+, libsOnly ? false
+, fetchurl
+, undmg
+, perl
+, autoPatchelfHook
 }:
 
 assert (!libsOnly) -> kernel != null;
@@ -19,7 +31,7 @@ stdenv.mkDerivation rec {
   # We download the full distribution to extract prl-tools-lin.iso from
   # => ${dmg}/Parallels\ Desktop.app/Contents/Resources/Tools/prl-tools-lin.iso
   src = fetchurl {
-    url =  "https://download.parallels.com/desktop/v${prl_major}/${version}/ParallelsDesktop-${version}.dmg";
+    url = "https://download.parallels.com/desktop/v${prl_major}/${version}/ParallelsDesktop-${version}.dmg";
     sha256 = "1ab5jwbg3jgvfwx8kwxwhhrsdp9wz4g9q7fg4z0hhd8v9pgy4yxx";
   };
 
