@@ -113,6 +113,7 @@
       noto-fonts-extra
       powerline-fonts
     ];
+    /*
     fontconfig = {
       defaultFonts = {
         sansSerif = [
@@ -122,6 +123,7 @@
         ];
       };
     };
+    */
   };
 
   environment = {
