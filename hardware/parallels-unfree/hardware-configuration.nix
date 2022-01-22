@@ -38,8 +38,6 @@
 
   swapDevices = [ ];
 
-  networking.interfaces.enp0s5.useDHCP = true;
-
   nixpkgs.config.allowUnfree = true;
   hardware.parallels = {
     enable = true;

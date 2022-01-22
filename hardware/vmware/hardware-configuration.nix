@@ -35,7 +35,5 @@
 
   swapDevices = [ ];
 
-  networking.interfaces.ens33.useDHCP = true;
-
   virtualisation.vmware.guest.enable = true;
 }

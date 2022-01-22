@@ -32,6 +32,4 @@
   };
 
   swapDevices = [ ];
-
-  networking.interfaces.enp0s5.useDHCP = true;
 }
