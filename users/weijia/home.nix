@@ -102,6 +102,7 @@
       neofetch
       nixpkgs-fmt
       rnix-lsp
+      parted
       # Custom.
       # (pkgs.callPackage ./aegisub/default.nix { })
     ];
