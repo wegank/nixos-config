@@ -103,7 +103,7 @@
       nixpkgs-fmt
       rnix-lsp
       # Custom.
-      (pkgs.callPackage ./aegisub/default.nix { })
+      # (pkgs.callPackage ./aegisub/default.nix { })
     ];
     shellAliases = {
       "codium" = "codium --enable-features=UseOzonePlatform --ozone-platform=wayland";
