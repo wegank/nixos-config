@@ -71,7 +71,7 @@
     };
     # Enable CUPS to print documents.
     printing.enable = true;
-
+    # Enable PipeWire.
     pipewire = {
       enable = true;
       alsa = {
