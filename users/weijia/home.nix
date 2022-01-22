@@ -28,6 +28,7 @@
     };
     extraConfig = ''
       xwayland disable
+      wayvnc
     '';
     extraSessionCommands = ''
       export WLR_NO_HARDWARE_CURSORS=1
@@ -90,6 +91,7 @@
       mako
       swayidle
       swaylock
+      wayvnc
       wl-clipboard
       wofi
       # Theming.
@@ -186,11 +188,4 @@
       };
     };
   };
-  /*
-  services = {
-    udiskie = {
-      enable = true;
-    };
-  };
-  */
 }
