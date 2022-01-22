@@ -186,10 +186,11 @@
       };
     };
   };
-
+  /*
   services = {
     udiskie = {
       enable = true;
     };
   };
+  */
 }
