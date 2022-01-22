@@ -53,6 +53,9 @@
   };
 
   services = {
+    # Enable the OpenSSH server.
+    sshd.enable = true;
+    # Enable the X server.
     xserver = {
       enable = true;
       # Configure keymap in X11.
