@@ -20,7 +20,11 @@
             # Hardware configuration.
             (./hardware + "/${hostname}" + /hardware-configuration.nix)
             # System configuration.
-            ./system/configuration.nix
+            ./system/common.nix
+            (if hostname == "raspberrypi" then
+              ./system/server.nix
+            else
+              ./system/desktop.nix)
             # Home Manager.
             home-manager.nixosModules.home-manager
             {

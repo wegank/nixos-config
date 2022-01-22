@@ -44,8 +44,6 @@
   };
 
   services = {
-    # Enable the OpenSSH server.
-    sshd.enable = true;
     # Enable the X server.
     xserver = {
       enable = true;
@@ -64,7 +62,6 @@
           enable = true;
           user = "weijia";
         };
-        defaultSession = "sway";
       };
       # Enable touchpad support.
       libinput.enable = true;
@@ -132,17 +129,6 @@
       enable = true;
       enableSSHSupport = true;
     };
-    sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-      extraPackages = [ ];
-    };
-  };
-
-  boot.binfmt = {
-    emulatedSystems = [
-      "riscv64-linux"
-    ];
   };
 
   # NixOS release.
