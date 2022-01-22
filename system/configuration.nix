@@ -28,8 +28,6 @@
     hostName = "workstation";
     # Enable NetworkManager.
     networkmanager.enable = true;
-    wireless.enable = false;
-    useDHCP = false;
   };
 
   # Select internationalisation properties.
