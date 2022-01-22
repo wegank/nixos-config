@@ -10,15 +10,8 @@
     '';
   };
 
-  boot = {
-    # Use the latest Linux kernel.
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader = {
-      efi.canTouchEfiVariables = true;
-      # Use the systemd-boot EFI boot loader.
-      systemd-boot.enable = true;
-    };
-  };
+  # Use the latest Linux kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set time zone.
   time.timeZone = "Europe/Paris";

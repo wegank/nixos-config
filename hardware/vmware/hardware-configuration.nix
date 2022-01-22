@@ -20,6 +20,10 @@
     };
     kernelModules = [ ];
     extraModulePackages = [ ];
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
   };
 
   fileSystems = {

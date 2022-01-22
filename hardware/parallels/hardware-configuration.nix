@@ -18,6 +18,10 @@
       "root=/dev/sda2"
     ];
     extraModulePackages = [ ];
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
   };
 
   fileSystems = {
