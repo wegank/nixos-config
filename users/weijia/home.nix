@@ -113,7 +113,11 @@
   programs = {
     alacritty = {
       enable = true;
-      package = pkgs.callPackage ./alacritty/default.nix { };
+      package = pkgs.alacritty.overrideAttrs (
+        o: rec {
+          doCheck = false;
+        }
+      );
     };
 
     chromium = {
