@@ -59,4 +59,6 @@
       cp ${pkgs.raspberrypi-armstubs}/armstub8-gic.bin /boot/armstub8-gic.bin
       cp ${pkgs.raspberrypifw}/share/raspberrypi/boot/bcm2711-rpi-4-b.dtb /boot/
     '';
+
+  hardware.enableRedistributableFirmware = true;
 }
