@@ -2,6 +2,8 @@
 
 default=parallels
 
+set -e
+
 check_root () {
     if [[ $(id -u) -ne 0 ]]; then
         echo "Please run as root."
@@ -10,7 +12,8 @@ check_root () {
 }
 
 format_and_mount () {
-    umount -R /mnt
+    umount /dev/sda* || true
+    umount -R /mnt || true
     parted -s /dev/sda mklabel gpt
     parted -s /dev/sda mkpart ESP fat32 1MiB 512MiB
     parted -s /dev/sda set 1 esp on
@@ -18,9 +21,10 @@ format_and_mount () {
     yes | mkfs.fat -F 32 -n boot /dev/sda1
     yes | mkfs.ext4 -L nixos /dev/sda2
     sleep 1
-    mount /dev/disk/by-label/nixos /mnt
+    mkdir -p /mnt
+    mount /dev/sda2 /mnt
     mkdir -p /mnt/boot
-    mount /dev/disk/by-label/boot /mnt/boot
+    mount /dev/sda1 /mnt/boot
 }
 
 install () {
@@ -64,7 +68,7 @@ elif [[ $1 == "install" ]] && [[ $3 == "" ]]; then
     format_and_mount
     sleep 1
     install "${2:-$default}"
-    reboot
+    # reboot
     exit
 elif [[ $1 == "netinstall" ]] && [[ $3 == "" ]]; then
     check_root
