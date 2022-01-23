@@ -86,7 +86,12 @@
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "python" "man" ];
-        theme = "agnoster";
+        theme = (
+          if profile == "desktop" then
+            "agnoster"
+          else
+            "robbyrussell"
+        );
       };
     };
   };
