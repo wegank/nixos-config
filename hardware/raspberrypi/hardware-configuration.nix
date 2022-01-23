@@ -37,6 +37,8 @@
 
   swapDevices = [ ];
 
+  powerManagement.cpuFreqGovernor = "ondemand";
+
   system.activationScripts.firmware-update =
     let configTxt = pkgs.writeText "config.txt" ''
       [pi4]
