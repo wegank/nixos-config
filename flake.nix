@@ -20,7 +20,7 @@
             # Hardware configuration.
             (./hardware + "/${hostname}" + /hardware-configuration.nix)
             # System configuration.
-            ./system/common.nix
+            ./system/base.nix
             (if hostname == "raspberrypi" then
               ./system/server.nix
             else
