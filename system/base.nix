@@ -1,6 +1,6 @@
 # System configuration.
 
-{ config, pkgs, ... }:
+{ config, pkgs, owner, ... }:
 
 {
   nix = {
@@ -76,9 +76,10 @@
 
   # Define a user account.
   users = {
-    users.weijia = {
+    extraUsers.${owner.name} = {
+      description = owner.description;
       isNormalUser = true;
-      initialPassword = "changeme";
+      initialPassword = owner.initialPassword;
       shell = pkgs.zsh;
       extraGroups = [
         "wheel"

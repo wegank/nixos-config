@@ -11,6 +11,7 @@
       owner = {
         name = "weijia";
         description = "Weijia Wang";
+        initialPassword = "changeme";
       };
       machines = {
         parallels = {
@@ -36,6 +37,9 @@
         (hostname: _:
           nixpkgs.lib.nixosSystem {
             system = machines.${hostname}.platform;
+            specialArgs = {
+              owner = owner;
+            };
             modules = [
               # Hardware configuration.
               (./hardware + "/${hostname}" + /hardware-configuration.nix)

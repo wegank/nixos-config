@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, owner, ... }:
 
 {
   services.xserver = {
@@ -9,7 +9,7 @@
       gdm.enable = true;
       autoLogin = {
         enable = true;
-        user = "weijia";
+        user = owner.name;
       };
       defaultSession = "sway";
     };
