@@ -3,32 +3,15 @@
 { pkgs, lib, profile, ... }:
 
 {
-  imports = lib.optional (profile == "desktop") ./sway.nix;
+  imports = [
+    ./gtk.nix
+  ] ++ lib.optionals (profile == "desktop") [
+    ./sway.nix
+  ];
 
   xdg = {
     enable = true;
     userDirs.enable = true;
-  };
-
-  gtk = {
-    enable = true;
-    font = {
-      name = "Noto Sans 10";
-      package = pkgs.noto-fonts;
-    };
-    iconTheme = {
-      name = "Adwaita";
-      package = pkgs.gnome.gnome-themes-extra;
-    };
-    theme = {
-      name = "Adwaita";
-      package = pkgs.gnome.gnome-themes-extra;
-    };
-    gtk3 = {
-      extraConfig = {
-        gtk-application-prefer-dark-theme = true;
-      };
-    };
   };
 
   i18n = {
@@ -49,11 +32,6 @@
 
   home = {
     packages = with pkgs; [
-      # Theming.
-      gsettings-desktop-schemas
-      gtk-engine-murrine
-      gtk_engines
-      lxappearance
       # Userland.
       android-tools
       neofetch
