@@ -84,6 +84,7 @@
     # Install fonts.
     fonts = with pkgs; [
       font-awesome
+      cantarell-fonts
       hack-font
       noto-fonts
       noto-fonts-cjk-sans
@@ -91,17 +92,16 @@
       noto-fonts-extra
       powerline-fonts
     ];
-    /*
-      fontconfig = {
+    fontconfig = {
       defaultFonts = {
-      sansSerif = [
-      "Noto Sans CJK SC"
-      "Noto Sans CJK TC"
-      "Noto Sans CJK JP"
-      ];
+        sansSerif = [
+          "Cantarell"
+          "Noto Sans CJK SC"
+          "Noto Sans CJK TC"
+          "Noto Sans CJK JP"
+        ];
       };
-      };
-    */
+    };
   };
 
   environment = {
