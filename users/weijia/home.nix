@@ -1,44 +1,9 @@
 # Home configuration.
 
-{ pkgs, ... }:
+{ pkgs, lib, profile, ... }:
 
 {
-  wayland.windowManager.sway = {
-    enable = true;
-    config = {
-      gaps = {
-        inner = 4;
-        outer = 2;
-      };
-      input = {
-        "*" = {
-          xkb_layout = "fr";
-          xkb_variant = "mac";
-        };
-      };
-      menu = "bemenu-run";
-      modifier = "Mod4";
-      output = {
-        "Virtual-1" = {
-          mode = "1680x1050";
-          scale = "1.1";
-        };
-      };
-      terminal = "alacritty";
-    };
-    extraConfig = ''
-      xwayland disable
-      wayvnc
-    '';
-    extraSessionCommands = ''
-      export WLR_NO_HARDWARE_CURSORS=1
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      export _JAVA_AWT_WM_NONREPARENTING=1
-    '';
-    xwayland = false;
-  };
+  imports = lib.optional (profile == "desktop") ./sway.nix;
 
   xdg = {
     enable = true;
@@ -84,16 +49,6 @@
 
   home = {
     packages = with pkgs; [
-      # Sway.
-      bemenu
-      kanshi
-      networkmanagerapplet
-      mako
-      swayidle
-      swaylock
-      wayvnc
-      wl-clipboard
-      wofi
       # Theming.
       gsettings-desktop-schemas
       gtk-engine-murrine
@@ -107,9 +62,6 @@
       # Custom.
       # (pkgs.callPackage ./aegisub/default.nix { })
     ];
-    shellAliases = {
-      "codium" = "codium --enable-features=UseOzonePlatform --ozone-platform=wayland";
-    };
   };
 
   programs = {
@@ -124,12 +76,6 @@
 
     chromium = {
       enable = true;
-      package = (pkgs.chromium.override {
-        commandLineArgs = [
-          "--enable-features=UseOzonePlatform"
-          "--ozone-platform=wayland"
-        ];
-      });
       extensions = [
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin.
       ];
