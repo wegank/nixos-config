@@ -7,7 +7,6 @@
         xterm.enable = false;
         xfce.enable = true;
       };
-      displayManager.defaultSession = "xfce";
     };
     sshd.enable = true;
     xrdp = {

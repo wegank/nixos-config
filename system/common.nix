@@ -50,19 +50,6 @@
       # Configure keymap in X11.
       layout = "fr";
       xkbVariant = "mac";
-      desktopManager = {
-        gnome = {
-          enable = true;
-        };
-      };
-      displayManager = {
-        gdm.enable = true;
-        # Enable autologin.
-        autoLogin = {
-          enable = true;
-          user = "weijia";
-        };
-      };
       # Enable touchpad support.
       libinput.enable = true;
     };
@@ -105,15 +92,15 @@
       powerline-fonts
     ];
     /*
-    fontconfig = {
+      fontconfig = {
       defaultFonts = {
-        sansSerif = [
-          "Noto Sans CJK SC"
-          "Noto Sans CJK TC"
-          "Noto Sans CJK JP"
-        ];
+      sansSerif = [
+      "Noto Sans CJK SC"
+      "Noto Sans CJK TC"
+      "Noto Sans CJK JP"
+      ];
       };
-    };
+      };
     */
   };
 

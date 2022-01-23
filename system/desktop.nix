@@ -5,7 +5,14 @@
     desktopManager = {
       gnome.enable = true;
     };
-    displayManager.defaultSession = "sway";
+    displayManager = {
+      gdm.enable = true;
+      autoLogin = {
+        enable = true;
+        user = "weijia";
+      };
+      defaultSession = "sway";
+    };
   };
 
   programs.sway = {
