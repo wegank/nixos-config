@@ -116,6 +116,18 @@
     pathsToLink = [
       "/libexec"
     ];
+    systemPackages = with pkgs; [
+      # Tools to manipulate filesystems.
+      dosfstools
+      ms-sys
+      mtools
+      ntfsprogs
+      parted
+      testdisk
+      # Some archiver tools.
+      unzip
+      zip
+    ];
   };
 
   programs = {
