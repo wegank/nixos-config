@@ -1,0 +1,25 @@
+{
+  "owner": {
+    "name": "weijia",
+    "description": "Weijia Wang",
+    "initialPassword": "changeme"
+  },
+  "machines": {
+    "parallels": {
+      "platform": "aarch64-linux",
+      "profile": "desktop"
+    },
+    "parallels-unfree": {
+      "platform": "aarch64-linux",
+      "profile": "desktop"
+    },
+    "raspberrypi": {
+      "platform": "aarch64-linux",
+      "profile": "server"
+    },
+    "vmware": {
+      "platform": "x86_64-linux",
+      "profile": "desktop"
+    }
+  }
+}
