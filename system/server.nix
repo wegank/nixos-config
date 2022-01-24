@@ -11,7 +11,7 @@ let unfreePackages = [
     })
   ];
 
-  nixpkgs.config.allowUnfreePredicate = 
+  nixpkgs.config.allowUnfreePredicate =
     pkg: builtins.elem (lib.getName pkg) unfreePackages;
 
   environment.systemPackages =
@@ -32,7 +32,7 @@ let unfreePackages = [
     };
     zerotierone.enable = true;
   };
-  
+
   networking.firewall.allowedTCPPorts = [ 3389 ];
 
   boot.binfmt.emulatedSystems = [
