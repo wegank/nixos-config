@@ -1,7 +1,8 @@
 {
   "owner": {
     "name": "weijia",
-    "description": "Weijia Wang",
+    "fullName": "Weijia Wang",
+    "gitEmail": "9713184+wegank@users.noreply.github.com",
     "initialPassword": "changeme"
   },
   "machines": {

@@ -1,11 +1,11 @@
 # Home configuration.
 
-{ pkgs, lib, profile, ... }:
+{ pkgs, lib, owner, host, ... }:
 
 {
   imports = [
     ./gtk.nix
-  ] ++ lib.optionals (profile == "desktop") [
+  ] ++ lib.optionals (host.profile == "desktop") [
     ./codium.nix
     ./sway.nix
   ];
@@ -66,8 +66,8 @@
     git = {
       enable = true;
       package = pkgs.gitAndTools.gitFull;
-      userName = "Weijia Wang";
-      userEmail = "9713184+wegank@users.noreply.github.com";
+      userName = owner.fullName;
+      userEmail = owner.gitEmail;
     };
 
     zsh = {
@@ -76,7 +76,7 @@
         enable = true;
         plugins = [ "git" "python" "man" ];
         theme = (
-          if profile == "desktop" then
+          if host.profile == "desktop" then
             "agnoster"
           else
             "robbyrussell"

@@ -77,7 +77,7 @@
   # Define a user account.
   users = {
     extraUsers.${owner.name} = {
-      description = owner.description;
+      description = owner.fullName;
       isNormalUser = true;
       initialPassword = owner.initialPassword;
       shell = pkgs.zsh;

@@ -29,7 +29,8 @@
                   useUserPackages = true;
                   useGlobalPkgs = true;
                   extraSpecialArgs = {
-                    profile = metadata.machines.${hostname}.profile;
+                    owner = metadata.owner;
+                    host = metadata.machines.${hostname};
                   };
                   users = builtins.mapAttrs
                     (username: _:
