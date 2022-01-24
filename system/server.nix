@@ -32,6 +32,20 @@ let unfreePackages = [
     };
   };
 
+  systemd.services = {
+    zerotier-one = {
+      description = "ZeroTier One";
+      wants = [ "network-online.target" ];
+      after = [ "network-online.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.zerotierone}/bin/zerotier-one";
+        Restart = "always";
+        KillMode = "process";
+      };
+      wantedBy = [ "multi-user.target" ];
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [ 3389 ];
 
   boot.binfmt.emulatedSystems = [
