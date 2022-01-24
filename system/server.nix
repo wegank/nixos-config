@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    (fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master")
+  ];
+
   services = {
     xserver = {
       desktopManager = {
@@ -9,6 +13,7 @@
       };
     };
     sshd.enable = true;
+    vscode-server.enable = true;
     xrdp = {
       enable = true;
       defaultWindowManager = "xfce4-session";
