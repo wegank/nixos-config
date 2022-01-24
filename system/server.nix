@@ -14,8 +14,10 @@ let unfreePackages = [
   nixpkgs.config.allowUnfreePredicate =
     pkg: builtins.elem (lib.getName pkg) unfreePackages;
 
-  environment.systemPackages =
-    map (name: pkgs.${name}) unfreePackages;
+  environment.systemPackages = with pkgs; [
+    nixpkgs-fmt
+    rnix-lsp
+  ] ++ map (name: pkgs.${name}) unfreePackages;
 
   services = {
     xserver = {
