@@ -35,6 +35,7 @@
     packages = with pkgs; [
       # Userland.
       android-tools
+      gh
       neofetch
       # Custom.
       # (pkgs.callPackage ./aegisub/default.nix { })
@@ -60,18 +61,6 @@
 
     firefox = {
       enable = true;
-    };
-
-    gh = {
-      enable = true;
-      enableGitCredentialHelper = true;
-      settings = {
-        git_protocol = "https";
-        prompt = "enabled";
-        aliases = {
-          co = "pr checkout";
-        };
-      };
     };
 
     git = {
