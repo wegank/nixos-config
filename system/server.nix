@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let unfreePackages = [
+  "zerotierone"
+]; in
 {
   imports = [
     (fetchTarball {
@@ -7,6 +10,12 @@
       sha256 = "00aqwrr6bgvkz9bminval7waxjamb792c0bz894ap8ciqawkdgxp";
     })
   ];
+
+  nixpkgs.config.allowUnfreePredicate = 
+    pkg: builtins.elem (lib.getName pkg) unfreePackages;
+
+  environment.systemPackages =
+    map (name: pkgs.${name}) unfreePackages;
 
   services = {
     xserver = {
