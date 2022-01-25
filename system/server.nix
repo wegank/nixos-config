@@ -20,14 +20,14 @@ let unfreePackages = [
   ] ++ map (name: pkgs.${name}) unfreePackages;
 
   services = {
+    sshd.enable = true;
+    vscode-server.enable = true;
     xserver = {
       desktopManager = {
         xterm.enable = false;
         xfce.enable = true;
       };
     };
-    sshd.enable = true;
-    vscode-server.enable = true;
     xrdp = {
       enable = true;
       defaultWindowManager = "xfce4-session";
@@ -36,6 +36,13 @@ let unfreePackages = [
   };
 
   networking.firewall.allowedTCPPorts = [ 3389 ];
+
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
+  };
 
   boot.binfmt.emulatedSystems = [
     "riscv64-linux"
