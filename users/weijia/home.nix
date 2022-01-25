@@ -39,6 +39,7 @@
       neofetch
       # Custom.
       # (pkgs.callPackage ./aegisub/default.nix { })
+      (pkgs.callPackage ./distrobox/default.nix { })
     ];
   };
 
