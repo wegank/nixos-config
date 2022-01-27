@@ -45,11 +45,6 @@
   programs = {
     alacritty = {
       enable = true;
-      package = pkgs.alacritty.overrideAttrs (
-        o: rec {
-          doCheck = false;
-        }
-      );
     };
 
     chromium = {
