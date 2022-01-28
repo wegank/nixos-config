@@ -13,7 +13,7 @@
         owner = "YumeMichi";
         repo = "device_oneplus_oneplus9r";
         rev = "e5488d45daa0f7b2c4f2abb720b26af548824914";
-        sha256 = "sha256-ULi+9XF6HMuHHRmQwZ0liJhLzLe9VM2bWXzTBn7nwNw=";
+        sha256 = "sha256-LNauR62SbjvpCOBzW8tIlTDo7mnJMx6lt86Ihd24Q7o=";
       };
 
       source.dirs."kernel/oneplus/sm8250".src = pkgs.fetchFromGitHub {
@@ -27,12 +27,14 @@
         owner = "YumeMichi";
         repo = "hardware_oneplus";
         rev = "6ee77f3f666fd3698a74d99eb12b0eeab575da71";
+        sha256 = "sha256-+Z9ariao/KuEgWND3XJ5vJAUWRseFJY9VvnoUj9wvCM=";
       };
 
       source.dirs."vendor/oneplus".src = pkgs.fetchFromGitHub {
         owner = "YumeMichi";
         repo = "proprietary_vendor_oneplus";
         rev = "9100879f5dbc555e45dca35040289eee44a1afcd";
+        sha256 = "sha256-fyCC/RQ7E9wYxbXQd5WtsKanh8deNOnfNqEYWLCG2JI=";
       };
 
       ccache.enable = true;
