@@ -7,6 +7,7 @@
     robotnixConfigurations."oneplus9r" = robotnix.lib.robotnixSystem ({ config, pkgs, ... }: {
       device = "oneplus9r";
       flavor = "lineageos";
+      androidVersion = 11;
 
       source.dirs."device/oneplus/oneplus9r".src = pkgs.fetchFromGitHub {
         owner = "YumeMichi";
