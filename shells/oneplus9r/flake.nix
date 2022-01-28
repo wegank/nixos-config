@@ -9,6 +9,9 @@
       flavor = "lineageos";
       androidVersion = 11;
 
+      apps.chromium.enable = false;
+      webview.chromium.enable = false;
+
       source.dirs."device/oneplus/oneplus9r".src = pkgs.fetchFromGitHub {
         owner = "YumeMichi";
         repo = "device_oneplus_oneplus9r";
