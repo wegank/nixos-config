@@ -34,18 +34,21 @@
       };
 
       source.dirs."vendor/oneplus".src = pkgs.fetchFromGitHub {
-        owner = "YumeMichi";
+        owner = "wegank";
         repo = "proprietary_vendor_oneplus";
-        rev = "6c13fdcc88117365bf8ef37ebf337a4bda227a70";
-        sha256 = "sha256-CyGb0+GGhiFOsfSvM1hZxgCYpVjzevy4AMQZ2xDNFYI=";
+        rev = "7aef37d27edb780fd667735abd579ab16d7d77af";
+        sha256 = "sha256-IX68oMLk8134wXEB2OxFqj+ySD6UesYLH6Vocv01xj8=";
+        fetchSubmodules = true;
       };
 
+      /*
       source.dirs."vendor/oneplus/addons/camera".src = pkgs.fetchFromGitLab {
         owner = "chandu078";
         repo = "vendor_oneplus_addons_camera";
         rev = "f62da8225eb82b6f59359b9f81a51fd931981de8";
         sha256 = "sha256-VxlUsvXjM9fFueOW8FzMQdifHVJ9aWkgF13tkjOg9Sk=";
       };
+      */
 
       ccache.enable = true;
     });
