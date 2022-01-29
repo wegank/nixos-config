@@ -35,7 +35,7 @@
 
       source.dirs."vendor/oneplus".src = pkgs.fetchFromGitHub {
         owner = "wegank";
-        repo = "proprietary_vendor_oneplus";
+        repo = "vendor_oneplus";
         rev = "7aef37d27edb780fd667735abd579ab16d7d77af";
         sha256 = "sha256-IX68oMLk8134wXEB2OxFqj+ySD6UesYLH6Vocv01xj8=";
         fetchSubmodules = true;
