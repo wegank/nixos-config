@@ -40,6 +40,13 @@
         sha256 = "sha256-CyGb0+GGhiFOsfSvM1hZxgCYpVjzevy4AMQZ2xDNFYI=";
       };
 
+      source.dirs."vendor/oneplus/addons/camera".src = pkgs.fetchFromGitLab {
+        owner = "chandu078";
+        repo = "vendor_oneplus_addons_camera";
+        rev = "f62da8225eb82b6f59359b9f81a51fd931981de8";
+        sha256 = "sha256-VxlUsvXjM9fFueOW8FzMQdifHVJ9aWkgF13tkjOg9Sk=";
+      };
+
       ccache.enable = true;
     });
 
