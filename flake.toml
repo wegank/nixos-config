@@ -1,0 +1,21 @@
+[owner]
+name = "weijia"
+fullName = "Weijia Wang"
+gitEmail = "9713184+wegank@users.noreply.github.com"
+initialPassword = "changeme"
+
+[machines.parallels]
+platform = "aarch64-linux"
+profile = "desktop"
+
+[machines.parallels-unfree]
+platform = "aarch64-linux"
+profile = "desktop"
+
+[machines.raspberrypi]
+platform = "aarch64-linux"
+profile = "server"
+
+[machines.vmware]
+platform = "x86_64-linux"
+profile = "desktop"

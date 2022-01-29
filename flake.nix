@@ -7,7 +7,7 @@
   };
 
   outputs = { self, home-manager, nixpkgs }:
-    let metadata = builtins.fromJSON (builtins.readFile ./flake.json); in
+    let metadata = builtins.fromTOML (builtins.readFile ./flake.toml); in
     {
       nixosConfigurations = builtins.mapAttrs
         (hostname: _:
