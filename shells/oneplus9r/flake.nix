@@ -29,10 +29,10 @@
       };
 
       source.dirs."hardware/oneplus".src = pkgs.fetchFromGitHub {
-        owner = "YumeMichi";
-        repo = "hardware_oneplus";
-        rev = "6ee77f3f666fd3698a74d99eb12b0eeab575da71";
-        sha256 = "sha256-+Z9ariao/KuEgWND3XJ5vJAUWRseFJY9VvnoUj9wvCM=";
+        owner = "LineageOS";
+        repo = "android_hardware_oneplus";
+        rev = "3e3340698870b9a73ed1b7632a08f3a2d443f3b3";
+        sha256 = "sha256-4t9gr7ktlF03WJ7DyMp8p9zH2jKO1wz9Z1Qth5dqang=";
       };
 
       source.dirs."vendor/oneplus".src = pkgs.fetchFromGitHub {
