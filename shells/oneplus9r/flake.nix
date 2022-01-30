@@ -15,13 +15,10 @@
       webview.chromium.enable = false;
 
       source.dirs."device/oneplus/lemonades".src = pkgs.fetchFromGitHub {
-        owner = "YumeMichi";
-        repo = "device_oneplus_lemonades";
-        rev = "fae2e4efa49efea80af632d00762b6acd6b5cbff";
-        sha256 = "sha256-CyXIwRRCoCFYB+jDXgFbY83bx35zv3wtNJgZT4Hjqnw=";
-        postFetch = ''
-          sed -i -e 's/audio_amplifier.kona \\//g' device.mk
-        '';
+        owner = "wegank";
+        repo = "android_device_oneplus_lemonades";
+        rev = "7e5f3ab81051d7598959f89267afaf57bfdd5901";
+        sha256 = "sha256-ejM9JRTSDYCVlLKs/46SxS4LYqi66Kx+2yTTehQw4t4=";
       };
 
       source.dirs."kernel/oneplus/sm8250".src = pkgs.fetchFromGitHub {
@@ -40,7 +37,7 @@
 
       source.dirs."vendor/oneplus".src = pkgs.fetchFromGitHub {
         owner = "wegank";
-        repo = "vendor_oneplus";
+        repo = "proprietary_vendor_oneplus";
         rev = "7aef37d27edb780fd667735abd579ab16d7d77af";
         sha256 = "sha256-IX68oMLk8134wXEB2OxFqj+ySD6UesYLH6Vocv01xj8=";
         fetchSubmodules = true;
