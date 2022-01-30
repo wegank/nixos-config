@@ -22,8 +22,8 @@
       };
 
       source.dirs."kernel/oneplus/sm8250".src = pkgs.fetchFromGitHub {
-        owner = "YumeMichi";
-        repo = "kernel_oneplus_sm8250";
+        owner = "wegank";
+        repo = "android_kernel_oneplus_sm8250";
         rev = "da96fc8381685b615f045014b7e1175494c1cd2d";
         sha256 = "sha256-fVptlGq9Ng1Uv5EQl+m2taIPPDqkiwT9lxo3EUweqTE=";
       };
