@@ -19,6 +19,9 @@
         repo = "device_oneplus_lemonades";
         rev = "fae2e4efa49efea80af632d00762b6acd6b5cbff";
         sha256 = "sha256-CyXIwRRCoCFYB+jDXgFbY83bx35zv3wtNJgZT4Hjqnw=";
+        postFetch = ''
+          sed -i -e 's/audio_amplifier.kona \\//g' device.mk
+        '';
       };
 
       source.dirs."kernel/oneplus/sm8250".src = pkgs.fetchFromGitHub {
