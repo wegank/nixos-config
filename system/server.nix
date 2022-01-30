@@ -49,4 +49,11 @@ let unfreePackages = [
     "riscv64-linux"
     "x86_64-linux"
   ];
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 1024 * 8 * 2;
+    }
+  ];
 }
