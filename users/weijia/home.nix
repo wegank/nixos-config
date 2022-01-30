@@ -37,6 +37,7 @@
       android-tools
       gh
       neofetch
+      screen
       # Custom.
       # (pkgs.callPackage ./aegisub/default.nix { })
     ];
