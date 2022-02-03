@@ -1,0 +1,39 @@
+From 8ad6ace96fbe7aba0846872cb18120b76a505bf5 Mon Sep 17 00:00:00 2001
+From: Iskren Chernev <me@iskren.info>
+Date: Thu, 18 Feb 2021 15:05:50 +0200
+Subject: [PATCH 2/6] Fix dangerous relocation
+
+Without this fix the linker complains:
+
+  WARNING: EXPORT symbol "gsi_write_channel_scratch" [vmlinux] version generation failed, symbol will not be versioned.
+  aarch64-linux-gnu-ld: warning: -z norelro ignored
+  aarch64-linux-gnu-ld: drivers/platform/msm/gsi/gsi.o: relocation R_AARCH64_ABS32 against `__crc_gsi_write_channel_scratch' can not be used when making a shared object
+  drivers/platform/msm/gsi/gsi.o:(.data+0x0): dangerous relocation: unsupported relocation
+  drivers/platform/msm/gsi/gsi.o:(.data+0x28): dangerous relocation: unsupported relocation
+  drivers/platform/msm/gsi/gsi.o:(.data+0x50): dangerous relocation: unsupported relocation
+  make[1]: *** [/home/iskren/src/pmos/android_kernel_samsung_msm8974/Makefile:1124: vmlinux] Error 1
+
+The problem is actually that genksyms doesn't understand __packed in
+function return type.
+
+Signed-off-by: Iskren Chernev <me@iskren.info>
+---
+ drivers/platform/msm/gsi/gsi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/platform/msm/gsi/gsi.c b/drivers/platform/msm/gsi/gsi.c
+index 391ff6f0325c0..793d253442f36 100644
+--- a/drivers/platform/msm/gsi/gsi.c
++++ b/drivers/platform/msm/gsi/gsi.c
+@@ -2620,7 +2620,7 @@ static void __gsi_read_channel_scratch(unsigned long chan_hdl,
+ 			gsi_ctx->per.ee));
+ }
+ 
+-static union __packed gsi_channel_scratch __gsi_update_mhi_channel_scratch(
++static union gsi_channel_scratch __gsi_update_mhi_channel_scratch(
+ 	unsigned long chan_hdl, struct __packed gsi_mhi_channel_scratch mscr)
+ {
+ 	union __packed gsi_channel_scratch scr;
+-- 
+2.30.1
+

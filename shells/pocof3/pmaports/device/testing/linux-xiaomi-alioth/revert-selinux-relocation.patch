@@ -1,0 +1,47 @@
+From ce4a6e089be790bd9dfe4c344a010d9e0bd7855c Mon Sep 17 00:00:00 2001
+From: Nick Desaulniers <ndesaulniers@google.com>
+Date: Fri, 25 Jan 2019 12:56:42 -0800
+Subject: [PATCH] Revert "selinux: Relocate ss_initialized and
+ selinux_enforcing to separate 4k"
+
+This reverts commit d4807bd60dc166a6445c3b13684f1d1afb722bc5.
+
+That out of tree patch causes the resulting kernel image to be too
+large, causing ld.lld to error; likely due to the additional section and
+alignment requirements.  Android and floral don't host virtual targets
+and thus do not run at EL2 on arm64.
+
+Bug: 63740206
+Change-Id: I357bf4d5c7e29230746eacd51fef413acec06067
+Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
+---
+ include/linux/init.h            |  2 --
+ security/selinux/hooks.c        |  2 +-
+ 2 files changed, 1 insertions(+), 3 deletions(-)
+
+diff --git a/include/linux/init.h b/include/linux/init.h
+index d66317911c1a..f138e5b918c2 100644
+--- a/include/linux/init.h
++++ b/include/linux/init.h
+@@ -289,8 +289,6 @@ void __init parse_early_options(char *cmdline);
+ /* Data marked not to be saved by software suspend */
+ #define __nosavedata __section(.data..nosave)
+ 
+-#define __rticdata  __attribute__((section(".bss.rtic")))
+-
+ #ifdef MODULE
+ #define __exit_p(x) x
+ #else
+diff --git a/security/selinux/hooks.c b/security/selinux/hooks.c
+index 7d5dadfaaab0..3bbfca4accd8 100644
+--- a/security/selinux/hooks.c
++++ b/security/selinux/hooks.c
+@@ -102,7 +102,7 @@
+ #include "audit.h"
+ #include "avc_ss.h"
+ 
+-struct selinux_state selinux_state __rticdata;
++struct selinux_state selinux_state;
+ 
+ /* SECMARK reference count */
+ static atomic_t selinux_secmark_refcount = ATOMIC_INIT(0);
