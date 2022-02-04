@@ -8,7 +8,7 @@ license="MIT"
 arch="aarch64"
 options="!check !archcheck"
 depends="
-	linux-xiaomi-alioth
+	linux-postmarketos-qcom-sm8250
 	mesa-dri-gallium
 	mkbootimg
 	postmarketos-base
@@ -25,5 +25,5 @@ package() {
 }
 
 sha512sums="
-db834aaffdab4d8cdbf037613f7ffb0f366f45f0989c0385c5c37601822f06649ae7adb77b8a2deae876cf25216c3ffaf14800995b344515b20c2f3ba4f19e87  deviceinfo
+25d00da8ebc5b093442eaf50c73a77828cc80026f27e62e1848f0802b939a885ff9d427104bd6fc498c348728e910ba54bc8b7387d44e493f411e119e29a22a7  deviceinfo
 "

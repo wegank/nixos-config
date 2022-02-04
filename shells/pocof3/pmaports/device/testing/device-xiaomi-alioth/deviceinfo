@@ -7,8 +7,8 @@ deviceinfo_name="Xiaomi Poco F3"
 deviceinfo_manufacturer="Xiaomi"
 deviceinfo_codename="xiaomi-alioth"
 deviceinfo_year="2021"
-deviceinfo_dtb=""
-deviceinfo_modules_initfs=""
+deviceinfo_dtb="qcom/sm8250-xiaomi-alioth"
+deviceinfo_append_dtb="true"
 deviceinfo_arch="aarch64"
 
 # Device related
