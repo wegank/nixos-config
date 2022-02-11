@@ -50,10 +50,8 @@ let unfreePackages = [
     "x86_64-linux"
   ];
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 1024 * 8 * 2;
-    }
-  ];
+  zramSwap = {
+    enable = true;
+    memoryPercent = 200;
+  };
 }
