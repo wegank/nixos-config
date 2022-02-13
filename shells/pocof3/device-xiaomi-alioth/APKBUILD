@@ -1,0 +1,29 @@
+# Reference: <https://postmarketos.org/devicepkg>
+pkgname=device-xiaomi-alioth
+pkgdesc="Xiaomi Poco F3"
+pkgver=0.1
+pkgrel=0
+url="https://postmarketos.org"
+license="MIT"
+arch="aarch64"
+options="!check !archcheck"
+depends="
+	linux-xiaomi-alioth
+	mesa-dri-gallium
+	mkbootimg
+	postmarketos-base
+"
+makedepends="devicepkg-dev"
+source="deviceinfo"
+
+build() {
+	devicepkg_build $startdir $pkgname
+}
+
+package() {
+	devicepkg_package $startdir $pkgname
+}
+
+sha512sums="
+34fa6840e8a5550c6d27c86cc12f61bb37237177e04ee968de6add2b150d51d21ff2da11adc8f21cd73e26ae7f8b557f9db4a05f845a74fbf529046749b9674b  deviceinfo
+"

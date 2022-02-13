@@ -1,0 +1,64 @@
+# Reference: <https://postmarketos.org/vendorkernel>
+# Kernel config based on: arch/arm64/configs/vendor/alioth_defconfig
+
+pkgname=linux-xiaomi-alioth
+pkgver=4.19.113
+pkgrel=0
+pkgdesc="Xiaomi Poco F3 kernel fork"
+arch="aarch64"
+_carch="arm64"
+_flavor="xiaomi-alioth"
+url="https://kernel.org"
+license="GPL-2.0-only"
+options="!strip !check !tracedeps pmb:cross-native"
+makedepends="
+	bash
+	bc
+	bison
+	devicepkg-dev
+	flex
+	openssl-dev
+	perl
+	python2
+	xz
+"
+
+# Source
+_repository="android_kernel_xiaomi_sm8250"
+_commit="4688376597fe0e9108986b0e01b115f24b1a6a4f"
+_config="config-$_flavor.$arch"
+source="
+	$pkgname-$_commit.tar.gz::https://github.com/LineageOS/$_repository/archive/$_commit.tar.gz
+	$_config
+	fix-dangerous-relocation.patch
+	revert-selinux-relocation.patch
+	remove_bootloader_cmdline_opts.patch
+	do-not-skip-initramfs.patch
+"
+builddir="$srcdir/$_repository-$_commit"
+_outdir="out"
+
+prepare() {
+	default_prepare
+	REPLACE_GCCH=0 . downstreamkernel_prepare
+}
+
+build() {
+	unset LDFLAGS
+	make O="$_outdir" ARCH="$_carch" CC="${CC:-gcc}" \
+		KBUILD_BUILD_VERSION="$((pkgrel + 1 ))-postmarketOS"
+}
+
+package() {
+	downstreamkernel_package "$builddir" "$pkgdir" "$_carch" \
+		"$_flavor" "$_outdir"
+}
+
+sha512sums="
+2ef13d0f7af787d70343dfb4fac3d2ac8b1b207ef88883ab1fcff5052910a11c915eca39108060769a780e30d049c71c5cf60be7bac199d29ae59f9ef3071a07  linux-xiaomi-alioth-4688376597fe0e9108986b0e01b115f24b1a6a4f.tar.gz
+273a9b8c8e92efa84c32d227197b8047800bb20e0e41cdbd7d15565dfd6077f32704d1db60f29233a266b369887d844ec8a7e1d143270712b53e573595c41932  config-xiaomi-alioth.aarch64
+39007dd285b502633c7bbf398acd6841a14fb6f5e0a3ad8570d31be77763b537b2352401701d67c53d36ddbf4068ee32446bf3b4ef9aa20c39f052ca491d2be4  fix-dangerous-relocation.patch
+98d90b5e2fe49be0a3d1f8f501b2c4e11999b1dc509790bd1482ec7dfb53cb64ec2492c076cdb269254ab25249b1bcaca4d5d05b38fc68aa7b59278367770a3a  revert-selinux-relocation.patch
+fa588b12edd5dd9312a21dff7cbf2089ca8a250952a657435ec02e4a3aaecb5c46645981ec265944a2e5ef43edc26a959d695c28930894649341a1bcc43a841f  remove_bootloader_cmdline_opts.patch
+4727cdcdaa03c8df62d5e26930baa036d43363b5d1b7f43059fbd361c463a09fc7957cca357ef1e9ad7488647e00fc5656fdbc4d209010cc85b8d2c98268ae6d  do-not-skip-initramfs.patch
+"

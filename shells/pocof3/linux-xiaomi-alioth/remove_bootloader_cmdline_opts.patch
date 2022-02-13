@@ -1,0 +1,49 @@
+From 92e3310d2db157deacb86ef5db8c8c8d38251312 Mon Sep 17 00:00:00 2001
+From: Alexey Min <alexey.min@gmail.com>
+Date: Wed, 11 Sep 2019 21:51:40 +0300
+Subject: [PATCH 3/6] Add config option to fix bootloader cmdline args
+
+Android bootloader passes some arguments in kernel command
+line, that make booting custom OSes harder:
+
+ * skip_initramfs
+ * root=PARTUUID=...
+ * init=/init
+
+Those parameters override default boot partition to hardcoded,
+set init binary to /init, disable booting from initramfs.
+
+If enabled, those parameters will be erased from bootloader's
+command line, and custom OS can boot the way it likes.
+
+Signed-off-by: Alexey Min <alexey.min@gmail.com>
+---
+ drivers/of/fdt.c   | 13 ++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/drivers/of/fdt.c b/drivers/of/fdt.c
+index ca175710c4c8..fd8257589648 100644
+--- a/drivers/of/fdt.c
++++ b/drivers/of/fdt.c
+@@ -1012,6 +1012,18 @@ int __init early_init_dt_scan_chosen(unsigned long node, const char *uname,
+ 
+ 	pr_debug("Command line is: %s\n", (char*)data);
+ 
++	pr_err("Replacing dangerous cmdline options...");
++	cmdline = strstr((const char *)data, "skip_initramfs");
++	if (cmdline)
++		*cmdline = '_';
++	cmdline = strstr((const char *)data, "root=");
++	if (cmdline)
++		*cmdline = '_';
++	cmdline = strstr((const char *)data, "init=");
++	if (cmdline)
++		*cmdline = '_';
++	pr_err("Command line now is: %s\n", (char*)data);
++
+ 	rng_seed = of_get_flat_dt_prop(node, "rng-seed", &l);
+	if (rng_seed && l > 0) {
+ 		add_bootloader_randomness(rng_seed, l);
+-- 
+2.24.1
+
