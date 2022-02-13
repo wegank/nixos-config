@@ -17,6 +17,7 @@ makedepends="
 	bison
 	devicepkg-dev
 	flex
+	linux-headers
 	openssl-dev
 	perl
 	python2
