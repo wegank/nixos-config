@@ -14,7 +14,15 @@ depends="
 	postmarketos-base
 "
 makedepends="devicepkg-dev"
-source="deviceinfo"
+subpackages="
+	$pkgname-weston
+"
+source="
+	deviceinfo
+	modules-load.conf
+	weston.ini
+	weston-fixes.sh
+"
 
 build() {
 	devicepkg_build $startdir $pkgname
@@ -24,6 +32,21 @@ package() {
 	devicepkg_package $startdir $pkgname
 }
 
+weston() {
+	install_if="$pkgname weston"
+
+	# weston use drm backend, 2x dpi, don't use virtual output
+	install -Dm644 "$srcdir"/weston.ini \
+		"$subpkgdir"/etc/xdg/weston/weston.ini
+
+	# weston msm_drm hax
+	install -Dm755 "$srcdir"/weston-fixes.sh \
+		"$subpkgdir"/etc/X11/xinit/xinitrc.d/00-xiaomi-alioth-weston-fixes.sh
+}
+
 sha512sums="
 62a64f2e73a6da3ffbd484987640a94ddd015b4b7c17034f984cdb8b95a1d41b65cb464f4b0b064ce8507355bac8f7ad272fa1eb2c287c60cf4b7642d50afd9f  deviceinfo
+cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e  modules-load.conf
+4fdc188f9cd5c0316959322568916a6e36e67ff316e90fa7bd7c7b642cb137a9ff7002b0475728c6ba53abcbfe8c50d82112e4943460ee424aee4bbfd0efecfe  weston.ini
+dee5579e89de6512ab827370103cab1c88beaa1e22159d66cbebeb77cec214aaf10f76ceb58ab7e7e65d5fa2b50892e5588aa439942ded2e0ed906cd1772d313  weston-fixes.sh
 "
