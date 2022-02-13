@@ -22,8 +22,10 @@ deviceinfo_generate_bootimg="true"
 deviceinfo_bootimg_qcdt="false"
 deviceinfo_bootimg_mtk_mkimage="false"
 deviceinfo_bootimg_dtb_second="false"
-deviceinfo_bootimg_custom_args="--header_version 3 --dtb_offset 0x0000000001f00000"
 deviceinfo_flash_pagesize="4096"
-deviceinfo_flash_sparse="true"
+
+deviceinfo_bootimg_custom_args="--header_version 3 --dtb_offset 0x0000000001f00000"
 deviceinfo_rootfs_image_sector_size="4096"
+deviceinfo_no_framebuffer="true"
+deviceinfo_flash_sparse="true"
 
