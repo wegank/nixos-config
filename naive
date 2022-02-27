@@ -4,14 +4,14 @@ default=parallels
 
 set -e
 
-check_root () {
+check_root() {
     if [[ $(id -u) -ne 0 ]]; then
         echo "Please run as root."
         exit 1
     fi
 }
 
-format_and_mount () {
+format_and_mount() {
     umount /dev/sda* || true
     umount -R /mnt || true
     parted -s /dev/sda mklabel gpt
@@ -27,25 +27,25 @@ format_and_mount () {
     mount /dev/sda1 /mnt/boot
 }
 
-install () {
+install() {
     nix-shell -p nixUnstable --run \
         "nixos-install --no-root-passwd --root /mnt --flake .#$1"
 }
 
-netinstall () {
+netinstall() {
     nix-shell -p nixUnstable --run \
         "nixos-install --no-root-passwd --root /mnt --flake github:wegank/nixos-config#$1"
 }
 
-upgrade () {
+upgrade() {
     nixos-rebuild switch --upgrade --flake ".#$1" --no-write-lock-file
 }
 
-full_upgrade () {
+full_upgrade() {
     nixos-rebuild switch --upgrade --flake ".#$1" --recreate-lock-file
 }
 
-clean () {
+clean() {
     nix-collect-garbage -d
 }
 
