@@ -35,6 +35,7 @@
     packages = with pkgs; [
       # Userland.
       android-tools
+      git-filter-repo
       gh
       neofetch
       screen
