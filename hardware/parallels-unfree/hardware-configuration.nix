@@ -50,4 +50,16 @@
     enable = true;
     package = (config.boot.kernelPackages.callPackage ./prl-tools.nix { });
   };
+
+  # Linux kernel 5.16.14 is broken on Apple hypervisor.
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_5_16.override {
+    argsOverride = rec {
+      src = pkgs.fetchurl {
+        url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
+        sha256 = "1fvz4v3mcm9yxfak6mshl764piadgz46y71wprb85b1shc09i2ig";
+      };
+      version = "5.16.13";
+      modDirVersion = "5.16.13";
+    };
+  });
 }

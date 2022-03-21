@@ -1,6 +1,6 @@
 # System configuration.
 
-{ config, pkgs, owner, ... }:
+{ config, lib, pkgs, owner, ... }:
 
 {
   nix = {
@@ -21,7 +21,7 @@
   };
 
   # Use the latest Linux kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   # Set time zone.
   time.timeZone = "Europe/Paris";
