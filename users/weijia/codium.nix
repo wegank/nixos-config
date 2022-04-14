@@ -37,6 +37,7 @@
       userSettings = {
         "terminal.integrated.fontFamily" =
           "'Meslo LG S for Powerline'";
+        "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
         "update.mode" = "none";
         "diffEditor.ignoreTrimWhitespace" = false;
