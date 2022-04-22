@@ -7,7 +7,13 @@
   };
 
   outputs = { self, home-manager, nixpkgs }:
-    let metadata = builtins.fromTOML (builtins.readFile ./flake.toml); in
+    let
+      metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
+      filterMachines = suffix:
+        (nixpkgs.lib.attrsets.filterAttrs
+          (_: config: nixpkgs.lib.strings.hasSuffix "linux" config.platform)
+          metadata.machines);
+    in
     {
       nixosConfigurations = builtins.mapAttrs
         (hostname: _:
@@ -42,6 +48,6 @@
             ];
           }
         )
-        (builtins.readDir ./hardware);
+        (filterMachines "linux");
     };
 }
