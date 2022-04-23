@@ -2,28 +2,21 @@
 
 { pkgs, lib, owner, host, ... }:
 
+let
+  isDesktop = (host.profile == "desktop");
+  isLinux = lib.strings.hasSuffix "linux" host.platform;
+in
 {
-  imports = [
+  imports = lib.optionals isLinux [
+    ./fcitx.nix
     ./gtk.nix
-  ] ++ lib.optionals (host.profile == "desktop") [
-    ./codium.nix
+    ./xdg.nix
+  ] ++ lib.optionals (isDesktop && isLinux) [
     ./sway.nix
+    ./codium.nix
+    ./www-client/firefox.nix
+    ./www-client/chromium.nix
   ];
-
-  xdg = {
-    enable = true;
-    userDirs.enable = true;
-  };
-
-  i18n = {
-    inputMethod = {
-      # Enable Fcitx.
-      enabled = "fcitx5";
-      fcitx5.addons = with pkgs; [
-        fcitx5-chinese-addons
-      ];
-    };
-  };
 
   manual = {
     manpages = {
@@ -34,7 +27,7 @@
   home = {
     packages = with pkgs; [
       # Userland.
-      android-tools
+      # android-tools
       git-filter-repo
       gh
       neofetch
@@ -54,6 +47,10 @@
       package = pkgs.gitAndTools.gitFull;
       userName = owner.fullName;
       userEmail = owner.gitEmail;
+    };
+
+    home-manager = {
+      enable = true;
     };
 
     zsh = {
