@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   services = {
     zerotierone = {
