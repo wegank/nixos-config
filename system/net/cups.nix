@@ -1,0 +1,7 @@
+{
+  services = {
+    printing = {
+      enable = true;
+    };
+  };
+}

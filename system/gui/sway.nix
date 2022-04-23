@@ -1,4 +1,8 @@
 {
+  environment = {
+    pathsToLink = [ "/libexec" ];
+  };
+
   services = {
     xserver = {
       displayManager = {
