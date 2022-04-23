@@ -1,7 +1,7 @@
 { pkgs, lib, host, ... }:
 
 let
-  isDarwin = lib.strings.hasSuffix "darwin" host.platform;
+  isDarwin = lib.hasSuffix "darwin" host.platform;
   package = if isDarwin then pkgs.vscode else pkgs.vscodium;
 in
 {

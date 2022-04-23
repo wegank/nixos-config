@@ -11,19 +11,18 @@
 
   outputs = { self, nixpkgs, home-manager, nix-darwin }:
     let
-      attrsets = nixpkgs.lib.attrsets;
-      strings = nixpkgs.lib.strings;
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
 
       # Filter machines by suffix.
       filterMachines = suffix:
-        (attrsets.filterAttrs
-          (_: config: strings.hasSuffix suffix config.platform)
+        (nixpkgs.lib.filterAttrs
+          (_: config: nixpkgs.lib.hasSuffix suffix config.platform)
           metadata.machines);
 
       # Convert full name to username.
       parseName = name:
-        (builtins.replaceStrings [ " " "-" ] [ "" "" ] (strings.toLower name));
+        (builtins.replaceStrings [ " " "-" ] [ "" "" ]
+          (nixpkgs.lib.toLower name));
     in
     {
       # macOS configurations.
@@ -48,7 +47,7 @@
                     owner = metadata.owner;
                     inherit host;
                   };
-                  users.${parseName metadata.owner.fullName} = 
+                  users.${parseName metadata.owner.fullName} =
                     ./users + "/${metadata.owner.name}" + /home.nix;
                 };
               }

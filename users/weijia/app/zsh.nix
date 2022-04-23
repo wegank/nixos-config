@@ -1,7 +1,7 @@
 { pkgs, lib, host, ... }:
 
 let
-  isDarwin = lib.strings.hasSuffix "darwin" host.platform;
+  isDarwin = lib.hasSuffix "darwin" host.platform;
   darwinEnv =
     # Rustup
     ". \"$HOME/.cargo/env\"\n" +

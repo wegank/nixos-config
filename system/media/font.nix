@@ -1,7 +1,7 @@
 { pkgs, lib, host, ... }:
 
 let
-  isLinux = lib.strings.hasSuffix "linux" host.platform;
+  isLinux = lib.hasSuffix "linux" host.platform;
 in
 {
   fonts = {

@@ -1,8 +1,8 @@
 { pkgs, lib, host, ... }:
 
 let
-  isLinux = lib.strings.hasSuffix "linux" host.platform;
-  isDarwin = lib.strings.hasSuffix "darwin" host.platform;
+  isLinux = lib.hasSuffix "linux" host.platform;
+  isDarwin = lib.hasSuffix "darwin" host.platform;
 in
 {
   nix = {

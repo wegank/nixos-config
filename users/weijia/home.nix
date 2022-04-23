@@ -4,7 +4,7 @@
 
 let
   isDesktop = (host.profile == "desktop");
-  isLinux = lib.strings.hasSuffix "linux" host.platform;
+  isLinux = lib.hasSuffix "linux" host.platform;
 in
 {
   imports = [
