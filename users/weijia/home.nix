@@ -12,6 +12,7 @@ in
     ./app/texlive.nix
     ./app/zsh.nix
     ./dev/git.nix
+    ./sys/nix.nix
   ] ++ lib.optionals isLinux [
     ./app/fcitx.nix
     ./gui/gtk.nix
@@ -24,12 +25,6 @@ in
     ./www/firefox.nix
   ];
 
-  manual = {
-    manpages = {
-      enable = false;
-    };
-  };
-
   home = {
     packages = with pkgs; [
       # Userland.
@@ -39,11 +34,5 @@ in
       # Custom.
       # (pkgs.callPackage ./aegisub/default.nix { })
     ];
-  };
-
-  programs = {
-    home-manager = {
-      enable = true;
-    };
   };
 }

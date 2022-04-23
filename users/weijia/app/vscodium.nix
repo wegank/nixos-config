@@ -5,14 +5,6 @@ let
   package = if isDarwin then pkgs.vscode else pkgs.vscodium;
 in
 {
-  home = {
-    packages = with pkgs; [
-      # Nix
-      nixpkgs-fmt
-      rnix-lsp
-    ];
-  };
-
   programs = {
     vscode = {
       enable = true;
