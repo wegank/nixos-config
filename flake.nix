@@ -45,7 +45,7 @@
             lib.nameValuePair
               (getUserName name host)
               (./users + "/${name}" + /home.nix))
-          (builtins.readDir ./users);
+          metadata.users;
       };
     in
     {
