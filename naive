@@ -1,14 +1,41 @@
 #!/run/current-system/sw/bin/bash
 
-default=parallels-unfree
-
 set -e
 
 check_root() {
     if [[ $(id -u) -ne 0 ]]; then
-        echo "Please run as root."
-        exit 1
+        echo "Please run as root." && exit 1
     fi
+}
+
+check_os() {
+    case "$OSTYPE" in
+    darwin*) rebuild='darwin-rebuild' ;;
+    linux*) rebuild='nixos-rebuild --use-remote-sudo --upgrade' ;;
+    *) echo "Unknown OS type." && exit 1 ;;
+    esac
+}
+
+check_machine() {
+    case "$OSTYPE" in
+    darwin*) machine='macbook' ;;
+    linux*)
+        if [[ -f /sys/devices/virtual/dmi/id/sys_vendor ]]; then
+            model=$(cat /sys/devices/virtual/dmi/id/sys_vendor)
+        elif [[ -f /sys/firmware/devicetree/base/model ]]; then
+            model=$(cat /sys/firmware/devicetree/base/model)
+        else
+            echo "Unknown machine." && exit 1
+        fi
+        case "$model" in
+        Parallels*) machine='parallels-unfree' ;;
+        Raspberry*) machine='raspberrypi' ;;
+        VMWare*) machine='vmware' ;;
+        *) echo "Unknown machine." && exit 1 ;;
+        esac
+        ;;
+    *) echo "Unknown machine." && exit 1 ;;
+    esac
 }
 
 format_and_mount() {
@@ -37,20 +64,12 @@ netinstall() {
         "nixos-install --no-root-passwd --root /mnt --flake github:wegank/nixos-config#$1"
 }
 
-check_os() {
-    case "$OSTYPE" in
-    darwin*) REBUILD='darwin-rebuild' ;;
-    linux*) REBUILD='nixos-rebuild --use-remote-sudo --upgrade' ;;
-    *) echo "Unknown OS type." && exit 1 ;;
-    esac
-}
-
 upgrade() {
-    $REBUILD switch --flake ".#$1" --no-write-lock-file
+    $rebuild switch --flake ".#$1" --no-write-lock-file
 }
 
 full_upgrade() {
-    $REBUILD switch --flake ".#$1" --recreate-lock-file
+    $rebuild switch --flake ".#$1" --recreate-lock-file
 }
 
 clean() {
@@ -61,27 +80,31 @@ trap 'exit 1' ERR
 
 if [[ $1 == "upgrade" ]] && [[ $3 == "" ]]; then
     check_os
-    upgrade "${2:-$default}"
+    check_machine
+    upgrade "${2:-$machine}"
     exit
 elif [[ $1 == "full-upgrade" ]] && [[ $3 == "" ]]; then
     check_os
-    full_upgrade "${2:-$default}"
+    check_machine
+    full_upgrade "${2:-$machine}"
     exit
 elif [[ $1 == "clean" ]] && [[ $2 == "" ]]; then
     clean
     exit
 elif [[ $1 == "install" ]] && [[ $3 == "" ]]; then
     check_root
+    check_machine
     format_and_mount
     sleep 1
-    install "${2:-$default}"
+    install "${2:-$machine}"
     umount -R /mnt || true
     exit
 elif [[ $1 == "netinstall" ]] && [[ $3 == "" ]]; then
     check_root
+    check_machine
     format_and_mount
     sleep 1
-    netinstall "${2:-$default}"
+    netinstall "${2:-$machine}"
     umount -R /mnt || true
     exit
 fi
