@@ -37,12 +37,20 @@ netinstall() {
         "nixos-install --no-root-passwd --root /mnt --flake github:wegank/nixos-config#$1"
 }
 
+check_os() {
+    case "$OSTYPE" in
+    darwin*) REBUILD='darwin-rebuild' ;;
+    linux*) REBUILD='nixos-rebuild --use-remote-sudo --upgrade' ;;
+    *) echo "Unknown OS type." && exit 1 ;;
+    esac
+}
+
 upgrade() {
-    nixos-rebuild --use-remote-sudo switch --upgrade --flake ".#$1" --no-write-lock-file
+    $REBUILD switch --flake ".#$1" --no-write-lock-file
 }
 
 full_upgrade() {
-    nixos-rebuild --use-remote-sudo switch --upgrade --flake ".#$1" --recreate-lock-file
+    $REBUILD switch --flake ".#$1" --recreate-lock-file
 }
 
 clean() {
@@ -52,9 +60,11 @@ clean() {
 trap 'exit 1' ERR
 
 if [[ $1 == "upgrade" ]] && [[ $3 == "" ]]; then
+    check_os
     upgrade "${2:-$default}"
     exit
 elif [[ $1 == "full-upgrade" ]] && [[ $3 == "" ]]; then
+    check_os
     full_upgrade "${2:-$default}"
     exit
 elif [[ $1 == "clean" ]] && [[ $2 == "" ]]; then
