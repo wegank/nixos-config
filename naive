@@ -21,9 +21,9 @@ check_machine() {
     darwin*) machine='macbook' ;;
     linux*)
         if [[ -f /sys/devices/virtual/dmi/id/sys_vendor ]]; then
-            model=$(</sys/devices/virtual/dmi/id/sys_vendor)
+            model=$(tr -d '\0' </sys/devices/virtual/dmi/id/sys_vendor)
         elif [[ -f /sys/firmware/devicetree/base/model ]]; then
-            model=$(</sys/firmware/devicetree/base/model)
+            model=$(tr -d '\0' </sys/firmware/devicetree/base/model)
         else
             echo "Unknown machine." && exit 1
         fi
