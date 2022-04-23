@@ -30,7 +30,7 @@ check_machine() {
         case "$model" in
         Parallels*) machine='parallels-unfree' ;;
         Raspberry*) machine='raspberrypi' ;;
-        VMWare*) machine='vmware' ;;
+        VMware*) machine='vmware' ;;
         *) echo "Unknown machine." && exit 1 ;;
         esac
         ;;
