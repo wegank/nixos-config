@@ -68,6 +68,13 @@ in
       userSettings = {
         # C++
         "C_Cpp.default.cppStandard" = "c++20";
+        # Copilot
+        "github.copilot.enable" = {
+          "*" = true;
+          "yaml" = false;
+          "plaintext" = false;
+          "markdown" = false;
+        };
         # Git
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
