@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./app/alacritty.nix
+    ./app/texlive.nix
     ./app/zsh.nix
     ./dev/git.nix
   ] ++ lib.optionals isLinux [
@@ -19,8 +20,8 @@ in
     ./app/vscodium.nix
   ] ++ lib.optionals (isDesktop && isLinux) [
     ./gui/sway.nix
-    ./www/firefox.nix
     ./www/chromium.nix
+    ./www/firefox.nix
   ];
 
   manual = {
