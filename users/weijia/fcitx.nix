@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   i18n = {
     inputMethod = {
