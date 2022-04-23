@@ -28,9 +28,6 @@ in
           jnoortheen.nix-ide
           # OCaml
           ocamllabs.ocaml-platform
-          # Python
-          ms-python.python
-          ms-python.vscode-pylance
           # Shell
           foxundermoon.shell-format
         ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
