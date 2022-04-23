@@ -9,20 +9,21 @@ in
 {
   imports = [
     ./app/alacritty.nix
-    ./app/texlive.nix
     ./app/zsh.nix
     ./dev/git.nix
     ./sys/nix.nix
   ] ++ lib.optionals isLinux [
-    ./app/fcitx.nix
     ./gui/gtk.nix
     ./x11/xdg.nix
   ] ++ lib.optionals isDesktop [
     ./app/vscodium.nix
   ] ++ lib.optionals (isDesktop && isLinux) [
+    ./app/fcitx.nix
     ./gui/sway.nix
     ./www/chromium.nix
     ./www/firefox.nix
+  ] ++ lib.optionals (isDesktop && !isLinux) [
+    ./app/texlive.nix
   ];
 
   home = {
