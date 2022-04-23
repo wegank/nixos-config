@@ -49,17 +49,6 @@
       enable = true;
     };
 
-    chromium = {
-      enable = true;
-      extensions = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin.
-      ];
-    };
-
-    firefox = {
-      enable = true;
-    };
-
     git = {
       enable = true;
       package = pkgs.gitAndTools.gitFull;

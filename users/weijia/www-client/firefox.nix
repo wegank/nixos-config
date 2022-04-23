@@ -1,0 +1,7 @@
+{
+  programs = {
+    firefox = {
+      enable = true;
+    };
+  };
+}
