@@ -57,14 +57,19 @@ in
         inherit (package) pname version;
       });
       userSettings = {
-        "diffEditor.ignoreTrimWhitespace" = false;
+        # Git
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
+        # LaTeX
+        "latex-workshop.latex.outDir" = "%TMPDIR%";
+        "latex-workshop.view.pdf.viewer" = "tab";
+        # Nix
         "nix.enableLanguageServer" = true;
-        "terminal.integrated.fontFamily" =
-          "'Meslo LG S for Powerline'";
-        "update.mode" = "none";
+        # Miscellaneous
+        "diffEditor.ignoreTrimWhitespace" = false;
         "editor.inlineSuggest.enabled" = true;
+        "terminal.integrated.fontFamily" = "Meslo LG S for Powerline";
+        "update.mode" = if isLinux then "none" else "default";
       };
     };
   };
