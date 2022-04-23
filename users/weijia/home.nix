@@ -8,14 +8,14 @@ let
 in
 {
   imports = lib.optionals isLinux [
-    ./fcitx.nix
-    ./gtk.nix
-    ./xdg.nix
+    ./app/fcitx.nix
+    ./gui/gtk.nix
+    ./x11/xdg.nix
   ] ++ lib.optionals (isDesktop && isLinux) [
-    ./sway.nix
-    ./codium.nix
-    ./www-client/firefox.nix
-    ./www-client/chromium.nix
+    ./gui/sway.nix
+    ./app/vscodium.nix
+    ./www/firefox.nix
+    ./www/chromium.nix
   ];
 
   manual = {
