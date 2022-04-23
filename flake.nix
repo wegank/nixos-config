@@ -2,11 +2,14 @@
   description = "NixOS configuration";
 
   inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-darwin.url = "github:lnl7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, home-manager, nixpkgs }:
+  outputs = { self, nixpkgs, home-manager, nix-darwin }:
     let
       attrsets = nixpkgs.lib.attrsets;
       strings = nixpkgs.lib.strings;
@@ -14,38 +17,51 @@
 
       # Filter machines by suffix.
       filterMachines = suffix:
-        (attrsets.filterAttrs 
+        (attrsets.filterAttrs
           (_: config: strings.hasSuffix suffix config.platform)
           metadata.machines);
 
       # Convert full name to username.
       parseName = name:
-        (builtins.replaceStrings [" " "-"] ["" ""] (strings.toLower name));
+        (builtins.replaceStrings [ " " "-" ] [ "" "" ] (strings.toLower name));
     in
     {
       # macOS configurations.
-      homeConfigurations = builtins.mapAttrs
+      darwinConfigurations = builtins.mapAttrs
         (hostname: host:
-          home-manager.lib.homeManagerConfiguration {
-            extraSpecialArgs = {
+          nix-darwin.lib.darwinSystem {
+            system = host.platform;
+            specialArgs = {
               owner = metadata.owner;
               inherit host;
             };
-            configuration =
-              import (./users + "/${metadata.owner.name}" + /home.nix);
-            system = host.platform;
-            homeDirectory = "/Users/${parseName metadata.owner.fullName}";
-            username = parseName metadata.owner.fullName;
-            stateVersion = "21.11";
+            modules = [
+              # System configuration.
+              ./system/configuration.nix
+              # Home Manager.
+              home-manager.darwinModules.home-manager
+              {
+                home-manager = {
+                  useUserPackages = true;
+                  useGlobalPkgs = true;
+                  extraSpecialArgs = {
+                    owner = metadata.owner;
+                    inherit host;
+                  };
+                  users.${parseName metadata.owner.fullName} = 
+                    ./users + "/${metadata.owner.name}" + /home.nix;
+                };
+              }
+            ];
           }
         )
         (filterMachines "darwin");
-      
+
       # NixOS configurations.
       nixosConfigurations = builtins.mapAttrs
         (hostname: host:
           nixpkgs.lib.nixosSystem {
-            system = metadata.machines.${hostname}.platform;
+            system = host.platform;
             specialArgs = {
               owner = metadata.owner;
               inherit host;
