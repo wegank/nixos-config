@@ -19,6 +19,8 @@ in
       package = (pkgs.vscode-with-extensions.override {
         vscode = package;
         vscodeExtensions = (with pkgs.vscode-extensions; [
+          # Copilot
+          github.copilot
           # LaTeX
           james-yu.latex-workshop
           # Markdown
@@ -57,17 +59,36 @@ in
         inherit (package) pname version;
       });
       userSettings = {
+        # C++
+        "C_Cpp.default.cppStandard" = "c++20";
         # Git
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
+        # Java
+        "files.exclude" = {
+          "**/.classpath" = true;
+          "**/.project" = true;
+          "**/.settings" = true;
+          "**/.factorypath" = true;
+        };
+        "redhat.telemetry.enabled" = false;
         # LaTeX
         "latex-workshop.latex.outDir" = "%TMPDIR%";
         "latex-workshop.view.pdf.viewer" = "tab";
+        # Markdown
+        "[markdown]" = {
+          "editor.defaultFormatter" = "yzhang.markdown-all-in-one";
+        };
         # Nix
         "nix.enableLanguageServer" = true;
         # Miscellaneous
         "diffEditor.ignoreTrimWhitespace" = false;
         "editor.inlineSuggest.enabled" = true;
+        "editor.suggestSelection" = "first";
+        "editor.unicodeHighlight.allowedLocales" = {
+          "ja" = true;
+          "zh-hant" = true;
+        };
         "terminal.integrated.fontFamily" = "Meslo LG S for Powerline";
         "update.mode" = if isLinux then "none" else "default";
       };
@@ -76,5 +97,6 @@ in
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "vscode"
+    "vscode-extension-github-copilot"
   ];
 }
