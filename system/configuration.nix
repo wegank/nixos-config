@@ -1,7 +1,11 @@
 # System configuration.
 
-{ config, lib, pkgs, owner, ... }:
+{ config, lib, pkgs, owner, host, ... }:
 
+let
+  isDesktop = (host.profile == "desktop");
+  isLinux = lib.strings.hasSuffix "linux" host.platform;
+in
 {
   imports = [
     ./app/gnupg.nix
@@ -13,6 +17,19 @@
     ./net/networkmanager.nix
     ./sys/nix.nix
     ./x11/xorg-server.nix
+  ] ++ lib.optionals isDesktop [
+    ./gui/sway.nix
+    ./gnome/gdm.nix
+    ./gnome/gnome.nix
+  ] ++ lib.optionals (!isDesktop) [
+    ./app/podman.nix
+    ./app/qemu.nix
+    ./app/vscode-server.nix
+    ./net/openssh.nix
+    ./net/xrdp.nix
+    ./net/zerotier.nix
+    ./sys/zram.nix
+    ./xfce/xfce.nix
   ];
 
   # Use the latest Linux kernel.

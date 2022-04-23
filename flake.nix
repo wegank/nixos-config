@@ -48,13 +48,13 @@
             system = metadata.machines.${hostname}.platform;
             specialArgs = {
               owner = metadata.owner;
+              inherit host;
             };
             modules = [
               # Hardware configuration.
               (./hardware + "/${hostname}" + /hardware-configuration.nix)
               # System configuration.
-              ./system/base.nix
-              (./system + "/${host.profile}.nix")
+              ./system/configuration.nix
               # Home Manager.
               home-manager.nixosModules.home-manager
               {
