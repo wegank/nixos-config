@@ -1,8 +1,8 @@
 { pkgs, lib, host, ... }:
 
 let
-  isLinux = lib.strings.hasSuffix "linux" host.platform;
-  package = if isLinux then pkgs.vscodium else pkgs.vscode;
+  isDarwin = lib.strings.hasSuffix "darwin" host.platform;
+  package = if isDarwin then pkgs.vscode else pkgs.vscodium;
 in
 {
   home = {
@@ -19,8 +19,6 @@ in
       package = (pkgs.vscode-with-extensions.override {
         vscode = package;
         vscodeExtensions = (with pkgs.vscode-extensions; [
-          # Copilot
-          github.copilot
           # LaTeX
           james-yu.latex-workshop
           # Markdown
@@ -32,7 +30,14 @@ in
           ocamllabs.ocaml-platform
           # Shell
           foxundermoon.shell-format
-        ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        ]) ++ lib.optional isDarwin (with pkgs.vscode-extensions; [
+          # Copilot
+          github.copilot
+          # Python
+          ms-python.python
+          ms-python.vscode-pylance
+        ])
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           # French Language Pack
           {
             publisher = "MS-CEINTL";
@@ -90,7 +95,7 @@ in
           "zh-hant" = true;
         };
         "terminal.integrated.fontFamily" = "Meslo LG S for Powerline";
-        "update.mode" = if isLinux then "none" else "default";
+        "update.mode" = if isDarwin then "default" else "none";
       };
     };
   };
@@ -98,5 +103,6 @@ in
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "vscode"
     "vscode-extension-github-copilot"
+    "vscode-extension-MS-python-vscode-pylance"
   ];
 }
