@@ -3,11 +3,12 @@
 { config, lib, pkgs, owner, host, ... }:
 
 let
-  isDarwin = lib.strings.hasSuffix "darwin" host.platform;
-  isLinux = lib.strings.hasSuffix "linux" host.platform;
+  isDarwin = lib.hasSuffix "darwin" host.platform;
+  isLinux = lib.hasSuffix "linux" host.platform;
 in
 {
   imports = [
+    ./app/zsh.nix
     ./media/font.nix
     ./sys/nix.nix
   ] ++ lib.optionals isDarwin [

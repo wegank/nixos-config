@@ -1,5 +1,9 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, host, ... }:
 
+let
+  isLinux = lib.strings.hasSuffix "linux" host.platform;
+  isDarwin = lib.strings.hasSuffix "darwin" host.platform;
+in
 {
   nix = {
     package = pkgs.nixFlakes;
@@ -12,5 +16,14 @@
       min-free = ${toString (100 * 1024 * 1024)}
       max-free = ${toString (1024 * 1024 * 1024)}
     '';
+  } // lib.optionalAttrs isLinux {
+    settings.auto-optimise-store = true;
+    gc.dates = "weekly";
   };
+
+  services = lib.optionalAttrs isDarwin {
+    nix-daemon.enable = true;
+  };
+
+  nixpkgs.config.allowUnfree = isDarwin;
 }

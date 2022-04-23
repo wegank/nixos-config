@@ -1,0 +1,7 @@
+{
+  programs = {
+    zsh = {
+      enable = true;
+    };
+  };
+}
