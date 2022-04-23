@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, host, ... }:
 
+let
+  isLinux = lib.strings.hasSuffix "linux" host.platform;
+in
 {
   home = {
     packages = with pkgs; [
@@ -11,7 +14,7 @@
 
   programs = {
     vscode = {
-      enable = true;
+      enable = isLinux;
       package = (pkgs.vscode-with-extensions.override {
         vscode = pkgs.vscodium;
         vscodeExtensions = (with pkgs.vscode-extensions; [

@@ -15,9 +15,10 @@ in
     ./app/fcitx.nix
     ./gui/gtk.nix
     ./x11/xdg.nix
+  ] ++ lib.optionals isDesktop [
+    ./app/vscodium.nix
   ] ++ lib.optionals (isDesktop && isLinux) [
     ./gui/sway.nix
-    ./app/vscodium.nix
     ./www/firefox.nix
     ./www/chromium.nix
   ];
