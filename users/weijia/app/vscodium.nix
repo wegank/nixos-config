@@ -19,6 +19,8 @@ in
       package = (pkgs.vscode-with-extensions.override {
         vscode = package;
         vscodeExtensions = (with pkgs.vscode-extensions; [
+          # Jupyter
+          ms-toolsai.jupyter
           # LaTeX
           james-yu.latex-workshop
           # Markdown
