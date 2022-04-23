@@ -1,5 +1,8 @@
 [owner]
 name = "weijia"
+
+[users.weijia]
+name = "weijia"
 fullName = "Weijia Wang"
 gitEmail = "9713184+wegank@users.noreply.github.com"
 initialPassword = "changeme"

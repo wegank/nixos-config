@@ -12,17 +12,41 @@
   outputs = { self, nixpkgs, home-manager, nix-darwin }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
+      owner = metadata.users.${metadata.owner.name};
+
+      lib = nixpkgs.lib;
+      isDarwin = host: lib.hasSuffix "darwin" host.platform;
+      isLinux = host: lib.hasSuffix "linux" host.platform;
 
       # Filter machines by suffix.
       filterMachines = suffix:
-        (nixpkgs.lib.filterAttrs
-          (_: config: nixpkgs.lib.hasSuffix suffix config.platform)
+        (lib.filterAttrs
+          (_: config: lib.hasSuffix suffix config.platform)
           metadata.machines);
 
-      # Convert full name to username.
-      parseName = name:
-        (builtins.replaceStrings [ " " "-" ] [ "" "" ]
-          (nixpkgs.lib.toLower name));
+      # Get username.
+      getUserName = name: host:
+        let fullName = lib.splitString " "
+          (lib.toLower metadata.users.${name}.fullName); in
+        if (isDarwin host) then
+          lib.concatStrings fullName
+        else
+          lib.head fullName;
+
+      # Set Home Manager template.
+      setHomeManagerTemplate = host: {
+        useUserPackages = true;
+        useGlobalPkgs = true;
+        extraSpecialArgs = {
+          inherit host owner;
+        };
+        users = lib.mapAttrs'
+          (name: _:
+            lib.nameValuePair
+              (getUserName name host)
+              (./users + "/${name}" + /home.nix))
+          (builtins.readDir ./users);
+      };
     in
     {
       # macOS configurations.
@@ -31,25 +55,15 @@
           nix-darwin.lib.darwinSystem {
             system = host.platform;
             specialArgs = {
-              owner = metadata.owner;
-              inherit host;
+              inherit host owner;
             };
             modules = [
               # System configuration.
               ./system/configuration.nix
-              # Home Manager.
+              # Home Manager configuration.
               home-manager.darwinModules.home-manager
               {
-                home-manager = {
-                  useUserPackages = true;
-                  useGlobalPkgs = true;
-                  extraSpecialArgs = {
-                    owner = metadata.owner;
-                    inherit host;
-                  };
-                  users.${parseName metadata.owner.fullName} =
-                    ./users + "/${metadata.owner.name}" + /home.nix;
-                };
+                home-manager = setHomeManagerTemplate host;
               }
             ];
           }
@@ -59,33 +73,20 @@
       # NixOS configurations.
       nixosConfigurations = builtins.mapAttrs
         (hostname: host:
-          nixpkgs.lib.nixosSystem {
+          lib.nixosSystem {
             system = host.platform;
             specialArgs = {
-              owner = metadata.owner;
-              inherit host;
+              inherit host owner;
             };
             modules = [
               # Hardware configuration.
               (./hardware + "/${hostname}" + /hardware-configuration.nix)
               # System configuration.
               ./system/configuration.nix
-              # Home Manager.
+              # Home Manager configuration.
               home-manager.nixosModules.home-manager
               {
-                home-manager = {
-                  useUserPackages = true;
-                  useGlobalPkgs = true;
-                  extraSpecialArgs = {
-                    owner = metadata.owner;
-                    inherit host;
-                  };
-                  users = builtins.mapAttrs
-                    (username: _:
-                      ./users + "/${username}" + /home.nix
-                    )
-                    (builtins.readDir ./users);
-                };
+                home-manager = setHomeManagerTemplate host;
               }
             ];
           }
