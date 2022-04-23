@@ -1,0 +1,7 @@
+{
+  programs = {
+    alacritty = {
+      enable = true;
+    };
+  };
+}
