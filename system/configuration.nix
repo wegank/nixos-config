@@ -8,6 +8,7 @@ let
 in
 {
   imports = [
+    ./media/font.nix
     ./sys/nix.nix
   ] ++ lib.optionals isDarwin [
     ./darwin.nix

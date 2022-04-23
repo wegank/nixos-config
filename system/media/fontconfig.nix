@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   console = {
     font = "Lat2-Terminus16";
@@ -15,15 +13,4 @@
       ];
     };
   };
-
-  fonts.fonts = with pkgs; [
-    font-awesome
-    cantarell-fonts
-    hack-font
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-    noto-fonts-extra
-    powerline-fonts
-  ];
 }
