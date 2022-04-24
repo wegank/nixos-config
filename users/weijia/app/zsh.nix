@@ -1,4 +1,4 @@
-{ pkgs, lib, isDarwin, isDesktop, ... }:
+{ lib, isDarwin, isDesktop, ... }:
 
 let
   darwinEnv =

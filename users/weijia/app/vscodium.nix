@@ -1,4 +1,4 @@
-{ pkgs, lib, isDarwin, ... }:
+{ lib, pkgs, isDarwin, ... }:
 
 let
   package = if isDarwin then pkgs.vscode else pkgs.vscodium;

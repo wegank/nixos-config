@@ -1,4 +1,4 @@
-{ pkgs, lib, isDarwin, isLinux, ... }:
+{ lib, pkgs, isDarwin, isLinux, ... }:
 
 {
   nix = {

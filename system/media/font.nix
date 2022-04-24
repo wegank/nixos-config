@@ -1,4 +1,4 @@
-{ pkgs, lib, isLinux, ... }:
+{ lib, pkgs, isLinux, ... }:
 
 {
   fonts = {
