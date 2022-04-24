@@ -42,15 +42,17 @@
 
       # Set Home Manager template.
       setHomeManagerTemplate = host: {
-        useUserPackages = true;
-        useGlobalPkgs = true;
-        extraSpecialArgs = setSpecialArgs host;
-        users = lib.mapAttrs'
-          (name: _:
-            lib.nameValuePair
-              (getUserName name host)
-              (./users + "/${name}" + /home.nix))
-          metadata.users;
+        home-manager = {
+          useUserPackages = true;
+          useGlobalPkgs = true;
+          extraSpecialArgs = setSpecialArgs host;
+          users = lib.mapAttrs'
+            (name: _:
+              lib.nameValuePair
+                (getUserName name host)
+                (./users + "/${name}" + /home.nix))
+            metadata.users;
+        };
       };
     in
     {
@@ -65,9 +67,7 @@
               ./system/configuration.nix
               # Home Manager configuration.
               home-manager.darwinModules.home-manager
-              {
-                home-manager = setHomeManagerTemplate host;
-              }
+              (setHomeManagerTemplate host)
             ];
           }
         )
@@ -86,9 +86,7 @@
               ./system/configuration.nix
               # Home Manager configuration.
               home-manager.nixosModules.home-manager
-              {
-                home-manager = setHomeManagerTemplate host;
-              }
+              (setHomeManagerTemplate host)
             ];
           }
         )
