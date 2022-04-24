@@ -1,8 +1,5 @@
-{ pkgs, lib, host, ... }:
+{ pkgs, lib, isLinux, ... }:
 
-let
-  isLinux = lib.hasSuffix "linux" host.platform;
-in
 {
   fonts = {
     fontDir = {

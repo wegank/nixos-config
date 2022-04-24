@@ -1,9 +1,5 @@
-{ pkgs, lib, host, ... }:
+{ pkgs, lib, isDarwin, isLinux, ... }:
 
-let
-  isLinux = lib.hasSuffix "linux" host.platform;
-  isDarwin = lib.hasSuffix "darwin" host.platform;
-in
 {
   nix = {
     package = pkgs.nixFlakes;

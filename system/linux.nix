@@ -1,8 +1,5 @@
-{ lib, pkgs, owner, host, ... }:
+{ lib, pkgs, owner, isDesktop, ... }:
 
-let
-  isDesktop = (host.profile == "desktop");
-in
 {
   imports = [
     ./app/gnupg.nix

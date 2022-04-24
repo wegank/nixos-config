@@ -1,8 +1,5 @@
-{ pkgs, lib, owner, host, ... }:
+{ lib, pkgs, isDesktop, ... }:
 
-let
-  isDesktop = (host.profile == "desktop");
-in
 {
   imports = [
     ./gui/gtk.nix

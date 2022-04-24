@@ -1,7 +1,6 @@
-{ pkgs, lib, host, ... }:
+{ pkgs, lib, isDarwin, isDesktop, ... }:
 
 let
-  isDarwin = lib.hasSuffix "darwin" host.platform;
   darwinEnv =
     # Rustup
     ". \"$HOME/.cargo/env\"\n" +
@@ -19,7 +18,7 @@ in
         enable = true;
         plugins = [ "git" "python" "man" ];
         theme = (
-          if host.profile == "desktop" then
+          if isDesktop then
             "agnoster"
           else
             "robbyrussell"

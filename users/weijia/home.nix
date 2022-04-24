@@ -1,11 +1,7 @@
 # Home configuration.
 
-{ pkgs, lib, owner, host, ... }:
+{ lib, isDarwin, isLinux, ... }:
 
-let
-  isDarwin = lib.hasSuffix "darwin" host.platform;
-  isLinux = lib.hasSuffix "linux" host.platform;
-in
 {
   imports = [
     ./app/alacritty.nix

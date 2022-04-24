@@ -1,11 +1,7 @@
 # System configuration.
 
-{ config, lib, pkgs, owner, host, ... }:
+{ lib, isDarwin, isLinux, ... }:
 
-let
-  isDarwin = lib.hasSuffix "darwin" host.platform;
-  isLinux = lib.hasSuffix "linux" host.platform;
-in
 {
   imports = [
     ./app/zsh.nix

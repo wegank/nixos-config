@@ -15,8 +15,6 @@
       owner = metadata.users.${metadata.owner.name};
 
       lib = nixpkgs.lib;
-      isDarwin = host: lib.hasSuffix "darwin" host.platform;
-      isLinux = host: lib.hasSuffix "linux" host.platform;
 
       # Filter machines by suffix.
       filterMachines = suffix:
@@ -28,18 +26,25 @@
       getUserName = name: host:
         let fullName = lib.splitString " "
           (lib.toLower metadata.users.${name}.fullName); in
-        if (isDarwin host) then
+        if (lib.hasSuffix "darwin" host.platform) then
           lib.concatStrings fullName
         else
           lib.head fullName;
+
+      # Set special args.
+      setSpecialArgs = host: {
+        inherit owner;
+        isDarwin = lib.hasSuffix "darwin" host.platform;
+        isLinux = lib.hasSuffix "linux" host.platform;
+        isDesktop = (host.profile == "desktop");
+        isServer = (host.profile == "server");
+      };
 
       # Set Home Manager template.
       setHomeManagerTemplate = host: {
         useUserPackages = true;
         useGlobalPkgs = true;
-        extraSpecialArgs = {
-          inherit host owner;
-        };
+        extraSpecialArgs = setSpecialArgs host;
         users = lib.mapAttrs'
           (name: _:
             lib.nameValuePair
@@ -54,9 +59,7 @@
         (hostname: host:
           nix-darwin.lib.darwinSystem {
             system = host.platform;
-            specialArgs = {
-              inherit host owner;
-            };
+            specialArgs = setSpecialArgs host;
             modules = [
               # System configuration.
               ./system/configuration.nix
@@ -75,9 +78,7 @@
         (hostname: host:
           nixpkgs.lib.nixosSystem {
             system = host.platform;
-            specialArgs = {
-              inherit host owner;
-            };
+            specialArgs = setSpecialArgs host;
             modules = [
               # Hardware configuration.
               (./hardware + "/${hostname}" + /hardware-configuration.nix)

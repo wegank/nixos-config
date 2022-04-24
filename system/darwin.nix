@@ -1,8 +1,3 @@
-{ lib, pkgs, owner, host, ... }:
-
-let
-  isDesktop = (host.profile == "desktop");
-in
 {
   imports = [
     ./sys/brew.nix
