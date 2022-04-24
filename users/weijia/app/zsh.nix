@@ -17,12 +17,7 @@ in
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "python" "man" ];
-        theme = (
-          if isDesktop then
-            "agnoster"
-          else
-            "robbyrussell"
-        );
+        theme = if isDesktop then "agnoster" else "robbyrussell";
       };
       envExtra = lib.optionalString isDarwin darwinEnv;
       initExtra = lib.optionalString isDarwin darwinInit;

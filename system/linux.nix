@@ -14,7 +14,7 @@
     ./gui/sway.nix
     ./gnome/gdm.nix
     ./gnome/gnome.nix
-  ] ++ lib.optionals (!isDesktop) [
+  ] ++ lib.optionals isServer [
     ./app/podman.nix
     ./app/qemu.nix
     ./app/vscode-server.nix
