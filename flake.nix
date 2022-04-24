@@ -73,7 +73,7 @@
       # NixOS configurations.
       nixosConfigurations = builtins.mapAttrs
         (hostname: host:
-          lib.nixosSystem {
+          nixpkgs.lib.nixosSystem {
             system = host.platform;
             specialArgs = {
               inherit host owner;
