@@ -6,6 +6,7 @@
     ./x11/xdg.nix
   ] ++ lib.optionals isDesktop [
     ./app/fcitx.nix
+    ./gnome/dconf.nix
     ./gui/sway.nix
     ./www/chromium.nix
     ./www/firefox.nix
