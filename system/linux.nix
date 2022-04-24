@@ -1,4 +1,4 @@
-{ lib, pkgs, owner, isDesktop, ... }:
+{ lib, pkgs, owner, isDesktop, isServer, ... }:
 
 {
   imports = [
