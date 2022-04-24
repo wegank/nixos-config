@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   wayland.windowManager.sway = {
@@ -49,7 +49,13 @@
       wofi
     ];
     shellAliases = {
-      "codium" = "codium --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      "codium" = lib.concatStringsSep " " [
+        "codium"
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+      ];
     };
   };
 
@@ -59,6 +65,7 @@
         commandLineArgs = [
           "--enable-features=UseOzonePlatform"
           "--ozone-platform=wayland"
+          "--gtk-version=4"
         ];
       });
     };

@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./gui/gtk.nix
+    ./dev/qt.nix
+    ./x11/gtk.nix
     ./x11/xdg.nix
   ] ++ lib.optionals isDesktop [
     ./app/fcitx.nix
