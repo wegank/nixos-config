@@ -7,6 +7,7 @@
     };
     fonts = with pkgs; [
       powerline-fonts
+      source-code-pro
     ] ++ lib.optionals isLinux [
       cantarell-fonts
       font-awesome
