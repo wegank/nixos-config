@@ -23,7 +23,7 @@ in
           ocamllabs.ocaml-platform
           # Shell
           foxundermoon.shell-format
-        ]) ++ lib.optional isDarwin (with pkgs.vscode-extensions; [
+        ]) ++ lib.optionals isDarwin (with pkgs.vscode-extensions; [
           # Copilot
           github.copilot
           # Python
