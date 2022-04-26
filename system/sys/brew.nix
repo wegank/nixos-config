@@ -10,6 +10,7 @@
       "emacs"
       "gimp"
       "iterm2"
+      "libreoffice"
       "obs"
       "rectangle"
       "utm"
