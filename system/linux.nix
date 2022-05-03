@@ -9,7 +9,6 @@
     ./media/pipewire.nix
     ./net/cups.nix
     ./net/networkmanager.nix
-    ./x11/xorg-server.nix
   ] ++ lib.optionals isDesktop [
     ./gui/sway.nix
     ./gnome/gdm.nix
@@ -20,7 +19,6 @@
     ./app/vscode-server.nix
     ./net/openssh.nix
     ./net/xrdp.nix
-    ./net/zerotier.nix
     ./sys/zram.nix
     ./xfce/xfce.nix
   ];

@@ -18,7 +18,5 @@
     "tunnelblick"
     "utm"
     "vlc"
-    "xquartz"
-    "zerotier-one"
   ];
 }

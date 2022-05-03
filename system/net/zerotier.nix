@@ -1,6 +1,10 @@
-{ lib, isDarwin, ... }:
+{ lib, isDarwin, isLinux, ... }:
 
-{
+{ } // lib.optionalAttrs isDarwin {
+  homebrew.casks = [
+    "zerotier-one"
+  ];
+} // lib.optionalAttrs isLinux {
   services.zerotierone = {
     enable = true;
   };
@@ -9,8 +13,4 @@
     pkg: builtins.elem (lib.getName pkg) [
       "zerotierone"
     ];
-} // lib.optionalAttrs isDarwin {
-  homebrew.casks = [
-    "zerotier-one"
-  ];
 }
