@@ -15,6 +15,7 @@
     "libreoffice"
     "obs"
     "rectangle"
+    "teamviewer"
     "tunnelblick"
     "utm"
     "vlc"
