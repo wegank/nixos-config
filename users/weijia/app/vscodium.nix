@@ -76,6 +76,10 @@ in
           "**/.settings" = true;
           "**/.factorypath" = true;
         };
+        # JavaScript
+        "[javascript]" = {
+          "editor.defaultFormatter" = "vscode.typescript-language-features";
+        };
         "redhat.telemetry.enabled" = false;
         # LaTeX
         "latex-workshop.latex.outDir" = "%TMPDIR%";
