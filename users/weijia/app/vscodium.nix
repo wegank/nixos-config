@@ -35,8 +35,8 @@ in
           {
             publisher = "MS-CEINTL";
             name = "vscode-language-pack-fr";
-            version = "1.67.0";
-            sha256 = "sha256-+iZAPs8eLOMQQ0akR0/hmWHw3Py/3IaTOmwKEbaCZxA=";
+            version = "1.67.1";
+            sha256 = "sha256-LLgkg6OgvZxw7q0pcTVF/G4Za2ggTr5YhRWadlw4Nj8=";
           }
           # Org mode
           {
