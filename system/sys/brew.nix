@@ -13,6 +13,7 @@
       "libreoffice"
       "obs"
       "rectangle"
+      "tunnelblick"
       "utm"
       "vlc"
       "xquartz"
