@@ -20,6 +20,4 @@
   services = lib.optionalAttrs isDarwin {
     nix-daemon.enable = true;
   };
-
-  nixpkgs.config.allowUnfree = isDarwin;
 }

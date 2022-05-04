@@ -4,6 +4,7 @@
 
 {
   imports = [
+    ./app/vscode.nix
     ./app/zsh.nix
     ./dev/postgresql.nix
     ./media/font.nix
