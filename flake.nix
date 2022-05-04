@@ -63,6 +63,8 @@
             system = host.platform;
             specialArgs = setSpecialArgs host;
             modules = [
+              # Nix Modules.
+              ./modules/environment.nix
               # System configuration.
               ./system/configuration.nix
               # Home Manager configuration.
@@ -80,6 +82,8 @@
             system = host.platform;
             specialArgs = setSpecialArgs host;
             modules = [
+              # Nix Modules.
+              ./modules/environment.nix
               # Hardware configuration.
               (./hardware + "/${hostname}" + /hardware-configuration.nix)
               # System configuration.

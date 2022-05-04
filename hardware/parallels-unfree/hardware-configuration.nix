@@ -42,12 +42,12 @@
 
   swapDevices = [ ];
 
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "prl-tools"
-  ];
-
   hardware.parallels = {
     enable = true;
     package = (config.boot.kernelPackages.callPackage ./prl-tools.nix { });
   };
+
+  environment.unfreePackages = [
+    "prl-tools"
+  ];
 }
