@@ -23,6 +23,8 @@ in
           ocamllabs.ocaml-platform
           # Shell
           foxundermoon.shell-format
+          # TOML
+          tamasfe.even-better-toml
         ]) ++ lib.optionals isDarwin (with pkgs.vscode-extensions; [
           # Copilot
           github.copilot
