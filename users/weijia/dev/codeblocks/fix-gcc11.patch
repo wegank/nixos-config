@@ -1,0 +1,18 @@
+git-svn-id: https://svn.code.sf.net/p/codeblocks/code/trunk@12532 2a5c6006-c6dd-42ca-98ab-0921f2732cef
+---
+ src/include/ccmanager.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/include/ccmanager.h b/src/include/ccmanager.h
+index 1f471001d..57318bf6f 100644
+--- a/src/include/ccmanager.h
++++ b/src/include/ccmanager.h
+@@ -44,7 +44,7 @@ class wxScintillaEvent;
+  * list or the doxygen popup, the scroll event is instead sent there (and skipped for the editor
+  * window).
+  */
+-class DLLIMPORT CCManager : public Mgr<CCManager>, wxEvtHandler
++class DLLIMPORT CCManager : public Mgr<CCManager>, public wxEvtHandler
+ {
+     public:
+         friend class Mgr<CCManager>;

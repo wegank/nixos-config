@@ -33,6 +33,7 @@ stdenv.mkDerivation rec {
     ./writable-projects.patch
     ./remove-int3.patch
     ./remove-pragmas.patch
+    ./fix-gcc11.patch
     ./fix-wxgtk315.patch
   ];
   preConfigure = "substituteInPlace ./configure --replace /usr/bin/file ${file}/bin/file";
@@ -41,8 +42,6 @@ stdenv.mkDerivation rec {
     ("--with-contrib-plugins" + optionalString stdenv.isDarwin "=all,-FileManager,-NassiShneiderman")
     "--with-boost-libdir=${boost}/lib"
   ];
-
-  NIX_CFLAGS_COMPILE = optional stdenv.isLinux [ "-std=c++14" ];
 
   meta = {
     maintainers = [ maintainers.linquize ];
