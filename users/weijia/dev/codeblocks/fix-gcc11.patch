@@ -1,18 +1,41 @@
-git-svn-id: https://svn.code.sf.net/p/codeblocks/code/trunk@12532 2a5c6006-c6dd-42ca-98ab-0921f2732cef
----
- src/include/ccmanager.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+From a5ea6ff7ff301d739d3dc8145db1578f504ee4ca Mon Sep 17 00:00:00 2001
+From: fuscated <fuscated@2a5c6006-c6dd-42ca-98ab-0921f2732cef>
+Date: Tue, 16 Mar 2021 23:28:01 +0000
+Subject: [PATCH] - openfilelist: Fix build with GCC-11
 
-diff --git a/src/include/ccmanager.h b/src/include/ccmanager.h
-index 1f471001d..57318bf6f 100644
---- a/src/include/ccmanager.h
-+++ b/src/include/ccmanager.h
-@@ -44,7 +44,7 @@ class wxScintillaEvent;
-  * list or the doxygen popup, the scroll event is instead sent there (and skipped for the editor
-  * window).
-  */
--class DLLIMPORT CCManager : public Mgr<CCManager>, wxEvtHandler
-+class DLLIMPORT CCManager : public Mgr<CCManager>, public wxEvtHandler
+> It seems this new version of GCC would require the predicate to have a
+  const operator().
+> But I suppose there is no need to reinvent std::less, so use it instead.
+
+git-svn-id: https://svn.code.sf.net/p/codeblocks/code/trunk@12303 2a5c6006-c6dd-42ca-98ab-0921f2732cef
+---
+ src/plugins/openfileslist/openfileslistplugin.h | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/src/plugins/openfileslist/openfileslistplugin.h b/src/plugins/openfileslist/openfileslistplugin.h
+index c59d67ba1..91cfc94cb 100644
+--- a/src/plugins/openfileslist/openfileslistplugin.h
++++ b/src/plugins/openfileslist/openfileslistplugin.h
+@@ -10,6 +10,7 @@
+ #include <projectfile.h>
+ 
+ #include <wx/dynarray.h>
++#include <functional>
+ 
+ class wxTreeCtrl;
+ class wxTreeEvent;
+@@ -20,12 +21,8 @@ class EditorBase;
+ struct TargetFilesData
  {
-     public:
-         friend class Mgr<CCManager>;
+     TargetFilesData() : activeFile(nullptr) {} // ctor
+-    // Functor for the std::set predicate to sort the opened editor files according to their tab order
+-    struct compareLess
+-    {
+-        bool operator()(const ProjectFile* lhs, const ProjectFile* rhs) { return lhs->editorTabPos < rhs->editorTabPos; }
+-    };
+-    typedef std::set<ProjectFile*, compareLess> OpenFilesSet;
++
++    typedef std::set<ProjectFile*, std::less<ProjectFile*>> OpenFilesSet;
+     ProjectFile* activeFile;
+     OpenFilesSet openFiles;
+ };
