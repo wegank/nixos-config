@@ -33,8 +33,8 @@ stdenv.mkDerivation rec {
     ./writable-projects.patch
     ./remove-int3.patch
     ./remove-pragmas.patch
-    ./fix-gcc11.patch
-    ./fix-wxgtk315.patch
+    ./use-gcc11.patch
+    ./use-wxgtk315.patch
     ./fix-assertion-error.patch
   ];
   preConfigure = "substituteInPlace ./configure --replace /usr/bin/file ${file}/bin/file";
