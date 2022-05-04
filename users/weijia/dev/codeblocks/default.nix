@@ -29,11 +29,17 @@ stdenv.mkDerivation rec {
   buildInputs = [ wxGTK30-gtk3 gtk3 ]
     ++ optionals contribPlugins [ hunspell gamin boost ];
   enableParallelBuilding = true;
-  patches = [ ./writable-projects.patch ./remove-int3.patch ./remove-pragmas.patch ];
+  patches = [
+    ./writable-projects.patch
+    ./remove-int3.patch
+    ./remove-pragmas.patch
+  ];
   preConfigure = "substituteInPlace ./configure --replace /usr/bin/file ${file}/bin/file";
   postConfigure = optionalString stdenv.isLinux "substituteInPlace libtool --replace ldconfig ${stdenv.cc.libc.bin}/bin/ldconfig";
   configureFlags = [ "--enable-pch=no" ]
     ++ optionals contribPlugins [ "--with-contrib-plugins" "--with-boost-libdir=${boost}/lib" ];
+
+  NIX_CFLAGS_COMPILE = [ "-std=c++14" ];
 
   meta = {
     maintainers = [ maintainers.linquize ];
