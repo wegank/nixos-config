@@ -1,12 +1,3 @@
-From a5ea6ff7ff301d739d3dc8145db1578f504ee4ca Mon Sep 17 00:00:00 2001
-From: fuscated <fuscated@2a5c6006-c6dd-42ca-98ab-0921f2732cef>
-Date: Tue, 16 Mar 2021 23:28:01 +0000
-Subject: [PATCH] - openfilelist: Fix build with GCC-11
-
-> It seems this new version of GCC would require the predicate to have a
-  const operator().
-> But I suppose there is no need to reinvent std::less, so use it instead.
-
 git-svn-id: https://svn.code.sf.net/p/codeblocks/code/trunk@12303 2a5c6006-c6dd-42ca-98ab-0921f2732cef
 ---
  src/plugins/openfileslist/openfileslistplugin.h | 9 +++------
