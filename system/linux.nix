@@ -21,6 +21,7 @@
     ./net/xrdp.nix
     ./sys/zram.nix
     ./xfce/xfce.nix
+    ./www/apache.nix
   ];
 
   # Use the latest Linux kernel.
