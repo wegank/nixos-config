@@ -35,7 +35,9 @@ stdenv.mkDerivation rec {
     ./remove-pragmas.patch
     ./use-gcc11.patch
     ./use-wxgtk315.patch
-    ./fix-assertion-error.patch
+    ./use-wxgtk316.patch
+    ./fix-clipboard-flush.patch
+    ./fix-getstring.patch
   ];
   preConfigure = "substituteInPlace ./configure --replace /usr/bin/file ${file}/bin/file";
   postConfigure = optionalString stdenv.isLinux "substituteInPlace libtool --replace ldconfig ${stdenv.cc.libc.bin}/bin/ldconfig";
@@ -43,6 +45,9 @@ stdenv.mkDerivation rec {
     ("--with-contrib-plugins" + optionalString stdenv.isDarwin "=all,-FileManager,-NassiShneiderman")
     "--with-boost-libdir=${boost}/lib"
   ];
+  postInstall = optionalString stdenv.isDarwin ''
+    ln -s $out/lib/codeblocks/plugins $out/share/codeblocks/plugins
+  '';
 
   meta = {
     maintainers = [ maintainers.linquize ];

@@ -1,0 +1,122 @@
+git-svn-id: https://svn.code.sf.net/p/codeblocks/code/trunk@12506 2a5c6006-c6dd-42ca-98ab-0921f2732cef
+---
+ .../contrib/regex_testbed/regexdlg.cpp        | 63 ++++++++-----------
+ src/plugins/contrib/regex_testbed/regexdlg.h  |  1 -
+ 2 files changed, 27 insertions(+), 37 deletions(-)
+
+diff --git a/src/plugins/contrib/regex_testbed/regexdlg.cpp b/src/plugins/contrib/regex_testbed/regexdlg.cpp
+index c04f0645c..703b1d3d3 100644
+--- a/src/plugins/contrib/regex_testbed/regexdlg.cpp
++++ b/src/plugins/contrib/regex_testbed/regexdlg.cpp
+@@ -55,6 +55,10 @@ RegExDlg::RegExDlg(wxWindow* parent,wxWindowID /*id*/)
+ 
+     m_text->MoveAfterInTabOrder(m_quoted);
+ 
++#if wxCHECK_VERSION(3, 1, 6)
++    m_library->Delete(1);  // v3.1.6 made wxRE_ADVANCED a synonym of wxRE_EXTENDED, so delete it
++#endif
++
+     m_library->SetSelection(0);
+     m_output->SetBorders(0);
+     m_quoted->SetEditable(false);
+@@ -116,14 +120,14 @@ void RegExDlg::OnUpdateUI(wxUpdateUIEvent& /*event*/)
+ //    cannot scroll the text (windows and linux).
+ //
+ 
+-    if ( regex == m_regex->GetValue() &&
++    if (regex == m_regex->GetValue() &&
+         text == m_text->GetValue() &&
+         nocase == m_nocase->GetValue() &&
+         newlines == m_newlines->GetValue() &&
+         library == m_library->GetSelection())
+-        {
+-            return;
+-        }
++    {
++        return;
++    }
+ 
+     regex = m_regex->GetValue();
+     text = m_text->GetValue();
+@@ -183,23 +187,20 @@ wxArrayString RegExDlg::GetBuiltinMatches(const wxString& text)
+ {
+     wxArrayString ret;
+ 
++#if wxCHECK_VERSION(3, 1, 6)
++    // wxRE_ADVANCED is a synonym of wxRE_EXTENDED, so it has been deleted from the choice
++    int flags = m_library->GetSelection() ? wxRE_BASIC : wxRE_EXTENDED;
++#else
+     int flags = m_library->GetSelection();
++#endif
+ 
+-    if (text.IsEmpty() || flags > 2) // should not be
+-        return ret;
++    if (m_newlines->IsChecked())
++        flags |= wxRE_NEWLINE;
+ 
+-    flags |= m_newlines->IsChecked() ? wxRE_NEWLINE : 0;
+-    flags |= m_nocase->IsChecked() ? wxRE_ICASE : 0;
++    if (m_nocase->IsChecked())
++        flags |= wxRE_ICASE;
+ 
+-    if (m_wxre.Compile(m_regex->GetValue(), flags))
+-    {
+-        m_regex->SetForegroundColour(wxNullColour);
+-        m_regex->SetBackgroundColour(wxNullColour);
+-        m_regex->GetParent()->Refresh();
+-        if (!m_wxre.Matches(text))
+-            return ret;
+-    }
+-    else
++    if (!m_wxre.Compile(m_regex->GetValue(), flags))
+     {
+         m_regex->SetForegroundColour(*wxWHITE);
+         m_regex->SetBackgroundColour(*wxRED);
+@@ -207,26 +208,16 @@ wxArrayString RegExDlg::GetBuiltinMatches(const wxString& text)
+         return ret;
+     }
+ 
+-    for(size_t i = 0; i < m_wxre.GetMatchCount(); ++i)
+-        if (!m_wxre.GetMatch(text, i).IsEmpty())
+-            ret.Add(m_wxre.GetMatch(text, i));
++    m_regex->SetForegroundColour(wxNullColour);
++    m_regex->SetBackgroundColour(wxNullColour);
++    m_regex->GetParent()->Refresh();
+ 
+-    return ret;
+-}
+-
+-wxArrayString RegExDlg::GetPregMatches(const wxString& /*text*/)
+-{
+-    wxArrayString ret;
+-
+-//    const char *error;
+-//    int erroffset;
+-//    int flags = 0;
+-//    flags |= m_nocase->IsChecked() ? PCRE_CASELESS : 0;
+-//    flags |= m_newlines->IsChecked() ? PCRE_DOTALL : 0;
+-//    pcre *reg = pcre_compile(text.mb_str(), flags, &error, &erroffset, 0);
++    if (!text.empty() && m_wxre.Matches(text))
++    {
++        const size_t count = m_wxre.GetMatchCount();
++        for (size_t i = 0; i < count; ++i)
++            ret.Add(m_wxre.GetMatch(text, i));
++    }
+ 
+     return ret;
+ }
+-
+-
+-
+diff --git a/src/plugins/contrib/regex_testbed/regexdlg.h b/src/plugins/contrib/regex_testbed/regexdlg.h
+index d4f4965c4..f3d0dcebf 100644
+--- a/src/plugins/contrib/regex_testbed/regexdlg.h
++++ b/src/plugins/contrib/regex_testbed/regexdlg.h
+@@ -54,7 +54,6 @@ class RegExDlg: public wxScrollingDialog
+ 
+ 
+         wxArrayString GetBuiltinMatches(const wxString& text);
+-        wxArrayString GetPregMatches(const wxString& text);
+ 
+         //(*Declarations(RegExDlg)
+         wxCheckBox* m_nocase;
