@@ -35,6 +35,7 @@ stdenv.mkDerivation rec {
     ./remove-pragmas.patch
     ./fix-gcc11.patch
     ./fix-wxgtk315.patch
+    ./fix-assertion-error.patch
   ];
   preConfigure = "substituteInPlace ./configure --replace /usr/bin/file ${file}/bin/file";
   postConfigure = optionalString stdenv.isLinux "substituteInPlace libtool --replace ldconfig ${stdenv.cc.libc.bin}/bin/ldconfig";
