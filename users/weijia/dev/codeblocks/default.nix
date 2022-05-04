@@ -4,7 +4,7 @@
 , pkg-config
 , file
 , zip
-, wxGTK30-gtk3
+, wxGTK31-gtk3
 , gtk3
 , contribPlugins ? false
 , hunspell
@@ -26,24 +26,27 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ pkg-config file zip wrapGAppsHook ];
-  buildInputs = [ wxGTK30-gtk3 gtk3 ]
+  buildInputs = [ wxGTK31-gtk3 gtk3 ]
     ++ optionals contribPlugins [ hunspell gamin boost ];
   enableParallelBuilding = true;
   patches = [
     ./writable-projects.patch
     ./remove-int3.patch
     ./remove-pragmas.patch
+    ./fix-wxgtk315.patch
   ];
   preConfigure = "substituteInPlace ./configure --replace /usr/bin/file ${file}/bin/file";
   postConfigure = optionalString stdenv.isLinux "substituteInPlace libtool --replace ldconfig ${stdenv.cc.libc.bin}/bin/ldconfig";
-  configureFlags = [ "--enable-pch=no" ]
-    ++ optionals contribPlugins [ "--with-contrib-plugins" "--with-boost-libdir=${boost}/lib" ];
+  configureFlags = [ "--enable-pch=no" ] ++ optionals contribPlugins [
+    ("--with-contrib-plugins" + optionalString stdenv.isDarwin "=all,-FileManager,-NassiShneiderman")
+    "--with-boost-libdir=${boost}/lib"
+  ];
 
-  NIX_CFLAGS_COMPILE = [ "-std=c++14" ];
+  NIX_CFLAGS_COMPILE = optional stdenv.isLinux [ "-std=c++14" ];
 
   meta = {
     maintainers = [ maintainers.linquize ];
-    platforms = platforms.linux;
+    platforms = platforms.all;
     description = "The open source, cross platform, free C, C++ and Fortran IDE";
     longDescription =
       ''
