@@ -51,9 +51,7 @@
     shellAliases = {
       "codium" = lib.concatStringsSep " " [
         "codium"
-        "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
-        "--enable-features=UseOzonePlatform"
+        "--enable-features=UseOzonePlatform,WaylandWindowDecorations"
         "--ozone-platform=wayland"
       ];
     };
@@ -63,7 +61,7 @@
     chromium = {
       package = (pkgs.chromium.override {
         commandLineArgs = [
-          "--enable-features=UseOzonePlatform"
+          "--enable-features=UseOzonePlatform,WaylandWindowDecorations"
           "--ozone-platform=wayland"
           "--gtk-version=4"
         ];
