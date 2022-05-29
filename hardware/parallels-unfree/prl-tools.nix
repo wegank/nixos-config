@@ -16,11 +16,6 @@
 , autoPatchelfHook
 }:
 
-let
-  aarch64 = stdenv.hostPlatform.system == "aarch64-linux";
-  x86_64 = stdenv.hostPlatform.system == "x86_64-linux";
-  i686 = stdenv.hostPlatform.system == "i686-linux";
-in
 stdenv.mkDerivation rec {
   version = "17.1.3-51565";
   pname = "prl-tools";
@@ -44,10 +39,10 @@ stdenv.mkDerivation rec {
 
   inherit libsOnly;
 
-  unpackPhase = assert (aarch64 || x86_64 || i686); ''
+  unpackPhase = ''
     undmg "${src}"
     export sourceRoot=prl-tools-build
-    7z x "Parallels Desktop.app/Contents/Resources/Tools/prl-tools-lin${lib.optionalString aarch64 "-arm"}.iso" -o$sourceRoot
+    7z x "Parallels Desktop.app/Contents/Resources/Tools/prl-tools-lin${lib.optionalString stdenv.isAarch64 "-arm"}.iso" -o$sourceRoot
     if test -z "$libsOnly"; then
       ( cd $sourceRoot/kmods; tar -xaf prl_mod.tar.gz )
     fi
@@ -81,13 +76,13 @@ stdenv.mkDerivation rec {
         cp prl_fs/SharedFolders/Guest/Linux/prl_fs/prl_fs.ko $out/lib/modules/${kernelVersion}/extra
         cp prl_fs_freeze/Snapshot/Guest/Linux/prl_freeze/prl_fs_freeze.ko $out/lib/modules/${kernelVersion}/extra
         cp prl_tg/Toolgate/Guest/Linux/prl_tg/prl_tg.ko $out/lib/modules/${kernelVersion}/extra
-        ${lib.optionalString aarch64
+        ${lib.optionalString stdenv.isAarch64
         "cp prl_notifier/Installation/lnx/prl_notifier/prl_notifier.ko $out/lib/modules/${kernelVersion}/extra"}
       )
     fi
 
     ( # tools
-      cd tools/tools${if aarch64 then "-arm64" else if x86_64 then "64" else "32"}
+      cd tools/tools${if stdenv.isAarch64 then "-arm64" else if stdenv.isx86_64 then "64" else "32"}
       mkdir -p $out/lib
 
       if test -z "$libsOnly"; then
