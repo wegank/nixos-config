@@ -41,6 +41,7 @@ stdenv.mkDerivation rec {
     (pkgs.callPackage ./pagsuite/default.nix { })
     (pkgs.callPackage ./scalp/default.nix { })
     sollya
+    (pkgs.callPackage ./wcpg/default.nix { })
   ];
 
   installPhase = ''
