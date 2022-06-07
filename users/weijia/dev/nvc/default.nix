@@ -1,34 +1,48 @@
 { autoreconfHook
+, clangStdenv
 , fetchFromGitHub
+, elfutils
 , flex
 , lib
 , llvm
-, stdenv
+, pkg-config
 , which
 , zlib
 }:
 
-stdenv.mkDerivation rec {
+clangStdenv.mkDerivation rec {
   pname = "nvc";
-  version = "1.6.2";
+  version = "1.7-devel";
 
   src = fetchFromGitHub {
     owner = "nickg";
     repo = "${pname}";
-    rev = "r${version}";
-    sha256 = "sha256-BtUMpT1MKRFGRlIbCEGo4OBZ/r9es1VRmJdgmk1oZFQ=";
+    rev = "71fa94bb99f91214ec6f9c5cc0abd857c324857c";
+    sha256 = "sha256-nNYyJ1FBsTOR23EmKdLMZbcUBE8E2CHAArrK8JpPix0=";
   };
 
   nativeBuildInputs = [
     autoreconfHook
+    pkg-config
   ];
 
   buildInputs = [
+    elfutils
     flex
     llvm
     which
     zlib
   ];
+
+  prePatch = ''
+    sed -i "720,724d;738d" src/util.c
+  '';
+
+  preConfigure = ''
+    mkdir build && cd build
+  '';
+
+  configureScript = "../configure";
 
   meta = with lib; {
     description = "VHDL compiler and simulator";
