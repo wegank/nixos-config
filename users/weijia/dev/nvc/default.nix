@@ -1,7 +1,7 @@
 { autoreconfHook
 , clangStdenv
-, fetchFromGitHub
 , elfutils
+, fetchFromGitHub
 , flex
 , lib
 , llvm
