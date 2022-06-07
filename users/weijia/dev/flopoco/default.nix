@@ -39,6 +39,7 @@ stdenv.mkDerivation rec {
     mpfi
     mpfr
     (pkgs.callPackage ./pagsuite/default.nix { })
+    (pkgs.callPackage ./scalp/default.nix { })
     sollya
   ];
 
