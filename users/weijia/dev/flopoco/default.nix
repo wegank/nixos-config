@@ -38,6 +38,7 @@ stdenv.mkDerivation rec {
     libxml2
     mpfi
     mpfr
+    (pkgs.callPackage ./pagsuite/default.nix { })
     sollya
   ];
 
