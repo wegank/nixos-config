@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./dev/android-tools.nix
     ./dev/qt.nix
     ./x11/gtk.nix
     ./x11/xdg.nix
@@ -16,7 +17,6 @@
   home = {
     packages = with pkgs; [
       # Userland.
-      android-tools
       neofetch
       screen
       # Custom.
