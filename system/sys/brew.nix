@@ -14,6 +14,7 @@
     "iterm2"
     "libreoffice"
     "obs"
+    "r"
     "rectangle"
     "rstudio"
     "teamviewer"
