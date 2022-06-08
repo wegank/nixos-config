@@ -15,6 +15,7 @@
     "libreoffice"
     "obs"
     "rectangle"
+    "rstudio"
     "teamviewer"
     "tunnelblick"
     "utm"
