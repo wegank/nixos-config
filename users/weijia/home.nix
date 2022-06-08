@@ -7,6 +7,7 @@
     ./app/alacritty.nix
     ./app/vscodium.nix
     ./app/zsh.nix
+    ./dev/android-tools.nix
     ./dev/git.nix
     ./sys/nix.nix
   ] ++ lib.optionals isDarwin [

@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./dev/android-tools.nix
     ./dev/qt.nix
     ./x11/gtk.nix
     ./x11/xdg.nix

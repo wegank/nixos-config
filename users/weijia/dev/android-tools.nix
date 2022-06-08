@@ -1,4 +1,4 @@
-{ pkgs, config ? pkgs.config, ... }:
+{ pkgs, config ? pkgs.config, isDarwin, isLinux, ... }:
 
 let
   androidEnvNixpkgs = fetchTarball {
@@ -17,7 +17,9 @@ let
   };
 in
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs; lib.optionals isDarwin [
     androidComposition.platform-tools
+  ] ++ lib.optionals isLinux [
+    android-tools
   ];
 }
