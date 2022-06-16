@@ -5,7 +5,9 @@ let
     # Rustup
     ". \"$HOME/.cargo/env\"\n" +
     # Home Manager
-    "export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels\${NIX_PATH:+:$NIX_PATH}\n";
+    "export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels\${NIX_PATH:+:$NIX_PATH}\n" +
+    # Node
+    "export PATH=~/.npm-global/bin:$PATH";
   darwinInit =
     # OPAM
     "[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null\n";
