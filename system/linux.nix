@@ -10,6 +10,7 @@
     ./net/cups.nix
     ./net/networkmanager.nix
   ] ++ lib.optionals isDesktop [
+    ./app/waydroid.nix
     ./gui/sway.nix
     ./gnome/gdm.nix
     ./gnome/gnome.nix
