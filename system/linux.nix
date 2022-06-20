@@ -64,5 +64,5 @@
   ];
 
   # Set state version.
-  system.stateVersion = "20.09";
+  system.stateVersion = "22.05";
 }

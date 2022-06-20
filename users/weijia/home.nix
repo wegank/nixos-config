@@ -16,4 +16,6 @@
   ] ++ lib.optionals isLinux [
     ./linux.nix
   ];
+
+  home.stateVersion = "22.05";
 }
