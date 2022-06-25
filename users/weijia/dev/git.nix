@@ -3,12 +3,15 @@
 {
   home = {
     packages = with pkgs; [
-      gh
       git-filter-repo
     ];
   };
 
   programs = {
+    gh = {
+      enable = true;
+    };
+
     git = {
       enable = true;
       package = pkgs.gitAndTools.gitFull;
