@@ -9,6 +9,7 @@
     ./app/zsh.nix
     ./dev/android-tools.nix
     ./dev/git.nix
+    ./net/cloudflared.nix
     ./net/nodejs.nix
     ./sys/nix.nix
   ] ++ lib.optionals isDarwin [
