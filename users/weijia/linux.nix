@@ -21,8 +21,6 @@
       tmux
       # Custom.
       # (pkgs.callPackage ./media/aegisub/default.nix { })
-      # (pkgs.callPackage ./dev/flopoco/default.nix { })
-      # (pkgs.callPackage ./dev/nvc/default.nix { })
     ];
   };
 }
