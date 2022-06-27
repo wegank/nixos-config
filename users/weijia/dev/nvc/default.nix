@@ -1,9 +1,11 @@
 { autoreconfHook
 , clangStdenv
+, check
 , elfutils
 , fetchFromGitHub
 , flex
 , lib
+, libelf
 , llvm
 , pkg-config
 , which
@@ -17,25 +19,30 @@ clangStdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "nickg";
     repo = "${pname}";
-    rev = "71fa94bb99f91214ec6f9c5cc0abd857c324857c";
-    sha256 = "sha256-nNYyJ1FBsTOR23EmKdLMZbcUBE8E2CHAArrK8JpPix0=";
+    rev = "bf49b3b0452bd2e89d180cfcf4e677a41848fecc";
+    sha256 = "sha256-1adtcuOPkSAlmCDxW+dssZukQY2K8eYhnecHgvZIZHE=";
   };
 
   nativeBuildInputs = [
     autoreconfHook
+    check
+    flex
     pkg-config
+    which
   ];
 
   buildInputs = [
-    elfutils
-    flex
     llvm
-    which
     zlib
-  ];
+  ] ++ (if clangStdenv.isLinux then [
+    elfutils
+  ] else [
+    libelf
+  ]);
 
-  prePatch = ''
-    sed -i "720,724d;738d" src/util.c
+  prePatch = lib.optionalString
+    (clangStdenv.isLinux && !clangStdenv.isx86_64) ''
+    sed -i "730,734d;748d" src/util.c
   '';
 
   preConfigure = ''
@@ -44,11 +51,13 @@ clangStdenv.mkDerivation rec {
 
   configureScript = "../configure";
 
+  # doCheck = true;
+
   meta = with lib; {
     description = "VHDL compiler and simulator";
     homepage = "https://www.nickg.me.uk/nvc/";
     license = licenses.gpl3Plus;
-    platforms = platforms.all;
+    platforms = platforms.unix;
     maintainers = with maintainers; [ wegank ];
   };
 }
