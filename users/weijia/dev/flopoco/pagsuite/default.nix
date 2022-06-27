@@ -24,11 +24,13 @@ stdenv.mkDerivation rec {
     gmp
   ];
 
+  enableParallelBuilding = false;
+
   meta = with lib; {
     description = "Optimization tools for the (P)MCM problem";
     homepage = "https://gitlab.com/kumm/pagsuite";
     license = licenses.agpl3Plus;
-    platforms = platforms.linux;
+    platforms = platforms.unix;
     maintainers = with maintainers; [ wegank ];
   };
 }
