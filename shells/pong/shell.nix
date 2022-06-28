@@ -7,9 +7,9 @@ pkgs.mkShell {
     (perpetual-pools-client.override {
       pongified = true;
       pools = [
-        "0xc08F53bd2787Bfb6057FDc60c3405E41274E8d8C"
-        "0xDb7ade08134f7D4a992AdA5B7c07Cb3314dFD0c4"
-        "0x51dd1e0260A4a0157C4D242fE05cE0141B07B2b4"
+        "0xaB1510e740F0c9247974e61d900eC964337d5D5A"
+        "0x4Fd513f353Bc834aBd7Df5e054E35eC40812af30"
+        "0xCb92788f7736f87f4a53fFcbb4B2AF70A65346ba"
       ];
     })
     perpetual-pools-keeper
