@@ -19,8 +19,6 @@
       neofetch
       screen
       tmux
-      # Custom.
-      # (pkgs.callPackage ./media/aegisub/default.nix { })
     ];
   };
 }
