@@ -11,9 +11,9 @@
   ] ++ lib.optionals isDesktop [
     ./app/waydroid.nix
     ./dev/android-tools.nix
-    ./gui/sway.nix
     ./gnome/gdm.nix
     ./gnome/gnome.nix
+    ./gui/sway.nix
   ] ++ lib.optionals isMobile [
     ./gui/phosh.nix
     ./net/openssh.nix
