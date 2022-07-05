@@ -1,10 +1,15 @@
 { owner, pkgs, ... }:
 
 {
-  services.xserver.desktopManager.phosh = {
-    enable = true;
-    user = owner.name;
-    group = "users";
+  services.xserver = {
+    desktopManager.phosh = {
+      enable = true;
+      user = owner.name;
+      group = "users";
+    };
+    displayManager.lightdm = {
+      enable = false;
+    };
   };
 
   programs.calls.enable = true;
