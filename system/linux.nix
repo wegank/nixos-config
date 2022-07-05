@@ -29,7 +29,7 @@
   ];
 
   # Use the latest Linux kernel.
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set time zone.
   time.timeZone = "Europe/Paris";
