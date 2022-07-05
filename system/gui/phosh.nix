@@ -8,7 +8,10 @@
   };
 
   programs.calls.enable = true;
+
   hardware.sensor.iio.enable = true;
+
+  networking.firewall.enable = false;
 
   environment.systemPackages = with pkgs; [
     chatty
