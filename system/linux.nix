@@ -15,6 +15,7 @@
     ./gnome/gnome.nix
     ./gui/sway.nix
   ] ++ lib.optionals isMobile [
+    ./gnome/gdm.nix
     ./gui/phosh.nix
     ./net/openssh.nix
   ] ++ lib.optionals isServer [
