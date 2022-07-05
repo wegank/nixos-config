@@ -1,4 +1,4 @@
-{ owner, ... }:
+{ owner, pkgs, ... }:
 
 {
   services.xserver.desktopManager.phosh = {
