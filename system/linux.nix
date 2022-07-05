@@ -16,6 +16,7 @@
     ./gnome/gnome.nix
   ] ++ lib.optionals isMobile [
     ./gui/phosh.nix
+    ./net/openssh.nix
   ] ++ lib.optionals isServer [
     ./app/podman.nix
     ./app/qemu.nix
