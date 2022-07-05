@@ -2,14 +2,24 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-darwin.url = "github:lnl7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    mobile-nixos = {
+      url = "github:nixos/mobile-nixos";
+      flake = false;
+    };
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin }:
+  outputs = { self, home-manager, mobile-nixos, nixpkgs, nix-darwin }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
       owner = metadata.users.${metadata.owner.name};
@@ -37,6 +47,7 @@
         isDarwin = lib.hasSuffix "darwin" host.platform;
         isLinux = lib.hasSuffix "linux" host.platform;
         isDesktop = (host.profile == "desktop");
+        isMobile = (host.profile == "mobile");
         isServer = (host.profile == "server");
       };
 
@@ -85,7 +96,14 @@
               # Nix Modules.
               ./modules/environment.nix
               # Hardware configuration.
-              (./hardware + "/${hostname}" + /hardware-configuration.nix)
+              (
+                if hostname == "pinephone" then
+                  (import "${mobile-nixos}/lib/configuration.nix" {
+                    device = "pine64-pinephone";
+                  })
+                else
+                  ./hardware + "/${hostname}" + /hardware-configuration.nix
+              )
               # System configuration.
               ./system/configuration.nix
               # Home Manager configuration.

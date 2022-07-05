@@ -1,9 +1,8 @@
-{ lib, pkgs, owner, isDesktop, isServer, ... }:
+{ lib, pkgs, owner, isDesktop, isMobile, isServer, ... }:
 
 {
   imports = [
     ./app/gnupg.nix
-    ./dev/android-tools.nix
     ./gnome/dconf.nix
     ./media/fontconfig.nix
     ./media/pipewire.nix
@@ -11,13 +10,17 @@
     ./net/networkmanager.nix
   ] ++ lib.optionals isDesktop [
     ./app/waydroid.nix
+    ./dev/android-tools.nix
     ./gui/sway.nix
     ./gnome/gdm.nix
     ./gnome/gnome.nix
+  ] ++ lib.optionals isMobile [
+    ./gui/phosh.nix
   ] ++ lib.optionals isServer [
     ./app/podman.nix
     ./app/qemu.nix
     ./app/vscode-server.nix
+    ./dev/android-tools.nix
     ./net/openssh.nix
     ./net/xrdp.nix
     ./sys/zram.nix

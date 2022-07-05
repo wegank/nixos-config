@@ -29,6 +29,7 @@ check_machine() {
         fi
         case "$model" in
         Parallels*) machine='parallels-unfree' ;;
+        Pine64*) machine='pinephone' ;;
         Raspberry*) machine='raspberrypi' ;;
         VMware*) machine='vmware' ;;
         *) echo "Unknown machine." && exit 1 ;;
