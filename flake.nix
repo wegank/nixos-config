@@ -10,16 +10,16 @@
       url = "github:nixos/mobile-nixos";
       flake = false;
     };
-    nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
   };
 
-  outputs = { self, home-manager, mobile-nixos, nixpkgs, nix-darwin }:
+  outputs = { self, home-manager, mobile-nixos, nix-darwin, nixpkgs }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
       owner = metadata.users.${metadata.owner.name};
