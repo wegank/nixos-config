@@ -8,16 +8,32 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1656367977,
-        "narHash": "sha256-0hV17V9Up9pnAtPJ+787FhrsPnawxoTPA/VxgjRMrjc=",
+        "lastModified": 1656927578,
+        "narHash": "sha256-ZSFrM/1PlJOqCb3mN88ZUh9dkQvNLU/nkoQ2tu02/FM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3bf16c0fd141c28312be52945d1543f9ce557bb1",
+        "rev": "f2445620d177e295e711c1b2bc6c01ed6df26c16",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "mobile-nixos": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1656299939,
+        "narHash": "sha256-gODt71CCv0gnMNeU4GYdSBJkxsfmBy0uNv8owQC1oPs=",
+        "owner": "nixos",
+        "repo": "mobile-nixos",
+        "rev": "de9a88a70f0ae5fc0839ff94bf29e8a30af399f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "mobile-nixos",
         "type": "github"
       }
     },
@@ -60,6 +76,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "mobile-nixos": "mobile-nixos",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs"
       }
