@@ -68,6 +68,12 @@
     zip
   ];
 
+  # Remove packages.
+  documentation.nixos.enable = false;
+  services.xserver.excludePackages = with pkgs; [
+    xterm
+  ];
+
   # Set state version.
   system.stateVersion = "22.05";
 }
