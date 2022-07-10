@@ -21,7 +21,7 @@
         "type": "github"
       }
     },
-    "mobile-nixos": {
+    "mobile-nixos-src": {
       "flake": false,
       "locked": {
         "lastModified": 1656299939,
@@ -76,7 +76,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "mobile-nixos": "mobile-nixos",
+        "mobile-nixos-src": "mobile-nixos-src",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs"
       }

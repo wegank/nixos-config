@@ -6,7 +6,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mobile-nixos = {
+    mobile-nixos-src = {
       url = "github:nixos/mobile-nixos";
       flake = false;
     };
@@ -19,7 +19,7 @@
     };
   };
 
-  outputs = { self, home-manager, mobile-nixos, nix-darwin, nixpkgs }:
+  outputs = { self, home-manager, mobile-nixos-src, nix-darwin, nixpkgs }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
       owner = metadata.users.${metadata.owner.name};
@@ -43,7 +43,7 @@
 
       # Set special args.
       setSpecialArgs = host: {
-        inherit owner;
+        inherit mobile-nixos-src owner;
         isDarwin = lib.hasSuffix "darwin" host.platform;
         isLinux = lib.hasSuffix "linux" host.platform;
         isDesktop = (host.profile == "desktop");
@@ -96,14 +96,7 @@
               # Nix Modules.
               ./modules/environment.nix
               # Hardware configuration.
-              (
-                if hostname == "pinephone" then
-                  (import "${mobile-nixos}/lib/configuration.nix" {
-                    device = "pine64-pinephone";
-                  })
-                else
-                  ./hardware + "/${hostname}" + /hardware-configuration.nix
-              )
+              (./hardware + "/${hostname}" + /hardware-configuration.nix)
               # System configuration.
               ./system/configuration.nix
               # Home Manager configuration.
