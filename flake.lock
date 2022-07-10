@@ -73,12 +73,47 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1657413868,
+        "narHash": "sha256-qDC9kUZhGhoDtOzhd6kIMUQHRZNys6/xsJAWrJB+gqU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7802f1b6479d6f04bea5cc94e8290ea61e210ecf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nur-packages": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1657487928,
+        "narHash": "sha256-HpsLu5QzzRPfvXJs2ImT1t2/h9/UM6BUwwsz4Kei9Xo=",
+        "owner": "wegank",
+        "repo": "nur-packages",
+        "rev": "3153628ec0f520917b25fa721efffd2eaf82f6c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wegank",
+        "repo": "nur-packages",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "mobile-nixos-src": "mobile-nixos-src",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nur-packages": "nur-packages"
       }
     },
     "utils": {

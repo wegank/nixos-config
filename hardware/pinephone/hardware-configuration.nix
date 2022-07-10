@@ -1,4 +1,4 @@
-{ lib, pkgs, mobile-nixos-src, ... }:
+{ lib, pkgs, nur-pkgs, mobile-nixos-src, ... }:
 
 {
   imports = [
@@ -8,8 +8,6 @@
   ];
 
   boot.kernelPackages = lib.mkForce (
-    pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor (
-      pkgs.callPackage ./linux-pinephone.nix { }
-    ))
+    pkgs.linuxPackagesFor nur-pkgs.linux_pinephone
   );
 }

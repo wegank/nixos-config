@@ -17,9 +17,12 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
+    nur-packages = {
+      url = github:wegank/nur-packages;
+    };
   };
 
-  outputs = { self, home-manager, mobile-nixos-src, nix-darwin, nixpkgs }:
+  outputs = { self, home-manager, mobile-nixos-src, nix-darwin, nixpkgs, nur-packages }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
       owner = metadata.users.${metadata.owner.name};
@@ -43,12 +46,17 @@
 
       # Set special args.
       setSpecialArgs = host: {
-        inherit mobile-nixos-src owner;
         isDarwin = lib.hasSuffix "darwin" host.platform;
         isLinux = lib.hasSuffix "linux" host.platform;
         isDesktop = (host.profile == "desktop");
         isMobile = (host.profile == "mobile");
         isServer = (host.profile == "server");
+        inherit mobile-nixos-src owner;
+        nur-pkgs = import nur-packages {
+          pkgs = import nixpkgs {
+            system = host.platform;
+          };
+        };
       };
 
       # Set Home Manager template.
