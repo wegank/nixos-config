@@ -7,9 +7,6 @@
 , ...
 } @ args:
 
-let
-  rev = "de9a88a70f0ae5fc0839ff94bf29e8a30af399f8";
-in
 buildLinux (args // {
   version = "5.18.9";
 
@@ -22,20 +19,11 @@ buildLinux (args // {
     sha256 = "sha256-khPoRx1fkx7N5mG4B0MbEZ0QIm5ZHhke6Rq/vkIXMRQ=";
   };
 
-  defconfig = "pinephone_defconfig";
-
-  structuredExtraConfig = with lib.kernel; {
-    #   CC [M]  drivers/video/fbdev/sun5i-eink-neon.o
-    # gcc: error: unrecognized command line option '-mfloat-abi=softfp'
-    # gcc: error: unrecognized command line option '-mfpu=neon'
-    FB_SUN5I_EINK = no;
-  };
-
   kernelPatches = [
     {
       name = "setup-default-on-and-panic-leds";
       patch = fetchpatch {
-        url = "https://raw.githubusercontent.com/NixOS/mobile-nixos/${rev}/devices/pine64-pinephone/kernel/0001-dts-pinephone-Setup-default-on-and-panic-LEDs.patch";
+        url = "https://raw.githubusercontent.com/NixOS/mobile-nixos/de9a88a70f0ae5fc0839ff94bf29e8a30af399f8/devices/pine64-pinephone/kernel/0001-dts-pinephone-Setup-default-on-and-panic-LEDs.patch";
         sha256 = "sha256-Gat478Po6DD+fwn79XmxW0thbJdI33lSHQdVkne+6OA=";
       };
     }
@@ -54,4 +42,15 @@ buildLinux (args // {
       };
     }
   ];
+
+  defconfig = "pinephone_defconfig";
+
+  structuredExtraConfig = with lib.kernel; {
+    #   CC [M]  drivers/video/fbdev/sun5i-eink-neon.o
+    # gcc: error: unrecognized command line option '-mfloat-abi=softfp'
+    # gcc: error: unrecognized command line option '-mfpu=neon'
+    FB_SUN5I_EINK = no;
+  };
+
+  extraMeta.broken = !stdenv.isAarch64;
 } // (args.argsOverride or { }))
