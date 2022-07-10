@@ -21,7 +21,7 @@
     ./net/openssh.nix
   ] ++ lib.optionals isServer [
     ./app/podman.nix
-    ./app/qemu.nix
+    # ./app/qemu.nix
     ./app/vscode-server.nix
     ./dev/android-tools.nix
     ./net/openssh.nix
