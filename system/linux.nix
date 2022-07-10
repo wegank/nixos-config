@@ -8,6 +8,7 @@
     ./media/pipewire.nix
     ./net/cups.nix
     ./net/networkmanager.nix
+    ./sys/fwupd.nix
   ] ++ lib.optionals isDesktop [
     ./app/waydroid.nix
     ./dev/android-tools.nix
