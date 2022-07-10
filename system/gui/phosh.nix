@@ -20,6 +20,7 @@
 
   environment.systemPackages = with pkgs; [
     chatty
+    epiphany
     kgx
     megapixels
   ];
