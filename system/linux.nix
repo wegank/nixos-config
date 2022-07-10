@@ -16,6 +16,7 @@
     ./gnome/gnome.nix
     ./gui/sway.nix
   ] ++ lib.optionals isMobile [
+    ./app/vscode-server.nix
     ./gui/phosh.nix
     ./net/openssh.nix
   ] ++ lib.optionals isServer [

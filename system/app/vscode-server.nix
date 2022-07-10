@@ -1,8 +1,8 @@
 {
   imports = [
     (fetchTarball {
-      url = https://github.com/msteen/nixos-vscode-server/tarball/bc28cc2a7d866b32a8358c6ad61bea68a618a3f5;
-      sha256 = "00aqwrr6bgvkz9bminval7waxjamb792c0bz894ap8ciqawkdgxp";
+      url = https://github.com/msteen/nixos-vscode-server/tarball/178c809a9dbd3f4df25ed7fbe23a52c35233502d;
+      sha256 = "sha256:0a62zj4vlcxjmn7a30gkpq3zbfys3k1d62d9nn2mi42yyv2hcrm1";
     })
   ];
 
