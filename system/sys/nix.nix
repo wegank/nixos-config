@@ -1,4 +1,4 @@
-{ lib, pkgs, isDarwin, isLinux, ... }:
+{ lib, pkgs, isDarwin, isLinux, isServer, ... }:
 
 {
   nix = {
@@ -13,8 +13,18 @@
       max-free = ${toString (1024 * 1024 * 1024)}
     '';
   } // lib.optionalAttrs isLinux {
-    settings.auto-optimise-store = true;
-    gc.dates = "weekly";
+    settings = {
+      substituters = [
+        "https://cache.nixos.org/"
+        "https://cache.weijia.wang"
+      ];
+      trusted-public-keys = [
+        "cache.weijia.wang:2aRaA9TLlndTMKhIgKDdiHiy4JCEYR+N9011PU1VxNo="
+      ];
+    } // lib.optionalAttrs (isLinux && !isServer) {
+      settings.auto-optimise-store = true;
+      gc.dates = "weekly";
+    };
   };
 
   services = lib.optionalAttrs isDarwin {
