@@ -29,6 +29,7 @@
     ./sys/zram.nix
     ./xfce/xfce.nix
     ./www/apache.nix
+    ./www/nix-serve.nix
   ];
 
   # Use the latest Linux kernel.
