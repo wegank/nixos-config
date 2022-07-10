@@ -18,7 +18,7 @@
       auto-optimise-store = !isServer;
       substituters = [
         "https://cache.nixos.org/"
-        "https://cache.weijia.wang"
+        "https://cache.weijia.wang/"
       ];
       trusted-public-keys = [
         "cache.weijia.wang:2aRaA9TLlndTMKhIgKDdiHiy4JCEYR+N9011PU1VxNo="
