@@ -25,6 +25,18 @@ lib.overrideDerivation
 
     defconfig = "pinephone_defconfig";
 
+    structuredExtraConfig = with lib.kernel; {
+      # Compilation error.
+      #     gcc: error: unrecognized command line option '-mfloat-abi=softfp'
+      #     gcc: error: unrecognized command line option '-mfpu=neon'
+      FB_SUN5I_EINK = no;
+
+      IP5XXX_POWER = module;
+
+      BATTERY_RK818 = yes;
+      CHARGER_RK818 = yes;
+    };
+
     kernelPatches = [
       {
         name = "setup-default-on-and-panic-leds";
