@@ -9,9 +9,7 @@
 
   boot.kernelPackages = lib.mkForce (
     pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor (
-      pkgs.callPackage ./linux-pinephone.nix {
-        inherit mobile-nixos-src;
-      }
+      pkgs.callPackage ./linux-pinephone.nix { }
     ))
   );
 }
