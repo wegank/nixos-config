@@ -35,4 +35,19 @@
       nur-pkgs.pinephone-firmware
     ];
   };
+
+  systemd = {
+    packages = [
+      nur-pkgs.eg25-manager
+    ];
+    targets.multi-user.wants = [
+      "eg25-manager.service"
+    ];
+  };
+
+  services = {
+    dbus.packages = [
+      nur-pkgs.eg25-manager
+    ];
+  };
 }
