@@ -4,7 +4,7 @@
   nix = {
     package = pkgs.nixFlakes;
     gc = {
-      automatic = isLinux;
+      automatic = !isDarwin && !isServer;
       options = "--delete-older-than 30d";
     };
     extraOptions = ''
