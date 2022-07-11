@@ -20,10 +20,10 @@ check_machine() {
     case "$OSTYPE" in
     darwin*) machine='macbook' ;;
     linux*)
-        if [[ -f /sys/devices/virtual/dmi/id/sys_vendor ]]; then
-            model=$(tr -d '\0' </sys/devices/virtual/dmi/id/sys_vendor)
-        elif [[ -f /sys/firmware/devicetree/base/model ]]; then
+        if [[ -f /sys/firmware/devicetree/base/model ]]; then
             model=$(tr -d '\0' </sys/firmware/devicetree/base/model)
+        elif [[ -f /sys/devices/virtual/dmi/id/sys_vendor ]]; then
+            model=$(tr -d '\0' </sys/devices/virtual/dmi/id/sys_vendor)
         else
             echo "Unknown machine." && exit 1
         fi
