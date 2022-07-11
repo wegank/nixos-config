@@ -1,13 +1,6 @@
 { lib, pkgs, nur-pkgs, ... }:
 
 {
-  nixpkgs.overlays = [
-    (final: super: {
-      makeModulesClosure = x:
-        super.makeModulesClosure (x // { allowMissing = true; });
-    })
-  ];
-
   boot = {
     kernelPackages = lib.mkForce
       (pkgs.linuxPackagesFor nur-pkgs.linux_pinephone);
