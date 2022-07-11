@@ -6,10 +6,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mobile-nixos-src = {
-      url = "github:nixos/mobile-nixos";
-      flake = false;
-    };
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +18,7 @@
     };
   };
 
-  outputs = { self, home-manager, mobile-nixos-src, nix-darwin, nixpkgs, nur-packages }:
+  outputs = { self, home-manager, nix-darwin, nixpkgs, nur-packages }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
       owner = metadata.users.${metadata.owner.name};
@@ -51,7 +47,7 @@
         isDesktop = (host.profile == "desktop");
         isMobile = (host.profile == "mobile");
         isServer = (host.profile == "server");
-        inherit mobile-nixos-src owner;
+        inherit owner;
         nur-pkgs = import nur-packages {
           pkgs = import nixpkgs {
             system = host.platform;
