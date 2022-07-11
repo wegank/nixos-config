@@ -78,11 +78,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1657570120,
-        "narHash": "sha256-QpxkN5xgFzzTGClBIRLSPacnwlKb4oAfxrQ824sLNJo=",
+        "lastModified": 1657582732,
+        "narHash": "sha256-ibVvNOqjRE+csEIaOxjcE4yM/zLz2Sd9RhG4j8wG25s=",
         "owner": "wegank",
         "repo": "nur-packages",
-        "rev": "e0de08fdda432f9feb24c5f6cdd8fd0c02156936",
+        "rev": "ebff73f942d682054efdb16849d6b080374ad2f6",
         "type": "github"
       },
       "original": {
