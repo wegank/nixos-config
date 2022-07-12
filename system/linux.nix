@@ -28,7 +28,7 @@
     ./net/xrdp.nix
     ./sys/zram.nix
     ./xfce/xfce.nix
-    ./www/apache.nix
+    ./www/nginx.nix
     ./www/nix-serve.nix
   ];
 
