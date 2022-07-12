@@ -17,9 +17,11 @@
     settings = {
       auto-optimise-store = !isServer;
       substituters = [
+        "https://wegank.cachix.org/"
         "https://cache.weijia.wang/"
       ];
       trusted-public-keys = [
+        "wegank.cachix.org-1:xHignps7GtkPP/gYK5LvA/6UFyz98+sgaxBSy7qK0Vs="
         "cache.weijia.wang:2aRaA9TLlndTMKhIgKDdiHiy4JCEYR+N9011PU1VxNo="
       ];
     };

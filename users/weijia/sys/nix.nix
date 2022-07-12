@@ -9,6 +9,7 @@
 
   home = {
     packages = with pkgs; [
+      cachix
       nixpkgs-fmt
       rnix-lsp
     ];
