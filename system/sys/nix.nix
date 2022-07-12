@@ -1,4 +1,4 @@
-{ lib, pkgs, isDarwin, isLinux, isServer, ... }:
+{ lib, pkgs, isDarwin, isLinux, isMobile, isServer, ... }:
 
 {
   nix = {
@@ -18,6 +18,7 @@
       auto-optimise-store = !isServer;
       substituters = [
         "https://wegank.cachix.org/"
+      ] ++ lib.optionals isMobile [
         "https://cache.weijia.wang/"
       ];
       trusted-public-keys = [
