@@ -18,6 +18,12 @@
         '';
       };
     };
+    virtualHosts."pong.weijia.wang" = {
+      root = "/var/www/pong-client";
+      listen = [
+        { addr = "0.0.0.0"; port = 3000; }
+      ];
+    };
   };
 
   services.phpfpm.pools."localhost" = {
