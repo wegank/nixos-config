@@ -1,10 +1,13 @@
-{ config, owner, ... }:
+{ config, ... }:
 
 {
   services.nginx = {
     enable = true;
     virtualHosts."localhost" = {
       root = "/var/www/localhost";
+      listen = [
+        { addr = "0.0.0.0"; port = 8530; }
+      ];
       locations = {
         "= /".extraConfig = ''
           rewrite ^ /index.php;
@@ -32,7 +35,7 @@
 
   networking = {
     firewall = {
-      allowedTCPPorts = [ 80 443 ];
+      allowedTCPPorts = [ 80 443 8530 ];
     };
   };
 }
