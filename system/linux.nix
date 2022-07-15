@@ -30,6 +30,7 @@
     ./xfce/xfce.nix
     ./www/nginx.nix
     ./www/nix-serve.nix
+    ./www/pong.nix
   ];
 
   # Use the latest Linux kernel.
