@@ -22,10 +22,8 @@
               (perpetual-pools-client.override {
                 pongified = true;
                 pools = [
-                  "0xBDF07af974352276b951C77cDCC51165FbC2bD6e"
-                  "0xf7edd0b21b260FD888CbBb8c2C524824e0b3ebfC"
-                  "0xeF698d6a9fa7A5Dba62B71cDc5811b5FECC505f3"
-                  "0xA4aF2845064116f338310b722c494D2aD092bD93"
+                  "0x321b3326ab24bA74a52e038327Adc42264C3093e"
+                  "0x41D60D3271ab0da8640040B4599737A5A31fD6db"
                 ];
               })
               perpetual-pools-keeper
