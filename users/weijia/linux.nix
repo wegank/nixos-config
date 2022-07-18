@@ -1,4 +1,4 @@
-{ lib, pkgs, isDesktop, ... }:
+{ lib, pkgs, isDesktop, isServer, ... }:
 
 {
   imports = [
@@ -11,6 +11,8 @@
     ./gui/sway.nix
     ./www/chromium.nix
     ./www/firefox.nix
+  ] ++ lib.optionals isServer [
+    ./www/chromium.nix
   ];
 
   home = {
