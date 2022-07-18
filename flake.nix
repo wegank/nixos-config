@@ -2,6 +2,9 @@
   description = "NixOS configuration";
 
   inputs = {
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,15 +13,17 @@
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
     nur-packages = {
       url = github:wegank/nur-packages;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, home-manager, nix-darwin, nixpkgs, nur-packages }:
+  outputs = { self, nixpkgs, home-manager, nix-darwin, nur-packages, vscode-server }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
       owner = metadata.users.${metadata.owner.name};
@@ -98,6 +103,7 @@
             specialArgs = setSpecialArgs host;
             modules = [
               # Nix Modules.
+              vscode-server.nixosModule
               ./modules/environment.nix
               # Hardware configuration.
               (./hardware + "/${hostname}" + /hardware-configuration.nix)
