@@ -8,13 +8,21 @@
 , glib
 , dbus-glib
 , zlib
-, kernel
+, bbe
+, bash
+, timetrap
+, netcat
+, cups
+, kernel ? null
 , libsOnly ? false
 , fetchurl
 , undmg
 , perl
 , autoPatchelfHook
 }:
+
+assert (!libsOnly) -> kernel != null;
+assert lib.elem stdenv.hostPlatform.system [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
 
 stdenv.mkDerivation rec {
   version = "17.1.4-51567";
@@ -29,7 +37,7 @@ stdenv.mkDerivation rec {
 
   hardeningDisable = [ "pic" "format" ];
 
-  nativeBuildInputs = [ p7zip undmg perl autoPatchelfHook ]
+  nativeBuildInputs = [ p7zip undmg perl bbe autoPatchelfHook ]
     ++ lib.optionals (!libsOnly) [ makeWrapper ] ++ kernel.moduleBuildDependencies;
 
   buildInputs = with xorg; [ libXrandr libXext libX11 libXcomposite libXinerama ]
@@ -52,7 +60,17 @@ stdenv.mkDerivation rec {
 
   kernelVersion = lib.optionalString (!libsOnly) kernel.modDirVersion;
   kernelDir = lib.optionalString (!libsOnly) "${kernel.dev}/lib/modules/${kernelVersion}";
-  scriptPath = lib.concatStringsSep ":" (lib.optionals (!libsOnly) [ "${util-linux}/bin" "${gawk}/bin" ]);
+
+  libPath = lib.concatStringsSep ":" [ "${glib.out}/lib" "${xorg.libXrandr}/lib" ];
+
+  scriptPath = lib.concatStringsSep ":" (lib.optionals (!libsOnly) [
+    "${util-linux}/bin"
+    "${gawk}/bin"
+    "${bash}/bin"
+    "${timetrap}/bin"
+    "${netcat}/bin"
+    "${cups}/sbin"
+  ]);
 
   buildPhase = ''
     if test -z "$libsOnly"; then
@@ -86,15 +104,36 @@ stdenv.mkDerivation rec {
       mkdir -p $out/lib
 
       if test -z "$libsOnly"; then
+        # prltoolsd contains hardcoded /bin/bash path
+        # we're lucky because it uses only -c command
+        # => replace to /bin/sh
+        bbe -e "s:/bin/bash:/bin/sh\x00\x00:" -o bin/prltoolsd.tmp bin/prltoolsd
+        rm -f bin/prltoolsd
+        mv bin/prltoolsd.tmp bin/prltoolsd
+
         # install binaries
         for i in bin/* sbin/prl_nettool sbin/prl_snapshot; do
+          # also patch binaries to replace /usr/bin/XXX to XXX
+          # here a two possible cases:
+          # 1. it is uses as null terminated string and should be truncated by null;
+          # 2. it is uses inside shell script and should be truncated by space.
+          for p in bin/* sbin/prl_nettool sbin/prl_snapshot sbin/prlfsmountd; do
+            p=$(basename $p)
+            bbe -e "s:/usr/bin/$p\x00:./$p\x00\x00\x00\x00\x00\x00\x00\x00:" -o $i.tmp $i
+            bbe -e "s:/usr/sbin/$p\x00:./$p\x00\x00\x00\x00\x00\x00\x00\x00 :" -o $i $i.tmp
+            bbe -e "s:/usr/bin/$p:$p         :" -o $i.tmp $i
+            bbe -e "s:/usr/sbin/$p:$p          :" -o $i $i.tmp
+          done
+
           install -Dm755 $i $out/$i
         done
 
-        mkdir -p $out/bin
         install -Dm755 ../../tools/prlfsmountd.sh $out/sbin/prlfsmountd
-        wrapProgram $out/sbin/prlfsmountd \
-          --prefix PATH ':' "$scriptPath"
+        for f in $out/bin/* $out/sbin/*; do
+          wrapProgram $f \
+            --prefix LD_LIBRARY_PATH ':' "$libPath" \
+            --prefix PATH ':' "$scriptPath"
+        done
 
         for i in lib/libPrl*.0.0; do
           cp $i $out/lib
@@ -103,6 +142,9 @@ stdenv.mkDerivation rec {
 
         mkdir -p $out/share/man/man8
         install -Dm644 ../mount.prl_fs.8 $out/share/man/man8
+
+        substituteInPlace ../99prltoolsd-hibernate \
+          --replace "/bin/bash" "${bash}/bin/bash"
 
         mkdir -p $out/etc/pm/sleep.d
         install -Dm644 ../99prltoolsd-hibernate $out/etc/pm/sleep.d
@@ -113,7 +155,8 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Parallels Tools for Linux guests";
     homepage = "https://parallels.com";
-    platforms = [ "aarch64-linux" "i686-linux" "x86_64-linux" ];
+    platforms = platforms.linux;
     license = licenses.unfree;
+    maintainers = with maintainers; [ catap wegank ];
   };
 }
