@@ -3,6 +3,8 @@
 {
   imports = [
     ./app/gnupg.nix
+    ./app/vscode-server.nix
+    ./dev/android-tools.nix
     ./gnome/dconf.nix
     ./media/fontconfig.nix
     ./media/pipewire.nix
@@ -11,19 +13,15 @@
     ./sys/fwupd.nix
   ] ++ lib.optionals isDesktop [
     ./app/waydroid.nix
-    ./dev/android-tools.nix
     ./gnome/gdm.nix
     ./gnome/gnome.nix
     ./gui/sway.nix
   ] ++ lib.optionals isMobile [
-    ./app/vscode-server.nix
     ./gui/phosh.nix
     ./net/openssh.nix
   ] ++ lib.optionals isServer [
     ./app/podman.nix
     # ./app/qemu.nix
-    ./app/vscode-server.nix
-    ./dev/android-tools.nix
     ./net/openssh.nix
     ./net/xrdp.nix
     ./sys/zram.nix
