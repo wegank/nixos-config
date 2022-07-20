@@ -2,8 +2,13 @@
   description = "A flake for building Pong";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
-    nur-packages.url = github:wegank/nur-packages;
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+    nur-packages = {
+      url = github:wegank/nur-packages;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nur-packages }:
