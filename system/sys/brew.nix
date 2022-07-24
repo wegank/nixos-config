@@ -9,6 +9,7 @@
   homebrew.casks = [
     "altserver"
     "balenaetcher"
+    "element"
     "emacs"
     "gimp"
     "iterm2"
