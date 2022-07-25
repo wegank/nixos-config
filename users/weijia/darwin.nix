@@ -6,6 +6,6 @@
   ];
 
   home.packages = with pkgs; [
-    # neofetch
+    neofetch
   ];
 }
