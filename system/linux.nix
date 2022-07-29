@@ -12,7 +12,7 @@
     ./net/networkmanager.nix
     ./sys/fwupd.nix
   ] ++ lib.optionals isDesktop [
-    ./app/waydroid.nix
+    # ./app/waydroid.nix
     ./gnome/gdm.nix
     ./gnome/gnome.nix
     ./gui/sway.nix
