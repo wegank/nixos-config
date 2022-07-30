@@ -29,7 +29,7 @@ in
           # Copilot
           github.copilot
           # Python
-          ms-python.python
+          # ms-python.python
           ms-python.vscode-pylance
         ])
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
