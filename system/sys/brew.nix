@@ -22,5 +22,6 @@
     "tunnelblick"
     "utm"
     "vlc"
+    "windscribe"
   ];
 }
