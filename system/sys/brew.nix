@@ -1,9 +1,11 @@
 {
   homebrew = {
     enable = true;
-    autoUpdate = true;
-    brewPrefix = "/opt/homebrew/bin";
-    cleanup = "zap";
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
+    };
   };
 
   homebrew.casks = [
