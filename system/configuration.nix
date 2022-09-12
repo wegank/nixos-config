@@ -10,6 +10,7 @@
     ./sys/nix.nix
     ./x11/xorg-server.nix
   ] ++ lib.optionals (!isMobile) [
+    ./app/podman.nix
     ./dev/postgresql.nix
     ./net/zerotier.nix
   ] ++ lib.optionals isDarwin [

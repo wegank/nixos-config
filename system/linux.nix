@@ -20,7 +20,6 @@
     ./gui/phosh.nix
     ./net/openssh.nix
   ] ++ lib.optionals isServer [
-    ./app/podman.nix
     # ./app/qemu.nix
     ./net/openssh.nix
     ./net/xrdp.nix
