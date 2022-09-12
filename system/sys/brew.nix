@@ -8,6 +8,10 @@
     };
   };
 
+  homebrew.taps = [
+    "homebrew/cask-drivers"
+  ];
+
   homebrew.casks = [
     "altserver"
     "balenaetcher"
@@ -17,6 +21,7 @@
     "iterm2"
     "libreoffice"
     "obs"
+    "prolific-pl2303"
     "r"
     "rectangle"
     "rstudio"
