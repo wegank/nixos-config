@@ -64,11 +64,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1663847533,
-        "narHash": "sha256-mmWmuMgbNfqnhycyHSuMZaB95s5ywXdUWS+DtSfRV3k=",
+        "lastModified": 1663882815,
+        "narHash": "sha256-lBB7Uxzv9/wEH50m+/9U28iQDVIE+uflJ/kNoeJC0Is=",
         "owner": "wegank",
         "repo": "nur-packages",
-        "rev": "c5b9638d4a280233ea615883e6b01351318a814f",
+        "rev": "0342e99077fdbdbd9bce5f933b5265ec9a3fd28e",
         "type": "github"
       },
       "original": {
