@@ -15,10 +15,6 @@ profile = "desktop"
 platform = "aarch64-linux"
 profile = "desktop"
 
-[machines.parallels-unfree]
-platform = "aarch64-linux"
-profile = "desktop"
-
 [machines.pinephone]
 platform = "aarch64-linux"
 profile = "mobile"
