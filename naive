@@ -65,6 +65,14 @@ netinstall() {
         "nixos-install --no-root-passwd --root /mnt --flake github:wegank/nixos-config#$1"
 }
 
+clean() {
+    nix store gc
+}
+
+update() {
+    nix flake update
+}
+
 upgrade() {
     $rebuild switch --flake ".#$1" --no-write-lock-file
 }
@@ -73,13 +81,15 @@ full_upgrade() {
     $rebuild switch --flake ".#$1" --recreate-lock-file
 }
 
-clean() {
-    nix store gc
-}
-
 trap 'exit 1' ERR
 
-if [[ $1 == "upgrade" ]] && [[ $3 == "" ]]; then
+if [[ $1 == "clean" ]] && [[ $2 == "" ]]; then
+    clean
+    exit
+elif [[ $1 == "update" ]] && [[ $2 == "" ]]; then
+    update
+    exit
+elif [[ $1 == "upgrade" ]] && [[ $3 == "" ]]; then
     check_os
     check_machine
     upgrade "${2:-$machine}"
@@ -88,9 +98,6 @@ elif [[ $1 == "full-upgrade" ]] && [[ $3 == "" ]]; then
     check_os
     check_machine
     full_upgrade "${2:-$machine}"
-    exit
-elif [[ $1 == "clean" ]] && [[ $2 == "" ]]; then
-    clean
     exit
 elif [[ $1 == "install" ]] && [[ $3 == "" ]]; then
     check_root
