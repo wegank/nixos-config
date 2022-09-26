@@ -2,8 +2,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ ];
-
   boot = {
     initrd = {
       availableKernelModules = [
