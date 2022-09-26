@@ -15,5 +15,6 @@ sudo ./naive install
 ## Upgrade
 
 ```bash
+./naive update
 ./naive upgrade
 ```
