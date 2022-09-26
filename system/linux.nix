@@ -12,6 +12,7 @@
     ./net/networkmanager.nix
     ./sys/fwupd.nix
   ] ++ lib.optionals isDesktop [
+    ./app/qemu.nix
     # ./app/waydroid.nix
     ./gnome/gdm.nix
     ./gnome/gnome.nix
@@ -20,7 +21,6 @@
     ./gui/phosh.nix
     ./net/openssh.nix
   ] ++ lib.optionals isServer [
-    # ./app/qemu.nix
     ./net/openssh.nix
     ./net/xrdp.nix
     ./sys/zram.nix
@@ -31,7 +31,7 @@
   ];
 
   # Use the latest Linux kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_testing;
 
   # Set time zone.
   time.timeZone = "Europe/Paris";
