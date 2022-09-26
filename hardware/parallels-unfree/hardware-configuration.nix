@@ -2,13 +2,6 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  disabledModules = [ "virtualisation/parallels-guest.nix" ];
-
-  imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
-    ./parallels-guest.nix
-  ];
-
   boot = {
     initrd = {
       availableKernelModules = [
@@ -46,6 +39,8 @@
     enable = true;
     package = (config.boot.kernelPackages.callPackage ./prl-tools.nix { });
   };
+
+  systemd.services.prlshprint.serviceConfig.Type = lib.mkForce "simple";
 
   environment.unfreePackages = [
     "prl-tools"
