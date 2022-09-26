@@ -2,7 +2,7 @@
 
 {
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     gc = {
       automatic = !isDarwin && !isServer;
       options = "--delete-older-than 30d";
