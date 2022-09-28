@@ -12,7 +12,7 @@
     ./app/alacritty.nix
     ./app/vscodium.nix
     ./net/cloudflared.nix
-    ./net/nodejs.nix
+    # ./net/nodejs.nix
   ] ++ lib.optionals isDarwin [
     ./darwin.nix
   ] ++ lib.optionals isLinux [
