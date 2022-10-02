@@ -7,6 +7,10 @@
     };
   };
 
+  systemd.services.NetworkManager-wait-online = {
+    enable = false;
+  };
+
   users.extraUsers.${owner.name} = {
     extraGroups = [
       "networkmanager"
