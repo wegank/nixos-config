@@ -16,7 +16,7 @@ in
           james-yu.latex-workshop
           # Markdown
           davidanson.vscode-markdownlint
-          yzhang.markdown-all-in-one
+          shd101wyy.markdown-preview-enhanced
           # Nix
           jnoortheen.nix-ide
           # OCaml
@@ -87,8 +87,9 @@ in
         "latex-workshop.latex.outDir" = "%TMPDIR%";
         "latex-workshop.view.pdf.viewer" = "tab";
         # Markdown
-        "[markdown]" = {
-          "editor.defaultFormatter" = "yzhang.markdown-all-in-one";
+        "markdown-preview-enhanced" = {
+          "mathRenderingOption" = "MathJax";
+          "previewTheme" = "github-dark.css";
         };
         # Nix
         "nix.enableLanguageServer" = true;
