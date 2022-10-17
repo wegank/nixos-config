@@ -89,7 +89,7 @@ in
         # Markdown
         "markdown-preview-enhanced" = {
           "mathRenderingOption" = "MathJax";
-          "previewTheme" = "github-dark.css";
+          "previewTheme" = "github-light.css";
         };
         # Nix
         "nix.enableLanguageServer" = true;
