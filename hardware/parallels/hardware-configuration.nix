@@ -39,16 +39,24 @@
     enable = true;
     package = with pkgs; (config.boot.kernelPackages.prl-tools.overrideAttrs (old:
       let
-        version = "18.0.2-53077";
+        version = "18.0.3-53079";
         src = fetchurl {
           url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
-          sha256 = "sha256-yrCg3qr96SUCHmT3IAF79/Ha+L82V3nIC6Hb5ugXoGk=";
+          sha256 = "sha256-z9B2nhcTSZr3L30fa54zYi6WnonQ2wezHoneT2tQWAc=";
         };
         patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
           ./prl-tools-6.0.patch
         ];
+        unpackPhase = ''
+          undmg "${src}"
+          export sourceRoot=prl-tools-build
+          7z x "Parallels Desktop.app/Contents/Resources/Tools/prl-tools-lin-arm.iso" -o$sourceRoot
+          if test -z "$libsOnly"; then
+            ( cd $sourceRoot/kmods; tar -xaf prl_mod.tar.gz )
+          fi
+        '';
       in
-      { inherit version src patches; }
+      { inherit version src patches unpackPhase; }
     ));
   };
 
