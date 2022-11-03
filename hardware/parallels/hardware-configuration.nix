@@ -39,13 +39,13 @@
     enable = true;
     package = with pkgs; (config.boot.kernelPackages.prl-tools.overrideAttrs (old:
       let
-        version = "18.0.3-53079";
+        version = "18.1.0-53311";
         src = fetchurl {
           url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
-          sha256 = "sha256-z9B2nhcTSZr3L30fa54zYi6WnonQ2wezHoneT2tQWAc=";
+          sha256 = "sha256-2ROPFIDoV2/sMVsVhcSyn0m1QVMCNb399WzKd/cozws=";
         };
         patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
-          ./prl-tools-6.0.patch
+          # ./prl-tools-6.0.patch
         ];
         unpackPhase = ''
           undmg "${src}"
