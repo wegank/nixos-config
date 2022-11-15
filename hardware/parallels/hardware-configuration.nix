@@ -47,16 +47,8 @@
         patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
           # ./prl-tools-6.0.patch
         ];
-        unpackPhase = ''
-          undmg "${src}"
-          export sourceRoot=prl-tools-build
-          7z x "Parallels Desktop.app/Contents/Resources/Tools/prl-tools-lin-arm.iso" -o$sourceRoot
-          if test -z "$libsOnly"; then
-            ( cd $sourceRoot/kmods; tar -xaf prl_mod.tar.gz )
-          fi
-        '';
       in
-      { inherit version src patches unpackPhase; }
+      { inherit version src patches; }
     ));
   };
 
