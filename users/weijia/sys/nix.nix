@@ -15,6 +15,10 @@
     ];
   };
 
+  nix.settings = {
+    sandbox = true;
+  };
+
   programs = {
     home-manager = {
       enable = true;
