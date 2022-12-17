@@ -28,6 +28,7 @@
     "teamviewer"
     "tunnelblick"
     "utm"
+    "vcv-rack"
     "vlc"
     "windscribe"
   ];
