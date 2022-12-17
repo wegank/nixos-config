@@ -37,19 +37,16 @@
 
   hardware.parallels = {
     enable = true;
-    package = with pkgs; (config.boot.kernelPackages.prl-tools.overrideAttrs (old:
-      let
-        version = "18.1.0-53311";
-        src = fetchurl {
-          url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
-          sha256 = "sha256-2ROPFIDoV2/sMVsVhcSyn0m1QVMCNb399WzKd/cozws=";
-        };
-        patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
-          # ./prl-tools-6.0.patch
-        ];
-      in
-      { inherit version src patches; }
-    ));
+    package = with pkgs; config.boot.kernelPackages.prl-tools.overrideAttrs (old: rec {
+      version = "18.1.1-53328";
+      src = fetchurl {
+        url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
+        hash = "sha256-Vw9i7Diki+hKODeosxfCY5bL/UOfwgzeCC6+QmWfIZw=";
+      };
+      patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
+        # ./prl-tools-6.0.patch
+      ];
+    });
   };
 
   systemd.services.prlshprint.serviceConfig.Type = lib.mkForce "simple";
