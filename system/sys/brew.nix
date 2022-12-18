@@ -20,7 +20,7 @@
     "gimp"
     "iterm2"
     "libreoffice"
-    "logitech-options"
+    "logi-options-plus"
     "microsoft-teams"
     "obs"
     "prolific-pl2303"
