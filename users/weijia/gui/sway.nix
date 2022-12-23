@@ -48,24 +48,5 @@
       wl-clipboard
       wofi
     ];
-    shellAliases = {
-      "codium" = lib.concatStringsSep " " [
-        "codium"
-        "--enable-features=UseOzonePlatform,WaylandWindowDecorations"
-        "--ozone-platform=wayland"
-      ];
-    };
-  };
-
-  programs = {
-    chromium = {
-      package = (pkgs.chromium.override {
-        commandLineArgs = [
-          "--enable-features=UseOzonePlatform,WaylandWindowDecorations"
-          "--ozone-platform=wayland"
-          "--gtk-version=4"
-        ];
-      });
-    };
   };
 }
