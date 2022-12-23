@@ -3,14 +3,6 @@
     pathsToLink = [ "/libexec" ];
   };
 
-  services = {
-    xserver = {
-      displayManager = {
-        defaultSession = "sway";
-      };
-    };
-  };
-
   programs = {
     sway = {
       enable = true;
