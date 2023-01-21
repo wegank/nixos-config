@@ -26,10 +26,6 @@
         "cache.weijia.wang:2aRaA9TLlndTMKhIgKDdiHiy4JCEYR+N9011PU1VxNo="
       ];
     };
-  } // lib.optionalAttrs isDarwin {
-    settings = {
-      sandbox = true;
-    };
   };
 
   services = lib.optionalAttrs isDarwin {
