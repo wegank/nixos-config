@@ -11,6 +11,7 @@
     ./net/cups.nix
     ./net/networkmanager.nix
     ./sys/fwupd.nix
+    ./sys/zram.nix
   ] ++ lib.optionals isDesktop [
     ./app/qemu.nix
     # ./app/waydroid.nix
@@ -23,7 +24,6 @@
   ] ++ lib.optionals isServer [
     ./net/openssh.nix
     ./net/xrdp.nix
-    ./sys/zram.nix
     ./xfce/xfce.nix
     ./www/nginx.nix
     ./www/nix-serve.nix
