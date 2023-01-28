@@ -11,6 +11,7 @@
     packages = with pkgs; [
       cachix
       nixpkgs-fmt
+      nixpkgs-review
       rnix-lsp
     ];
   };
