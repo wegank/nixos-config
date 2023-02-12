@@ -13,6 +13,7 @@
         "mptspi"
         "uhci_hcd"
         "ehci_pci"
+        "xhci_pci"
         "sd_mod"
         "sr_mod"
       ];
@@ -21,8 +22,11 @@
     kernelModules = [ ];
     extraModulePackages = [ ];
     loader = {
-      efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
     };
   };
 
@@ -31,7 +35,7 @@
       device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
     };
-    "/boot" = {
+    "/boot/efi" = {
       device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
