@@ -26,7 +26,3 @@ profile = "mobile"
 [machines.raspberrypi]
 platform = "aarch64-linux"
 profile = "server"
-
-[machines.vmware]
-platform = "x86_64-linux"
-profile = "desktop"

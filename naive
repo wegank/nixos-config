@@ -32,7 +32,6 @@ check_machine() {
         Parallels*) machine='parallels' ;;
         Pine64*) machine='pinephone' ;;
         Raspberry*) machine='raspberrypi' ;;
-        VMware*) machine='vmware' ;;
         *) echo "Unknown machine." && exit 1 ;;
         esac
         ;;
