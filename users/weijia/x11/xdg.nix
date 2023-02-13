@@ -1,6 +1,6 @@
 {
   xdg = {
     enable = true;
-    userDirs.enable = true;
+    # userDirs.enable = true;
   };
 }
