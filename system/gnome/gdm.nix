@@ -8,4 +8,10 @@
       user = owner.name;
     };
   };
+
+  users.extraUsers.${owner.name} = {
+    extraGroups = [
+      "video"
+    ];
+  };
 }
