@@ -7,6 +7,10 @@ fullName = "Weijia Wang"
 gitEmail = "9713184+wegank@users.noreply.github.com"
 initialPassword = "changeme"
 
+[machines.hyperv]
+platform = "x86_64-linux"
+profile = "desktop"
+
 [machines.macbook]
 platform = "aarch64-darwin"
 profile = "desktop"

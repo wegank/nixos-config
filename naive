@@ -28,6 +28,7 @@ check_machine() {
             echo "Unknown machine." && exit 1
         fi
         case "$model" in
+        Microsoft*) machine='hyperv' ;;
         Parallels*) machine='parallels' ;;
         Pine64*) machine='pinephone' ;;
         Raspberry*) machine='raspberrypi' ;;
