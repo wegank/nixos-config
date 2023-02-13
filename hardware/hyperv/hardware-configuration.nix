@@ -38,5 +38,6 @@
 
   virtualisation.hypervGuest = {
     enable = true;
+    videoMode = "1280x800";
   };
 }
