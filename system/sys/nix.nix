@@ -25,7 +25,7 @@
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "wegank.cachix.org-1:xHignps7GtkPP/gYK5LvA/6UFyz98+sgaxBSy7qK0Vs="
-        "cache.weijia.wang:2aRaA9TLlndTMKhIgKDdiHiy4JCEYR+N9011PU1VxNo="
+        "cache.weijia.wang:wyOTKj3LFHYT0XhEyZl7vlpBkvDf9Fkb8TZB5YoQUpQ="
       ];
     };
   };
