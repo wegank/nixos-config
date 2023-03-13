@@ -15,8 +15,11 @@
     kernelModules = [ ];
     extraModulePackages = [ ];
     loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        version = 2;
+        device = "/dev/sda";
+      };
     };
   };
 
@@ -24,10 +27,6 @@
     "/" = {
       device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
-    };
-    "/boot/efi" = {
-      device = "/dev/disk/by-label/boot";
-      fsType = "vfat";
     };
   };
 
