@@ -1,7 +1,9 @@
 {
-  services = {
-    sshd = {
-      enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      passwordAuthentication = false;
+      kbdInteractiveAuthentication = false;
     };
   };
 }

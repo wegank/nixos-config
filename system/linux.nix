@@ -10,6 +10,7 @@
     ./media/pipewire.nix
     ./net/cups.nix
     ./net/networkmanager.nix
+    ./net/openssh.nix
     ./sys/fwupd.nix
     ./sys/zram.nix
   ] ++ lib.optionals isDesktop [
@@ -20,9 +21,7 @@
     ./gui/sway.nix
   ] ++ lib.optionals isMobile [
     ./gui/phosh.nix
-    ./net/openssh.nix
   ] ++ lib.optionals isServer [
-    ./net/openssh.nix
     ./net/xrdp.nix
     ./xfce/xfce.nix
     ./www/nginx.nix
@@ -49,6 +48,7 @@
     description = owner.fullName;
     isNormalUser = true;
     initialPassword = owner.initialPassword;
+    openssh.authorizedKeys.keys = owner.authorizedKeys;
     shell = pkgs.zsh;
     extraGroups = [ "wheel" ];
   };
