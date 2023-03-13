@@ -22,12 +22,15 @@ check_machine() {
     linux*)
         if [[ -f /sys/firmware/devicetree/base/model ]]; then
             model=$(tr -d '\0' </sys/firmware/devicetree/base/model)
+        elif [[ -f /sys/devices/virtual/dmi/id/board_name ]]; then
+            model=$(tr -d '\0' </sys/devices/virtual/dmi/id/board_name)
         elif [[ -f /sys/devices/virtual/dmi/id/sys_vendor ]]; then
             model=$(tr -d '\0' </sys/devices/virtual/dmi/id/sys_vendor)
         else
             echo "Unknown machine." && exit 1
         fi
         case "$model" in
+        DN2800MT*) machine='kimsufi' ;;
         Microsoft*) machine='hyperv' ;;
         Parallels*) machine='parallels' ;;
         Pine64*) machine='pinephone' ;;

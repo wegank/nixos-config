@@ -14,6 +14,10 @@ authorizedKeys = [
 platform = "x86_64-linux"
 profile = "desktop"
 
+[machines.kimsufi]
+platform = "x86_64-linux"
+profile = "server"
+
 [machines.macbook]
 platform = "aarch64-darwin"
 profile = "desktop"
