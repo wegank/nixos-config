@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, owner, ... }:
 
 {
   services.nix-serve = {
@@ -6,9 +6,16 @@
     secretKeyFile = "/var/cache-priv-key.pem";
   };
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = owner.email;
+  };
+
   services.nginx = {
     enable = true;
     virtualHosts."cache.weijia.wang" = {
+      enableACME = true;
+      forceSSL = true;
       locations."/".extraConfig = ''
         proxy_pass http://localhost:${toString config.services.nix-serve.port};
         proxy_set_header Host $host;

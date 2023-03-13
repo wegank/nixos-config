@@ -4,11 +4,12 @@ name = "weijia"
 [users.weijia]
 name = "weijia"
 fullName = "Weijia Wang"
+email = "contact@weijia.wang"
 gitEmail = "9713184+wegank@users.noreply.github.com"
-initialPassword = "changeme"
 authorizedKeys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGpByMZOhm7u06dBLvE2OXAe3BBTgS8jrSAm4a7sBWHT",
 ]
+initialPassword = "changeme"
 
 [machines.hyperv]
 platform = "x86_64-linux"
