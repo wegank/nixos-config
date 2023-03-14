@@ -9,6 +9,7 @@
   };
 
   homebrew.taps = [
+    "PlayCover/playcover"
     "homebrew/cask-drivers"
   ];
 
@@ -23,6 +24,7 @@
     "logi-options-plus"
     "microsoft-teams"
     "obs"
+    "playcover-community"
     "prolific-pl2303"
     "rectangle"
     "teamviewer"
