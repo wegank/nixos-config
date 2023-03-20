@@ -93,6 +93,10 @@ in
         };
         # Nix
         "nix.enableLanguageServer" = true;
+        # Python
+        "[python]" = {
+          "editor.formatOnType" = true;
+        };
         # Miscellaneous
         "diffEditor.ignoreTrimWhitespace" = false;
         "editor.inlineSuggest.enabled" = true;
