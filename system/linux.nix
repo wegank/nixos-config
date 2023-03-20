@@ -32,10 +32,10 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set time zone.
-  time.timeZone = "Europe/Paris";
+  time.timeZone = if isServer then "Europe/Paris" else "Europe/Tallinn";
 
   # Set hostname.
-  networking.hostName = "workstation";
+  networking.hostName = if isServer then "server" else "workstation";
 
   # Set locale.
   i18n.defaultLocale = "fr_FR.UTF-8";
