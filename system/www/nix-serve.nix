@@ -16,6 +16,7 @@ in
   services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
     useACMEHost = domain;
+    acmeRoot = config.security.acme.certs.${domain}.webroot;
     locations."/".extraConfig = ''
       proxy_pass http://localhost:${toString config.services.nix-serve.port};
       proxy_set_header Host $host;

@@ -16,5 +16,6 @@ in
   services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
     useACMEHost = domain;
+    acmeRoot = config.security.acme.certs.${domain}.webroot;
   };
 }
