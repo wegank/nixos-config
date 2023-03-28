@@ -26,6 +26,7 @@
     ./xfce/xfce.nix
     ./www/nginx.nix
     ./www/nix-serve.nix
+    ./www/wordpress.nix
     ./www/wsus-proxy.nix
   ];
 
