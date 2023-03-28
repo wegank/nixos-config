@@ -31,6 +31,7 @@ check_machine() {
         fi
         case "$model" in
         DN2800MT*) machine='ks-1' ;;
+        P9D-M*) machine='ks-le-2' ;;
         Microsoft*) machine='hyperv' ;;
         Parallels*) machine='parallels' ;;
         Pine64*) machine='pinephone' ;;
