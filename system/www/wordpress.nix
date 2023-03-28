@@ -1,17 +1,20 @@
 { config, ... }:
 
+let
+  domain = "in.con.nu";
+in
 {
-  security.acme.certs."in.con.nu" = {
-    webroot = "/var/lib/acme/in.con.nu";
-  };
-
   services.wordpress = {
     webserver = "nginx";
-    sites."in.con.nu" = { };
+    sites.${domain} = { };
   };
 
-  services.nginx.virtualHosts."in.con.nu" = {
+  security.acme.certs.${domain} = {
+    webroot = "/var/lib/acme/${domain}";
+  };
+
+  services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
-    useACMEHost = "in.con.nu";
+    useACMEHost = domain;
   };
 }
