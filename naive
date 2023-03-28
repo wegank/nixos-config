@@ -30,7 +30,6 @@ check_machine() {
             echo "Unknown machine." && exit 1
         fi
         case "$model" in
-        DN2800MT*) machine='ks-1' ;;
         P9D-M*) machine='ks-le-2' ;;
         Microsoft*) machine='hyperv' ;;
         Parallels*) machine='parallels' ;;
