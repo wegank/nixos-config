@@ -1,4 +1,4 @@
-{ config, owner, ... }:
+{ owner, ... }:
 
 {
   security.acme = {
