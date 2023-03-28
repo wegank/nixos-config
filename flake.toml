@@ -15,7 +15,7 @@ initialPassword = "changeme"
 platform = "x86_64-linux"
 profile = "desktop"
 
-[machines.ks-le-2]
+[machines.kimsufi]
 platform = "x86_64-linux"
 profile = "server"
 
