@@ -1,14 +1,18 @@
 { config, pkgs, ... }:
 
 {
+  security.acme.certs."cache.weijia.wang" = {
+    webroot = "/var/lib/acme/cache.weijia.wang";
+  };
+
   services.nix-serve = {
     enable = true;
     secretKeyFile = "/var/cache-priv-key.pem";
   };
 
   services.nginx.virtualHosts."cache.weijia.wang" = {
-    enableACME = true;
     forceSSL = true;
+    useACMEHost = "cache.weijia.wang";
     locations."/".extraConfig = ''
       proxy_pass http://localhost:${toString config.services.nix-serve.port};
       proxy_set_header Host $host;
