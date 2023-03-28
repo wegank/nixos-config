@@ -46,6 +46,8 @@
       patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
         # ./prl-tools-6.0.patch
       ];
+      env.NIX_CFLAGS_COMPILE = lib.optionalString (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.3")
+        "-Wno-incompatible-pointer-types";
     });
   };
 
