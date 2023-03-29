@@ -4,7 +4,6 @@
   imports = [
     ./app/gnupg.nix
     ./app/vscode-server.nix
-    ./dev/android-tools.nix
     ./gnome/dconf.nix
     ./media/fontconfig.nix
     ./media/pipewire.nix
