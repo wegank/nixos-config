@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
   domain = "in.con.nu";
@@ -6,7 +6,14 @@ in
 {
   services.wordpress = {
     webserver = "nginx";
-    sites.${domain} = { };
+    sites.${domain} = {
+      languages = [
+        pkgs.wordpressPackages.languages.fr_FR
+      ];
+      settings = {
+        WPLANG = "fr_FR";
+      };
+    };
   };
 
   security.acme.certs.${domain} = {
