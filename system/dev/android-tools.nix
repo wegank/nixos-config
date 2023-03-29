@@ -1,7 +1,11 @@
-{ owner, ... }:
+{ lib, pkgs, owner, isLinux, ... }:
 
 {
-  users.extraUsers.${owner.name} = {
+  environment.systemPackages = with pkgs; [
+    android-tools
+  ];
+} // lib.optionalAttrs isLinux {
+  users.users.${owner.name} = {
     extraGroups = [
       "adbusers"
     ];

@@ -6,6 +6,7 @@
   imports = [
     ./app/vscode.nix
     ./app/zsh.nix
+    ./dev/android-tools.nix
     ./media/font.nix
     ./sys/nix.nix
     ./x11/xorg-server.nix

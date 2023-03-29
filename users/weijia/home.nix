@@ -5,7 +5,6 @@
 {
   imports = [
     ./app/zsh.nix
-    ./dev/android-tools.nix
     ./dev/git.nix
     ./sys/nix.nix
   ] ++ lib.optionals (!isMobile) [
