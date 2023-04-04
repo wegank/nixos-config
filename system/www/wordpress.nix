@@ -24,15 +24,25 @@ in
             hash = "sha256-H87YguPOQuuPH5T6G9AbJbCmAZmhAt2A21pNcbUnIgM=";
           };
           installPhase = ''
-            runHook preInstall
-
             mkdir -p $out
-            cp -r ./wp-content/languages/* $out/
-
-            runHook postInstall
+            cp -R ./wp-content/languages/* $out/
           '';
         })
       ];
+      themes = {
+        twentytwentythree = with pkgs; stdenvNoCC.mkDerivation rec {
+          pname = "twentytwentythree";
+          version = "1.1";
+          src = fetchzip {
+            url = "https://downloads.wordpress.org/theme/${pname}.${version}.zip";
+            hash = "sha256-8zZJsU0LrlNO5WgXmoTwzsQ8kDVMloMqKtawsn8iQsw=";
+          };
+          installPhase = ''
+            mkdir -p $out
+            cp -R * $out/
+          '';
+        };
+      };
       settings = {
         WPLANG = "fr_FR";
       };
