@@ -13,8 +13,10 @@ in
       adminpassFile = "${pkgs.writeText "adminPass" owner.initialPassword}";
       dbtype = "mysql";
       dbpassFile = "${pkgs.writeText "dbPass" dbpass}";
+      defaultPhoneRegion = "FR";
     };
     database.createLocally = true;
+    enableBrokenCiphersForSSE = false;
     hostName = domain;
     https = true;
   };
