@@ -22,6 +22,7 @@
     ./gui/phosh.nix
   ] ++ lib.optionals isServer [
     ./net/xrdp.nix
+    ./www/nextcloud.nix
     ./www/nginx.nix
     ./www/nix-serve.nix
     ./www/wordpress.nix
