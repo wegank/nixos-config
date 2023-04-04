@@ -7,6 +7,13 @@ in
   services.wordpress = {
     webserver = "nginx";
     sites.${domain} = {
+      package = with pkgs; wordpress.overrideAttrs (old: rec {
+        version = "6.2";
+        src = fetchurl {
+          url = "https://wordpress.org/${old.pname}-${version}.tar.gz";
+          hash = "sha256-FDEo3rZc7SU9yqAplUScSMUWOEVS0e/PsrOPjS9m+QQ=";
+        };
+      });
       languages = [
         pkgs.wordpressPackages.languages.fr_FR
       ];
