@@ -10,7 +10,6 @@
   ] ++ lib.optionals (!isMobile) [
     ./app/alacritty.nix
     ./app/vscodium.nix
-    ./net/cloudflared.nix
     # ./net/nodejs.nix
   ] ++ lib.optionals isDarwin [
     ./darwin.nix
