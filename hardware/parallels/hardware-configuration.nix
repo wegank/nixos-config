@@ -14,6 +14,7 @@
     kernelModules = [ ];
     kernelParams = [
       "root=/dev/sda2"
+      "xhci_hcd.quirks=0x40"
     ];
     extraModulePackages = [ ];
     loader = {
