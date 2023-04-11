@@ -44,9 +44,11 @@
         url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
         hash = "sha256-FpAbQQapIcZ7GsGjH4ZeJ81Ke+NUF7GvgV1wEDLKoUU=";
       };
-      patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
-        # ./prl-tools-6.0.patch
-      ];
+      /*
+        patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
+        ./prl-tools-6.0.patch
+        ];
+      */
       env.NIX_CFLAGS_COMPILE = lib.optionalString (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.3")
         "-Wno-incompatible-pointer-types";
     });
