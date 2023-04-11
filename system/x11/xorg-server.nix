@@ -12,7 +12,4 @@
       xterm
     ];
   };
-
-  # https://github.com/NixOS/nixpkgs/issues/223458
-  hardware.opengl.mesaPackage = pkgs.mesa;
 }
