@@ -2,7 +2,13 @@
 
 {
   environment.systemPackages = with pkgs; [
-    virt-manager
+    (virt-manager.override {
+      spice-gtk = spice-gtk.overrideAttrs (old: {
+        mesonFlags = old.mesonFlags ++ lib.optionals (!isLinux) [
+          "-Degl=disabled"
+        ];
+      });
+    })
   ];
 } // lib.optionalAttrs isLinux {
   virtualisation.libvirtd.enable = true;
