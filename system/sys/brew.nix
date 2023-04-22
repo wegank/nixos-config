@@ -34,10 +34,4 @@
     "vlc"
     "windscribe"
   ];
-
-  # TODO: move more packages above to Nix
-  environment.systemPackages = with pkgs; [
-    rectangle
-    utm
-  ];
 }

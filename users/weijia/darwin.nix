@@ -7,5 +7,7 @@
 
   home.packages = with pkgs; [
     neofetch
+    rectangle
+    utm
   ];
 }
