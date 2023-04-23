@@ -48,9 +48,9 @@ format_and_mount() {
     parted -s /dev/sda mklabel gpt
     parted -s /dev/sda mkpart ESP fat32 1MiB 512MiB
     parted -s /dev/sda set 1 esp on
-    parted -s /dev/sda mkpart primary ext4 512MiB 100%
+    parted -s /dev/sda mkpart primary btrfs 512MiB 100%
     yes | mkfs.fat -F 32 -n boot /dev/sda1
-    yes | mkfs.ext4 -L nixos /dev/sda2
+    yes | mkfs.btrfs -L nixos /dev/sda2
     sleep 1
     mkdir -p /mnt
     mount /dev/sda2 /mnt
