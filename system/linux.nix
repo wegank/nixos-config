@@ -13,7 +13,7 @@
     ./sys/fwupd.nix
     ./sys/zram.nix
   ] ++ lib.optionals isDesktop [
-    ./app/qemu.nix
+    # ./app/qemu.nix
     # ./app/waydroid.nix
     ./gnome/gdm.nix
     ./gnome/gnome.nix
@@ -21,6 +21,7 @@
   ] ++ lib.optionals isMobile [
     ./gui/phosh.nix
   ] ++ lib.optionals isServer [
+    ./app/qemu.nix
     ./net/xrdp.nix
     ./www/nextcloud.nix
     ./www/nginx.nix
