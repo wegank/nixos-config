@@ -54,8 +54,6 @@
     });
   };
 
-  systemd.services.prlshprint.serviceConfig.Type = lib.mkForce "simple";
-
   environment.unfreePackages = [
     "prl-tools"
   ];
