@@ -2,7 +2,6 @@
 
 let
   domain = "cloud.weijia.wang";
-  dbpass = "nextcloud";
 in
 {
   services.nextcloud = {
@@ -12,7 +11,6 @@ in
       adminuser = owner.name;
       adminpassFile = "${pkgs.writeText "adminPass" owner.initialPassword}";
       dbtype = "mysql";
-      dbpassFile = "${pkgs.writeText "dbPass" dbpass}";
       defaultPhoneRegion = "FR";
     };
     database.createLocally = true;
