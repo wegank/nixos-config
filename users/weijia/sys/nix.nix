@@ -10,6 +10,7 @@
   home = {
     packages = with pkgs; [
       cachix
+      nil
       nixpkgs-fmt
       (nixpkgs-review.overrideAttrs (old: {
         patches = [
@@ -20,7 +21,6 @@
           })
         ];
       }))
-      rnix-lsp
     ];
   };
 
