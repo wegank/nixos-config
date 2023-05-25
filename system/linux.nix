@@ -52,7 +52,6 @@
     isNormalUser = true;
     initialPassword = owner.initialPassword;
     openssh.authorizedKeys.keys = owner.authorizedKeys;
-    shell = pkgs.fish;
     extraGroups = [ "wheel" ];
   };
 
