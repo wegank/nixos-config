@@ -2,7 +2,6 @@
 name = "weijia"
 
 [users.weijia]
-name = "weijia"
 fullName = "Weijia Wang"
 email = "contact@weijia.wang"
 gitEmail = "9713184+wegank@users.noreply.github.com"

@@ -26,7 +26,6 @@
   outputs = { self, nixpkgs, home-manager, nix-darwin, nur-packages, vscode-server }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
-      owner = metadata.users.${metadata.owner.name};
 
       lib = nixpkgs.lib;
 
@@ -38,8 +37,10 @@
 
       # Get username.
       getUserName = name: host:
-        let fullName = lib.splitString " "
-          (lib.toLower metadata.users.${name}.fullName); in
+        let
+          fullName = lib.splitString " "
+            (lib.toLower metadata.users.${name}.fullName);
+        in
         if (lib.hasSuffix "darwin" host.platform) then
           lib.concatStrings fullName
         else
@@ -52,7 +53,9 @@
         isDesktop = (host.profile == "desktop");
         isMobile = (host.profile == "mobile");
         isServer = (host.profile == "server");
-        inherit owner;
+        owner = metadata.users.${metadata.owner.name} // {
+          name = getUserName metadata.owner.name host;
+        };
         nur-pkgs = import nur-packages {
           pkgs = import nixpkgs {
             system = host.platform;
