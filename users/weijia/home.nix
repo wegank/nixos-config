@@ -4,7 +4,7 @@
 
 {
   imports = [
-    ./app/zsh.nix
+    ./app/fish.nix
     ./dev/git.nix
     ./sys/nix.nix
   ] ++ lib.optionals (!isMobile) [

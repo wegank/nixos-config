@@ -5,7 +5,7 @@
 {
   imports = [
     ./app/vscode.nix
-    ./app/zsh.nix
+    ./app/fish.nix
     ./dev/android-tools.nix
     ./media/font.nix
     ./sys/nix.nix

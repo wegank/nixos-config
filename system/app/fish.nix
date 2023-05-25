@@ -1,8 +1,14 @@
+{ pkgs, ... }:
+
 {
   programs = {
-    zsh = {
+    fish = {
       enable = true;
       promptInit = "";
     };
   };
+
+  environment.shells = [
+    pkgs.fish
+  ];
 }
