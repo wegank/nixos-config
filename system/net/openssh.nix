@@ -2,8 +2,8 @@
   services.openssh = {
     enable = true;
     settings = {
-      passwordAuthentication = false;
-      kbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
     };
   };
 }
