@@ -14,7 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur-packages = {
-      url = github:wegank/nur-packages;
+      url = "github:wegank/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vscode-server = {
