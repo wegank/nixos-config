@@ -5,6 +5,7 @@
 {
   imports = [
     ./app/fish.nix
+    ./app/neovim.nix
     ./dev/git.nix
     ./sys/nix.nix
   ] ++ lib.optionals (!isMobile) [
