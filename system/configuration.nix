@@ -4,8 +4,8 @@
 
 {
   imports = [
-    ./app/vscode.nix
     ./app/fish.nix
+    ./app/vscode.nix
     ./dev/android-tools.nix
     ./media/font.nix
     ./sys/nix.nix
