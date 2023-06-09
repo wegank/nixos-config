@@ -39,17 +39,11 @@
   hardware.parallels = {
     enable = true;
     package = with pkgs; config.boot.kernelPackages.prl-tools.overrideAttrs (old: rec {
-      version = "18.3.0-53606";
+      version = "18.3.1-53614";
       src = fetchurl {
         url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
-        hash = "sha256-uthaY6266YJqh5UtlI6ifmJVZVC6JTlsEoxEUOihx4I=";
+        hash = "sha256-MZtNxByY2GSoPFeH9mPieCPPNfUgfla+lYgpeD+SgOc=";
       };
-      /*
-        patches = lib.optionals (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.0") [
-        ./prl-tools-6.0.patch
-        ];
-      */
-      env.NIX_CFLAGS_COMPILE = "";
     });
   };
 
