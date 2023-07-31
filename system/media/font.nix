@@ -5,7 +5,7 @@
     fontDir = {
       enable = true;
     };
-    fonts = with pkgs; [
+    packages = with pkgs; [
       powerline-fonts
       source-code-pro
     ] ++ lib.optionals isLinux [
