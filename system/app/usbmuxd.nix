@@ -1,0 +1,5 @@
+{
+  services.usbmuxd = {
+    enable = true;
+  };
+}

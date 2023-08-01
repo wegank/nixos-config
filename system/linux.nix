@@ -3,6 +3,7 @@
 {
   imports = [
     ./app/gnupg.nix
+    ./app/usbmuxd.nix
     ./app/vscode-server.nix
     ./gnome/dconf.nix
     ./media/fontconfig.nix
