@@ -35,7 +35,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set time zone.
-  time.timeZone = if isServer then "Europe/Paris" else "Europe/Tallinn";
+  time.timeZone = "Europe/Paris";
 
   # Set hostname.
   networking.hostName = if isServer then "server" else "workstation";
