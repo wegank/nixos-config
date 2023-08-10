@@ -1,11 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 
 {
   options = {
     environment.unfreePackages = mkOption {
-      type = types.listOf types.string;
+      type = types.listOf types.str;
       default = [ ];
     };
   };
