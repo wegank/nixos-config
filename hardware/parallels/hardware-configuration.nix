@@ -44,6 +44,9 @@
         url = "https://download.parallels.com/desktop/v${lib.versions.major version}/${version}/ParallelsDesktop-${version}.dmg";
         hash = "sha256-mPETZiCI/i6xJ3+ououDKaVwrAxK5cr6L6A16oEgIqk=";
       };
+      patches = [
+        ./prl-tools-6.5.patch
+      ];
     });
   };
 
