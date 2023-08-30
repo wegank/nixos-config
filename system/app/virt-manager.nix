@@ -2,7 +2,9 @@
 
 {
   environment.systemPackages = with pkgs; [
-    virt-manager
+    (virt-manager.overrideAttrs (old: {
+      buildInputs = lib.lists.remove pkgs.desktopToDarwinBundle old.buildInputs;
+    }))
   ];
 } // lib.optionalAttrs isLinux {
   virtualisation.libvirtd.enable = true;
