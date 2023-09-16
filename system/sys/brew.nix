@@ -34,5 +34,6 @@
     "vcv-rack"
     "vlc"
     "windscribe"
+    "zerotier-one"
   ];
 }
