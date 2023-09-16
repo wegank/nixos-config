@@ -45,7 +45,7 @@
         hash = "sha256-y7UC+E5i2cxkOJ9nVI6aQAFJ5kTXv9uaZoMO4/SCS6k=";
       };
       patches = [
-        ./prl-tools-6.5.patch
+        ./linux-6.5.patch
       ];
     });
   };
