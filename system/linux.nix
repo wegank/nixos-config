@@ -33,6 +33,7 @@
 
   # Use the latest Linux kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.swraid.enable = false;
 
   # Set time zone.
   time.timeZone = "Europe/Paris";
