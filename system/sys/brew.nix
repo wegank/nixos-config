@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   homebrew = {
     enable = true;
@@ -34,6 +32,5 @@
     "vcv-rack"
     "vlc"
     "windscribe"
-    "zerotier-one"
   ];
 }
