@@ -8,6 +8,10 @@
     };
   };
 
+  homebrew.brews = [
+    "gmp"
+  ];
+
   homebrew.taps = [
     "PlayCover/playcover"
     "homebrew/cask-drivers"
