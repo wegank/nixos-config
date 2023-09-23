@@ -36,5 +36,6 @@
     "vcv-rack"
     "vlc"
     "windscribe"
+    "zulip"
   ];
 }
