@@ -46,6 +46,7 @@
       };
       patches = [
         ./linux-6.5.patch
+        ./linux-6.6.patch
       ];
     });
   };

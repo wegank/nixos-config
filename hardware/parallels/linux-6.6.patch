@@ -1,0 +1,83 @@
+diff --git a/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c b/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
+index 1a98ede..699ba3b 100644
+--- a/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
++++ b/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
+@@ -172,7 +172,11 @@ static void prlfs_change_attributes(struct inode *inode,
+ 	if (attr->valid & _PATTR_MTIME)
+ 		SET_INODE_TIME(inode->i_mtime, attr->mtime);
+ 	if (attr->valid & _PATTR_CTIME)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
++		SET_INODE_TIME(inode->__i_ctime, attr->ctime);
++#else
+ 		SET_INODE_TIME(inode->i_ctime, attr->ctime);
++#endif
+ 	if (attr->valid & _PATTR_MODE)
+ 		inode->i_mode = (inode->i_mode & S_IFMT) | (attr->mode & 07777);
+ 	if (attr->valid & _PATTR_UID) {
+@@ -530,7 +534,10 @@ struct dentry_operations prlfs_dentry_ops = {
+ 	.d_revalidate = prlfs_d_revalidate,
+ };
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
++inline int __prlfs_getattr(prl_idmap_t *mnt_idmap, u32 request_mask,
++                           struct dentry *dentry, struct kstat *stat)
++#elif LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0)
+ inline int __prlfs_getattr(prl_idmap_t *mnt_idmap, 
+                            struct dentry *dentry, struct kstat *stat)
+ #else
+@@ -548,7 +555,9 @@ inline int __prlfs_getattr(struct dentry *dentry, struct kstat *stat)
+ 	if (ret < 0)
+ 		goto out;
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
++	generic_fillattr(mnt_idmap, request_mask, dentry->d_inode, stat);
++#elif LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0)
+ 	generic_fillattr(mnt_idmap, dentry->d_inode, stat);
+ #else
+ 	generic_fillattr(dentry->d_inode, stat);
+@@ -564,7 +573,14 @@ out:
+ 	return ret;
+ }
+ 
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
++static int prlfs_getattr(prl_idmap_t *mnt_idmap,
++                         const struct path *path, struct kstat *stat,
++                         u32 request_mask, unsigned int query_flags)
++{
++	return __prlfs_getattr(mnt_idmap, request_mask, path->dentry, stat);
++}
++#elif LINUX_VERSION_CODE >= KERNEL_VERSION(5, 12, 0)
+ static int prlfs_getattr(prl_idmap_t *mnt_idmap,
+                          const struct path *path, struct kstat *stat,
+                          u32 request_mask, unsigned int query_flags)
+@@ -924,8 +940,13 @@ static struct inode *prlfs_get_inode(struct super_block *sb, prl_umode_t mode)
+ 	if (inode) {
+ 		inode->i_mode = mode;
+ 		inode->i_blocks = 0;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
++		inode->__i_ctime = prlfs_current_time(inode);
++		inode->i_atime = inode->i_mtime = inode->__i_ctime;
++#else
+ 		inode->i_ctime = prlfs_current_time(inode);
+ 		inode->i_atime = inode->i_mtime = inode->i_ctime;
++#endif
+ 		if (PRLFS_SB(sb)->share) {
+ 			inode->i_uid = current->cred->uid;
+ 			inode->i_gid = current->cred->gid;
+@@ -970,8 +991,13 @@ void prlfs_read_inode(struct inode *inode)
+ 	struct prlfs_fd *pfd;
+ 
+ 	inode->i_mode = S_IFDIR | S_IRUGO | S_IXUGO | S_IWUSR;
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
++	inode->__i_ctime = prlfs_current_time(inode);
++	inode->i_atime = inode->i_mtime = inode->__i_ctime;
++#else
+ 	inode->i_ctime = prlfs_current_time(inode);
+ 	inode->i_atime = inode->i_mtime = inode->i_ctime;
++#endif
+ 	if (PRLFS_SB(sb)->share) {
+ 		inode->i_uid = current->cred->uid;
+ 		inode->i_gid = current->cred->gid;
