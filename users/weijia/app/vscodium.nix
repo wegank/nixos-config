@@ -1,7 +1,7 @@
 { lib, pkgs, isDarwin, ... }:
 
 let
-  package = if isDarwin then pkgs.vscode else pkgs.vscodium;
+  package = pkgs.vscode;
 in
 {
   programs = {
