@@ -28,7 +28,6 @@
     "logi-options-plus"
     "microsoft-teams"
     "obs"
-    "paraview"
     "playcover-community"
     "prolific-pl2303"
     "teamviewer"
