@@ -112,6 +112,7 @@ in
           "zh-hant" = true;
         };
         "terminal.integrated.fontFamily" = "Meslo LG S for Powerline";
+        "remote.SSH.useLocalServer" = false;
         "update.mode" = if isDarwin then "default" else "none";
       };
     };
