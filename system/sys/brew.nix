@@ -30,6 +30,7 @@
     "obs"
     "playcover-community"
     "prolific-pl2303"
+    "sage"
     "teamviewer"
     "tunnelblick"
     "vcv-rack"
