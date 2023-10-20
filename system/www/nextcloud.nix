@@ -14,7 +14,6 @@ in
       defaultPhoneRegion = "FR";
     };
     database.createLocally = true;
-    enableBrokenCiphersForSSE = false;
     hostName = domain;
     https = true;
   };
