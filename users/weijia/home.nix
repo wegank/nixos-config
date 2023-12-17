@@ -10,7 +10,7 @@
     ./sys/nix.nix
   ] ++ lib.optionals (!isMobile) [
     ./app/alacritty.nix
-    ./app/vscodium.nix
+    ./app/vscode.nix
     # ./net/nodejs.nix
   ] ++ lib.optionals isDarwin [
     ./darwin.nix
