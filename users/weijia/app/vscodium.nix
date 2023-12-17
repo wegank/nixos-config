@@ -19,8 +19,6 @@ in
           shd101wyy.markdown-preview-enhanced
           # Nix
           jnoortheen.nix-ide
-          # OCaml
-          ocamllabs.ocaml-platform
           # Shell
           foxundermoon.shell-format
           # TOML
@@ -28,6 +26,8 @@ in
         ]) ++ lib.optionals isDarwin (with pkgs.vscode-extensions; [
           # Copilot
           github.copilot
+          # OCaml
+          ocamllabs.ocaml-platform
           # Python
           # ms-python.python
           ms-python.vscode-pylance
