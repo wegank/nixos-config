@@ -6,7 +6,7 @@ in
 {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud27;
+    package = pkgs.nextcloud28;
     config = {
       adminuser = owner.name;
       adminpassFile = "${pkgs.writeText "adminPass" owner.initialPassword}";
