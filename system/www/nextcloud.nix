@@ -11,9 +11,9 @@ in
       adminuser = owner.name;
       adminpassFile = "${pkgs.writeText "adminPass" owner.initialPassword}";
       dbtype = "mysql";
-      defaultPhoneRegion = "FR";
     };
     database.createLocally = true;
+    extraOptions.default_phone_region = "FR";
     hostName = domain;
     https = true;
   };
