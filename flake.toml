@@ -32,4 +32,4 @@ profile = "mobile"
 
 [machines.raspberrypi]
 platform = "aarch64-linux"
-profile = "server"
+profile = "home-server"

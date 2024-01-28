@@ -51,6 +51,7 @@
         isDarwin = lib.hasSuffix "darwin" host.platform;
         isLinux = lib.hasSuffix "linux" host.platform;
         isDesktop = (host.profile == "desktop");
+        isHomeServer = (host.profile == "home-server");
         isMobile = (host.profile == "mobile");
         isServer = (host.profile == "server");
         owner = metadata.users.${metadata.owner.name} // {

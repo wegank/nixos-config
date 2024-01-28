@@ -1,4 +1,4 @@
-{ lib, pkgs, owner, isDesktop, isMobile, isServer, ... }:
+{ lib, pkgs, owner, isDesktop, isMobile, isHomeServer, isServer, ... }:
 
 {
   imports = [
@@ -21,15 +21,16 @@
     ./gui/sway.nix
   ] ++ lib.optionals isMobile [
     ./gui/phosh.nix
+  ] ++ lib.optionals (isHomeServer || isServer) [
+    ./net/xrdp.nix
+    ./xfce/xfce.nix
   ] ++ lib.optionals isServer [
     ./app/qemu.nix
-    ./net/xrdp.nix
     ./www/nextcloud.nix
     ./www/nginx.nix
     ./www/nix-serve.nix
     ./www/wordpress.nix
     ./www/wsus-proxy.nix
-    ./xfce/xfce.nix
   ];
 
   # Use the latest Linux kernel.
@@ -40,7 +41,10 @@
   time.timeZone = "Europe/Paris";
 
   # Set hostname.
-  networking.hostName = if isServer then "server" else "workstation";
+  networking.hostName =
+    if isHomeServer then "home-server"
+    else if isServer then "server"
+    else "workstation";
 
   # Set locale.
   i18n.defaultLocale = "fr_FR.UTF-8";
