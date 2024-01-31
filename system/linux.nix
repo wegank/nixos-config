@@ -19,18 +19,21 @@
     ./gnome/gdm.nix
     ./gnome/gnome.nix
     ./gui/sway.nix
+  ] ++ lib.optionals isHomeServer [
+    ./net/xrdp.nix
+    ./www/home-assistant.nix
+    ./xfce/xfce.nix
   ] ++ lib.optionals isMobile [
     ./gui/phosh.nix
-  ] ++ lib.optionals (isHomeServer || isServer) [
-    ./net/xrdp.nix
-    ./xfce/xfce.nix
   ] ++ lib.optionals isServer [
     ./app/qemu.nix
+    ./net/xrdp.nix
     ./www/nextcloud.nix
     ./www/nginx.nix
     ./www/nix-serve.nix
     ./www/wordpress.nix
     ./www/wsus-proxy.nix
+    ./xfce/xfce.nix
   ];
 
   # Use the latest Linux kernel.
