@@ -7,6 +7,7 @@
 
   services.home-assistant = {
     enable = true;
+    openFirewall = true;
     config = {
       default_config = { };
     };
@@ -14,9 +15,16 @@
       "bthome"
       "esphome"
       "google_translate"
+      "homekit"
       "met"
       "radio_browser"
+      "xiaomi_ble"
       "yeelight"
     ];
   };
+
+  networking.firewall.allowedTCPPorts = [
+    5353
+    21064
+  ];
 }
