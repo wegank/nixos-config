@@ -12,6 +12,7 @@
       default_config = { };
     };
     extraComponents = [
+      "apple_tv"
       "bthome"
       "esphome"
       "google_translate"
@@ -26,8 +27,12 @@
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [
-    5353
-    21064
-  ];
+  networking.firewall = {
+    allowedTCPPorts = [
+      21064
+    ];
+    allowedUDPPorts = [
+      5353
+    ];
+  };
 }
