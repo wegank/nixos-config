@@ -51,8 +51,8 @@
 
   # Set locale.
   i18n.defaultLocale = "fr_FR.UTF-8";
-  services.xserver.layout = "fr";
-  services.xserver.xkbVariant = "mac";
+  services.xserver.xkb.layout = "fr";
+  services.xserver.xkb.variant = "mac";
   console.useXkbConfig = true;
 
   # Define a user account.
