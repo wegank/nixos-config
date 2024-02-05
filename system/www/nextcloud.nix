@@ -13,7 +13,7 @@ in
       dbtype = "mysql";
     };
     database.createLocally = true;
-    extraOptions.default_phone_region = "FR";
+    settings.default_phone_region = "FR";
     hostName = domain;
     https = true;
   };
