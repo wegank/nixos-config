@@ -22,6 +22,7 @@
       "kegtron"
       "met"
       "radio_browser"
+      "switchbot"
       "xiaomi_ble"
       "yeelight"
     ];
