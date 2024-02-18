@@ -19,7 +19,6 @@
 
   homebrew.casks = [
     "altserver"
-    "balenaetcher"
     "element"
     "gimp"
     "iterm2"
@@ -32,7 +31,6 @@
     "sage"
     "teamviewer"
     "tunnelblick"
-    "vcv-rack"
     "vlc"
     "windscribe"
     "zulip"
