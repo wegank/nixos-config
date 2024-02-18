@@ -4,6 +4,7 @@
 
 {
   imports = [
+    ./app/emacs.nix
     ./app/fish.nix
     ./app/neovim.nix
     ./dev/git.nix

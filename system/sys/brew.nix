@@ -21,7 +21,6 @@
     "altserver"
     "balenaetcher"
     "element"
-    "emacs"
     "gimp"
     "iterm2"
     "libreoffice"
