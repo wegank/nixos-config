@@ -99,6 +99,11 @@ in
             "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
           };
         };
+        # Org
+        "[org]" = {
+          "editor.fontFamily" = "Ubuntu Mono derivative Powerline";
+          "editor.fontSize" = 14;
+        };
         # Python
         "[python]" = {
           "editor.formatOnType" = true;
