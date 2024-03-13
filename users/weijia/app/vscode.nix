@@ -96,7 +96,7 @@ in
         "nix.serverPath" = "nil";
         "nix.serverSettings" = {
           "nil" = {
-            "formatting" = { "command" = [ "nixpkgs-fmt" ]; };
+            "formatting" = { "command" = [ "nixfmt" ]; };
           };
         };
         # Org

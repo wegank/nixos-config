@@ -11,7 +11,7 @@
     packages = with pkgs; [
       cachix
       nil
-      nixpkgs-fmt
+      nixfmt-rfc-style
       nixpkgs-review
     ];
   };
