@@ -16,7 +16,6 @@ in
           james-yu.latex-workshop
           # Markdown
           davidanson.vscode-markdownlint
-          shd101wyy.markdown-preview-enhanced
           # Nix
           jnoortheen.nix-ide
           # Shell
