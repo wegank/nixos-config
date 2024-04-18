@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:wegank/nix-darwin/develop";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur-packages = {
