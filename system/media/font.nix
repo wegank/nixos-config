@@ -5,7 +5,7 @@
     fontDir = {
       enable = true;
     };
-    ${if isLinux then "packages" else "fonts"} = with pkgs; [
+    packages = with pkgs; [
       powerline-fonts
       source-code-pro
     ] ++ lib.optionals isLinux [
