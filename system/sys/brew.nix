@@ -24,7 +24,6 @@
     "iterm2"
     "libreoffice"
     "logi-options-plus"
-    "microsoft-teams"
     "obs"
     "playcover-community"
     "prolific-pl2303"
