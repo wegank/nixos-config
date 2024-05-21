@@ -2,9 +2,7 @@
 
 {
   home = {
-    packages = with pkgs; [
-      git-filter-repo
-    ];
+    packages = with pkgs; [ git-filter-repo ];
   };
 
   programs = {
@@ -20,6 +18,10 @@
       package = pkgs.gitAndTools.gitFull;
       userName = owner.fullName;
       userEmail = owner.gitEmail;
+    };
+
+    gpg = {
+      enable = true;
     };
   };
 }
