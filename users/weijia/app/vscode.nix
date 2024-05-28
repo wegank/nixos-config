@@ -67,6 +67,7 @@ in
           "plaintext" = false;
           "markdown" = false;
         };
+        "github.copilot.editor.enableAutoCompletions" = true;
         # Git
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
