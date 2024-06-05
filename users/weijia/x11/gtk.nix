@@ -9,11 +9,7 @@
     };
     iconTheme = {
       name = "Adwaita";
-      package = pkgs.gnome.gnome-themes-extra;
-    };
-    theme = {
-      name = "Adwaita";
-      package = pkgs.gnome.gnome-themes-extra;
+      package = pkgs.gnome.adwaita-icon-theme;
     };
     gtk3 = {
       extraConfig = {
