@@ -38,11 +38,10 @@
 
   hardware.parallels = {
     enable = true;
-    package = with pkgs; config.boot.kernelPackages.prl-tools.overrideAttrs (finalAttrs: previousAttrs: {
+    package = config.boot.kernelPackages.prl-tools.overrideAttrs (finalAttrs: previousAttrs: {
       version = "19.4.0-54962";
-      src = fetchurl {
-        url = "https://download.parallels.com/desktop/v${lib.versions.major finalAttrs.version}/${finalAttrs.version}/ParallelsDesktop-${finalAttrs.version}.dmg";
-        hash = "sha256-c/MrWUvwY/Z38uOBbetJSVkZlwkdzFhw6wpk1L0BuQs=";
+      src = previousAttrs.src.overrideAttrs {
+        outputHash = "sha256-c/MrWUvwY/Z38uOBbetJSVkZlwkdzFhw6wpk1L0BuQs=";
       };
     });
   };
