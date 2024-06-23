@@ -2,9 +2,6 @@
 
 {
   fonts = {
-    fontDir = {
-      enable = true;
-    };
     packages = with pkgs; [
       powerline-fonts
       source-code-pro
@@ -17,5 +14,9 @@
       noto-fonts-emoji
       noto-fonts-extra
     ];
+  } // lib.optionalAttrs isLinux {
+    fontDir = {
+      enable = true;
+    };
   };
 }
