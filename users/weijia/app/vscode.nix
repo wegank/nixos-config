@@ -36,8 +36,8 @@ in
           {
             publisher = "MS-CEINTL";
             name = "vscode-language-pack-fr";
-            version = "1.67.1";
-            sha256 = "sha256-LLgkg6OgvZxw7q0pcTVF/G4Za2ggTr5YhRWadlw4Nj8=";
+            version = "1.90.2024061209";
+            sha256 = "sha256-A/NcmyxEBUKhmItK0TePgVhJkOJWU0BDeKKCtPKL3GE=";
           }
           # Org mode
           {
@@ -50,8 +50,8 @@ in
           {
             publisher = "WolframResearch";
             name = "wolfram";
-            version = "1.5.0";
-            sha256 = "sha256-DZ73DhwkdqMeSq98Nr6Z6WGcu2js+U7O3nF6kV000sM=";
+            version = "1.7.0";
+            sha256 = "sha256-ArkYX/lRSgb+yEYVnmdSaol9VHdopE3tQ9aYUsOJL3I=";
           }
         ];
       }).overrideAttrs (old: {
