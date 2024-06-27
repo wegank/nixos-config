@@ -83,14 +83,15 @@ in
           "editor.defaultFormatter" = "vscode.typescript-language-features";
         };
         "redhat.telemetry.enabled" = false;
+        # Julia
+        "julia.enableTelemetry" = false;
+        "julia.symbolCacheDownload" = true;
+        "terminal.integrated.commandsToSkipShell" = [
+          "language-julia.interrupt"
+        ];
         # LaTeX
         "latex-workshop.latex.outDir" = "%TMPDIR%";
         "latex-workshop.view.pdf.viewer" = "tab";
-        # Markdown
-        "markdown-preview-enhanced" = {
-          "mathRenderingOption" = "MathJax";
-          "previewTheme" = "github-light.css";
-        };
         # Nix
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nil";
