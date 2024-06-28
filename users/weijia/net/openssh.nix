@@ -9,6 +9,10 @@
         proxyJump = "ssh.lip6.fr";
         user = "weijia";
       };
+      "sysal" = {
+        proxyJump = "ssh.lip6.fr";
+        user = "weijia";
+      };
     };
   };
 }
