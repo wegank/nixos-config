@@ -16,9 +16,7 @@ in
 
   security.acme.certs.${domain} = {
     webroot = "/var/lib/acme/${domain}";
-    extraDomainNames = [
-      subdomain
-    ];
+    extraDomainNames = [ subdomain ];
   };
 
   services.nginx.virtualHosts.${domain} = {

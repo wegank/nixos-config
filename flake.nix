@@ -23,28 +23,31 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-darwin, nur-packages, vscode-server }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nix-darwin,
+      nur-packages,
+      vscode-server,
+    }:
     let
       metadata = builtins.fromTOML (builtins.readFile ./flake.toml);
 
       lib = nixpkgs.lib;
 
       # Filter machines by suffix.
-      filterMachines = suffix:
-        (lib.filterAttrs
-          (_: config: lib.hasSuffix suffix config.platform)
-          metadata.machines);
+      filterMachines =
+        suffix: (lib.filterAttrs (_: config: lib.hasSuffix suffix config.platform) metadata.machines);
 
       # Get username.
-      getUserName = name: host:
+      getUserName =
+        name: host:
         let
-          fullName = lib.splitString " "
-            (lib.toLower metadata.users.${name}.fullName);
+          fullName = lib.splitString " " (lib.toLower metadata.users.${name}.fullName);
         in
-        if (lib.hasSuffix "darwin" host.platform) then
-          lib.concatStrings fullName
-        else
-          lib.head fullName;
+        if (lib.hasSuffix "darwin" host.platform) then lib.concatStrings fullName else lib.head fullName;
 
       # Set special args.
       setSpecialArgs = host: {
@@ -57,11 +60,7 @@
         owner = metadata.users.${metadata.owner.name} // {
           name = getUserName metadata.owner.name host;
         };
-        nur-pkgs = import nur-packages {
-          pkgs = import nixpkgs {
-            system = host.platform;
-          };
-        };
+        nur-pkgs = import nur-packages { pkgs = import nixpkgs { system = host.platform; }; };
       };
 
       # Set Home Manager template.
@@ -70,55 +69,50 @@
           useUserPackages = true;
           useGlobalPkgs = true;
           extraSpecialArgs = setSpecialArgs host;
-          users = lib.mapAttrs'
-            (name: _:
-              lib.nameValuePair
-                (getUserName name host)
-                (./users + "/${name}" + /home.nix))
-            metadata.users;
+          users = lib.mapAttrs' (
+            name: _: lib.nameValuePair (getUserName name host) (./users + "/${name}" + /home.nix)
+          ) metadata.users;
         };
       };
     in
     {
       # macOS configurations.
-      darwinConfigurations = builtins.mapAttrs
-        (hostname: host:
-          nix-darwin.lib.darwinSystem {
-            system = host.platform;
-            specialArgs = setSpecialArgs host;
-            modules = [
-              # Nix Modules.
-              ./modules/environment.nix
-              # System configuration.
-              ./system/configuration.nix
-              # Home Manager configuration.
-              home-manager.darwinModules.home-manager
-              (setHomeManagerTemplate host)
-            ];
-          }
-        )
-        (filterMachines "darwin");
+      darwinConfigurations = builtins.mapAttrs (
+        hostname: host:
+        nix-darwin.lib.darwinSystem {
+          system = host.platform;
+          specialArgs = setSpecialArgs host;
+          modules = [
+            # Nix Modules.
+            ./modules/environment.nix
+            # System configuration.
+            ./system/configuration.nix
+            # Home Manager configuration.
+            home-manager.darwinModules.home-manager
+            (setHomeManagerTemplate host)
+          ];
+        }
+      ) (filterMachines "darwin");
 
       # NixOS configurations.
-      nixosConfigurations = builtins.mapAttrs
-        (hostname: host:
-          nixpkgs.lib.nixosSystem {
-            system = host.platform;
-            specialArgs = setSpecialArgs host;
-            modules = [
-              # Nix Modules.
-              vscode-server.nixosModule
-              ./modules/environment.nix
-              # Hardware configuration.
-              (./hardware + "/${hostname}" + /hardware-configuration.nix)
-              # System configuration.
-              ./system/configuration.nix
-              # Home Manager configuration.
-              home-manager.nixosModules.home-manager
-              (setHomeManagerTemplate host)
-            ];
-          }
-        )
-        (filterMachines "linux");
+      nixosConfigurations = builtins.mapAttrs (
+        hostname: host:
+        nixpkgs.lib.nixosSystem {
+          system = host.platform;
+          specialArgs = setSpecialArgs host;
+          modules = [
+            # Nix Modules.
+            vscode-server.nixosModule
+            ./modules/environment.nix
+            # Hardware configuration.
+            (./hardware + "/${hostname}" + /hardware-configuration.nix)
+            # System configuration.
+            ./system/configuration.nix
+            # Home Manager configuration.
+            home-manager.nixosModules.home-manager
+            (setHomeManagerTemplate host)
+          ];
+        }
+      ) (filterMachines "linux");
     };
 }

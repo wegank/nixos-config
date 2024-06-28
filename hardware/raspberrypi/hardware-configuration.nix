@@ -1,5 +1,11 @@
 # Hardware configuration.
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   boot = {

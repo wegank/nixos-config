@@ -1,10 +1,14 @@
-{ lib, isDarwin, isLinux, ... }:
+{
+  lib,
+  isDarwin,
+  isLinux,
+  ...
+}:
 
-{ } // lib.optionalAttrs isDarwin {
-  homebrew.casks = [
-    "docker"
-  ];
-} // lib.optionalAttrs isLinux {
+{
+}
+// lib.optionalAttrs isDarwin { homebrew.casks = [ "docker" ]; }
+// lib.optionalAttrs isLinux {
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;

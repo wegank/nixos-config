@@ -12,8 +12,6 @@
   };
 
   users.extraUsers.${owner.name} = {
-    extraGroups = [
-      "networkmanager"
-    ];
+    extraGroups = [ "networkmanager" ];
   };
 }

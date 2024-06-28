@@ -1,7 +1,8 @@
-{ lib
-, pkgs
-, isDarwin
-, ...
+{
+  lib,
+  pkgs,
+  isDarwin,
+  ...
 }:
 
 {

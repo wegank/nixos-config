@@ -22,9 +22,7 @@ in
   };
 
   boot.binfmt = {
-    emulatedSystems = [
-      "armv7l-linux"
-    ];
+    emulatedSystems = [ "armv7l-linux" ];
     registrations.armv7l-linux = {
       interpreter = lib.mkForce "${qemu-user-arm}/bin/qemu-arm";
     };

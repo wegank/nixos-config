@@ -1,15 +1,16 @@
-{ lib, pkgs, isDarwin, isLinux, ... }:
+{
+  lib,
+  pkgs,
+  isDarwin,
+  isLinux,
+  ...
+}:
 
-lib.optionalAttrs isDarwin {
-  homebrew.casks = [
-    "xquartz"
-  ];
-} // lib.optionalAttrs isLinux {
+lib.optionalAttrs isDarwin { homebrew.casks = [ "xquartz" ]; }
+// lib.optionalAttrs isLinux {
   services.xserver = {
     enable = true;
-    excludePackages = with pkgs; [
-      xterm
-    ];
+    excludePackages = with pkgs; [ xterm ];
   };
 
   services.libinput = {

@@ -1,4 +1,10 @@
-{ config, lib, owner, pkgs, ... }:
+{
+  config,
+  lib,
+  owner,
+  pkgs,
+  ...
+}:
 
 let
   domain = "cloud.weijia.wang";

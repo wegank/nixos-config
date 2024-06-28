@@ -1,13 +1,16 @@
-{ lib, pkgs, owner, isLinux, ... }:
+{
+  lib,
+  pkgs,
+  owner,
+  isLinux,
+  ...
+}:
 
 {
-  environment.systemPackages = with pkgs; [
-    android-tools
-  ];
-} // lib.optionalAttrs isLinux {
+  environment.systemPackages = with pkgs; [ android-tools ];
+}
+// lib.optionalAttrs isLinux {
   users.users.${owner.name} = {
-    extraGroups = [
-      "adbusers"
-    ];
+    extraGroups = [ "adbusers" ];
   };
 }

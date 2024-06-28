@@ -1,4 +1,9 @@
-{ lib, pkgs, isDarwin, ... }:
+{
+  lib,
+  pkgs,
+  isDarwin,
+  ...
+}:
 
 let
   package = pkgs.vscode;
@@ -7,56 +12,63 @@ in
   programs = {
     vscode = {
       enable = true;
-      package = (pkgs.vscode-with-extensions.override {
-        vscode = package;
-        vscodeExtensions = (with pkgs.vscode-extensions; [
-          # Jupyter
-          ms-toolsai.jupyter
-          # LaTeX
-          james-yu.latex-workshop
-          # Markdown
-          davidanson.vscode-markdownlint
-          # Nix
-          jnoortheen.nix-ide
-          # Shell
-          foxundermoon.shell-format
-          # TOML
-          tamasfe.even-better-toml
-        ]) ++ lib.optionals isDarwin (with pkgs.vscode-extensions; [
-          # Copilot
-          github.copilot
-          # OCaml
-          ocamllabs.ocaml-platform
-          # Python
-          # ms-python.python
-          ms-python.vscode-pylance
-        ])
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          # French Language Pack
-          {
-            publisher = "MS-CEINTL";
-            name = "vscode-language-pack-fr";
-            version = "1.90.2024061209";
-            sha256 = "sha256-A/NcmyxEBUKhmItK0TePgVhJkOJWU0BDeKKCtPKL3GE=";
-          }
-          # Org mode
-          {
-            publisher = "vscode-org-mode";
-            name = "org-mode";
-            version = "1.0.0";
-            sha256 = "sha256-o9CIjMlYQQVRdtTlOp9BAVjqrfFIhhdvzlyhlcOv5rY=";
-          }
-          # Wolfram
-          {
-            publisher = "WolframResearch";
-            name = "wolfram";
-            version = "1.7.0";
-            sha256 = "sha256-ArkYX/lRSgb+yEYVnmdSaol9VHdopE3tQ9aYUsOJL3I=";
-          }
-        ];
-      }).overrideAttrs (old: {
-        inherit (package) pname version;
-      });
+      package =
+        (pkgs.vscode-with-extensions.override {
+          vscode = package;
+          vscodeExtensions =
+            (with pkgs.vscode-extensions; [
+              # Jupyter
+              ms-toolsai.jupyter
+              # LaTeX
+              james-yu.latex-workshop
+              # Markdown
+              davidanson.vscode-markdownlint
+              # Nix
+              jnoortheen.nix-ide
+              # Shell
+              foxundermoon.shell-format
+              # TOML
+              tamasfe.even-better-toml
+            ])
+            ++ lib.optionals isDarwin (
+              with pkgs.vscode-extensions;
+              [
+                # Copilot
+                github.copilot
+                # OCaml
+                ocamllabs.ocaml-platform
+                # Python
+                # ms-python.python
+                ms-python.vscode-pylance
+              ]
+            )
+            ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+              # French Language Pack
+              {
+                publisher = "MS-CEINTL";
+                name = "vscode-language-pack-fr";
+                version = "1.90.2024061209";
+                sha256 = "sha256-A/NcmyxEBUKhmItK0TePgVhJkOJWU0BDeKKCtPKL3GE=";
+              }
+              # Org mode
+              {
+                publisher = "vscode-org-mode";
+                name = "org-mode";
+                version = "1.0.0";
+                sha256 = "sha256-o9CIjMlYQQVRdtTlOp9BAVjqrfFIhhdvzlyhlcOv5rY=";
+              }
+              # Wolfram
+              {
+                publisher = "WolframResearch";
+                name = "wolfram";
+                version = "1.7.0";
+                sha256 = "sha256-ArkYX/lRSgb+yEYVnmdSaol9VHdopE3tQ9aYUsOJL3I=";
+              }
+            ];
+        }).overrideAttrs
+          (old: {
+            inherit (package) pname version;
+          });
       userSettings = {
         # C++
         "C_Cpp.default.cppStandard" = "c++20";
@@ -86,9 +98,7 @@ in
         # Julia
         "julia.enableTelemetry" = false;
         "julia.symbolCacheDownload" = true;
-        "terminal.integrated.commandsToSkipShell" = [
-          "language-julia.interrupt"
-        ];
+        "terminal.integrated.commandsToSkipShell" = [ "language-julia.interrupt" ];
         # LaTeX
         "latex-workshop.latex.outDir" = "%TMPDIR%";
         "latex-workshop.view.pdf.viewer" = "tab";
@@ -97,7 +107,9 @@ in
         "nix.serverPath" = "nil";
         "nix.serverSettings" = {
           "nil" = {
-            "formatting" = { "command" = [ "nixfmt" ]; };
+            "formatting" = {
+              "command" = [ "nixfmt" ];
+            };
           };
         };
         # Org

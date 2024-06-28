@@ -4,7 +4,10 @@
   services.nginx.virtualHosts."localhost" = {
     root = "/var/www/localhost";
     listen = [
-      { addr = "0.0.0.0"; port = 8530; }
+      {
+        addr = "0.0.0.0";
+        port = 8530;
+      }
     ];
     locations = {
       "= /".extraConfig = ''

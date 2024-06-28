@@ -1,9 +1,7 @@
 { ... }:
 
 {
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1w"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
 
   services.home-assistant = {
     enable = true;
@@ -29,11 +27,7 @@
   };
 
   networking.firewall = {
-    allowedTCPPorts = [
-      21064
-    ];
-    allowedUDPPorts = [
-      5353
-    ];
+    allowedTCPPorts = [ 21064 ];
+    allowedUDPPorts = [ 5353 ];
   };
 }

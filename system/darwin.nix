@@ -1,9 +1,7 @@
 { owner, ... }:
 
 {
-  imports = [
-    ./sys/brew.nix
-  ];
+  imports = [ ./sys/brew.nix ];
 
   users.users.${owner.name} = {
     home = "/Users/${owner.name}";

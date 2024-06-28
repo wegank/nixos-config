@@ -8,9 +8,7 @@
     };
   };
 
-  homebrew.brews = [
-    "gmp"
-  ];
+  homebrew.brews = [ "gmp" ];
 
   homebrew.taps = [
     "PlayCover/playcover"

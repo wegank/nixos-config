@@ -1,5 +1,11 @@
 # Hardware configuration.
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 let
   ipv4 = "37.187.92.65";
@@ -19,9 +25,7 @@ in
       ];
       kernelModules = [ ];
     };
-    kernelModules = [
-      "kvm-intel"
-    ];
+    kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     loader = {
       grub = {
@@ -42,14 +46,18 @@ in
     useDHCP = false;
     usePredictableInterfaceNames = false;
     interfaces."eth0" = {
-      ipv4.addresses = [{
-        address = ipv4;
-        prefixLength = 24;
-      }];
-      ipv6.addresses = [{
-        address = ipv6;
-        prefixLength = 128;
-      }];
+      ipv4.addresses = [
+        {
+          address = ipv4;
+          prefixLength = 24;
+        }
+      ];
+      ipv6.addresses = [
+        {
+          address = ipv6;
+          prefixLength = 128;
+        }
+      ];
     };
     defaultGateway = {
       address = ipv4Gateway;
