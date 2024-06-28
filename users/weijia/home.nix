@@ -8,6 +8,7 @@
     ./app/fish.nix
     ./app/neovim.nix
     ./dev/git.nix
+    ./net/openssh.nix
     ./sys/nix.nix
   ] ++ lib.optionals (!isMobile) [
     ./app/alacritty.nix
