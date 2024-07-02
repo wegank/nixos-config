@@ -28,7 +28,6 @@
       settings = {
         auto-optimise-store = !isServer;
         substituters = [
-          "https://nix-community.cachix.org/"
           "https://wegank.cachix.org/"
         ] ++ lib.optionals isMobile [ "https://cache.weijia.wang/" ];
         trusted-public-keys = [
