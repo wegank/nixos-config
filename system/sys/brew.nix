@@ -17,6 +17,7 @@
 
   homebrew.casks = [
     "altserver"
+    "chatgpt"
     "element"
     "gimp"
     "iterm2"
