@@ -21,7 +21,6 @@
     "gimp"
     "iterm2"
     "libreoffice"
-    "logi-options-plus"
     "obs"
     "playcover-community"
     "prolific-pl2303"
