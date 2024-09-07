@@ -7,7 +7,7 @@
 
 {
   boot = {
-    kernelPackages = lib.mkForce (pkgs.linuxPackagesFor nur-pkgs.linux_pinephone);
+    kernelPackages = lib.mkForce (pkgs.linuxPackagesFor nur-pkgs.linux-pinephone);
     kernelParams = [
       # Serial console on ttyS0, using the serial headphone adapter.
       "console=ttyS0,115200"
@@ -39,11 +39,11 @@
   };
 
   systemd = {
-    packages = [ nur-pkgs.eg25-manager ];
+    packages = [ pkgs.eg25-manager ];
     targets.multi-user.wants = [ "eg25-manager.service" ];
   };
 
   services = {
-    dbus.packages = [ nur-pkgs.eg25-manager ];
+    dbus.packages = [ pkgs.eg25-manager ];
   };
 }
