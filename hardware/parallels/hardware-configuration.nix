@@ -44,12 +44,18 @@
 
   hardware.parallels = {
     enable = true;
+    autoMountShares = false;
     package = config.boot.kernelPackages.prl-tools.overrideAttrs (
       finalAttrs: previousAttrs: {
-        version = "19.4.1-54985";
+        version = "20.0.0-55653";
         src = previousAttrs.src.overrideAttrs {
-          outputHash = "sha256-VBHCsxaMI6mfmc/iQ4hJW/592rKck9HilTX2Hq7Hb5s=";
+          outputHash = "sha256-ohGhaLVzXuR/mQ6ToeGbTixKy01F14JSgTs128vGZXM=";
         };
+        buildInputs =
+          previousAttrs.buildInputs
+          ++ (with pkgs; [
+            fuse
+          ]);
       }
     );
   };
