@@ -100,6 +100,7 @@ in
         "julia.symbolCacheDownload" = true;
         "terminal.integrated.commandsToSkipShell" = [ "language-julia.interrupt" ];
         # LaTeX
+        "latex-workshop.formatting.latex" = "latexindent";
         "latex-workshop.latex.outDir" = "%TMPDIR%";
         "latex-workshop.view.pdf.viewer" = "tab";
         # Nix
