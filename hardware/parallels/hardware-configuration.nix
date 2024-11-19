@@ -42,6 +42,8 @@
 
   swapDevices = [ ];
 
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11;
+
   hardware.parallels = {
     enable = true;
     package = config.boot.kernelPackages.prl-tools.overrideAttrs (
