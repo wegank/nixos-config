@@ -42,8 +42,6 @@
 
   swapDevices = [ ];
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_11;
-
   hardware.parallels = {
     enable = true;
     package = config.boot.kernelPackages.prl-tools.overrideAttrs (
@@ -52,6 +50,9 @@
         src = previousAttrs.src.overrideAttrs {
           outputHash = "sha256-3Lo/tAPn3vYvHXV9r8VeMkxKjRPpr8fhADh0vyppC0k=";
         };
+        patches = [
+          ./linux-6.12.patch
+        ];
       }
     );
   };

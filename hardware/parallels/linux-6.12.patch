@@ -1,0 +1,55 @@
+diff --git a/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c b/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
+index d604fff..7974e42 100644
+--- a/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
++++ b/kmods/prl_fs/SharedFolders/Guest/Linux/prl_fs/inode.c
+@@ -872,7 +872,6 @@ int prlfs_writepage(struct page *page, struct writeback_control *wbc) {
+ 	kunmap(page);
+ 	if (ret < 0) {
+ 		rc =  -EIO;
+-		SetPageError(page);
+ 		mapping_set_error(page->mapping, rc);
+ 	}
+ 
+@@ -884,7 +883,7 @@ int prlfs_writepage(struct page *page, struct writeback_control *wbc) {
+ 
+ static int prlfs_write_end(struct file *file, struct address_space *mapping,
+                            loff_t pos, unsigned int len, unsigned int copied,
+-                           struct page *page, void *fsdata)
++                           struct folio *folio, void *fsdata)
+ {
+ 	unsigned int from = pos & (PAGE_SIZE - 1);
+ 	struct inode *inode = mapping->host;
+@@ -894,25 +893,25 @@ static int prlfs_write_end(struct file *file, struct address_space *mapping,
+ 
+ 	DPRINTK("ENTER inode=%p pos=%lld len=%u copied=%u\n", inode, pos, len, copied);
+ 
+-	if (!PageUptodate(page) && copied < len)
+-		zero_user(page, from + copied, len - copied);
++	if (!PageUptodate(&folio->page) && copied < len)
++		zero_user(&folio->page, from + copied, len - copied);
+ 
+-	buf = kmap(page);
++	buf = kmap(&folio->page);
+ 	ret = prlfs_rw(inode, buf + from, copied, &offset, 1, TG_REQ_COMMON);
+-	kunmap(page);
++	kunmap(&folio->page);
+ 
+ 	if (ret < 0)
+ 		goto out;
+ 
+-	if (!PageUptodate(page) && len == PAGE_SIZE)
+-		SetPageUptodate(page);
++	if (!PageUptodate(&folio->page) && len == PAGE_SIZE)
++		SetPageUptodate(&folio->page);
+ 
+ 	if (pos + copied > inode->i_size)
+ 		i_size_write(inode, pos + copied);
+ 
+ out:
+-	unlock_page(page);
+-	put_page(page);
++	unlock_page(&folio->page);
++	put_page(&folio->page);
+ 
+ 	DPRINTK("EXIT ret=%ld\n", ret);
+ 	return ret;
