@@ -46,9 +46,9 @@
     enable = true;
     package = config.boot.kernelPackages.prl-tools.overrideAttrs (
       finalAttrs: previousAttrs: {
-        version = "20.1.2-55742";
+        version = "20.1.3-55743";
         src = previousAttrs.src.overrideAttrs {
-          outputHash = "sha256-R7pQhmLpMOHExPwH4YM3WDnp1PcwpH5Bif3C1/N55Bg=";
+          outputHash = "sha256-5lbTTQucop/jnsVudoqTO9bESR5tdn8NFu9Nm2WphU4=";
         };
         patches = [
           ./linux-6.12.patch
