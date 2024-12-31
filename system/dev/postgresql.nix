@@ -11,7 +11,7 @@
     postgresql =
       {
         enable = true;
-        package = pkgs.postgresql_14;
+        package = pkgs.postgresql_17;
         enableTCPIP = true;
       }
       // lib.optionalAttrs isDarwin {
