@@ -17,7 +17,6 @@
       ./gnome/dconf.nix
       ./media/fontconfig.nix
       ./media/pipewire.nix
-      ./net/cups.nix
       ./net/networkmanager.nix
       ./net/openssh.nix
       ./net/tailscale.nix
@@ -30,6 +29,7 @@
       ./gnome/gdm.nix
       ./gnome/gnome.nix
       ./gui/sway.nix
+      ./net/cups.nix
     ]
     ++ lib.optionals isHomeServer [
       ./net/xrdp.nix
