@@ -1,4 +1,9 @@
 {
+  pkgs,
+  ...
+}:
+
+{
   services = {
     avahi = {
       enable = true;
@@ -13,6 +18,9 @@
         LocalQueueNamingRemoteCUPS RemoteName
         CreateIPPPrinterQueues All
       '';
+      drivers = with pkgs; [
+        gutenprint
+      ];
     };
   };
 }
