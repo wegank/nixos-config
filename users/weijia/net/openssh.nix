@@ -13,6 +13,10 @@
         proxyJump = "ssh.lip6.fr";
         user = "weijia";
       };
+      "tibre" = {
+        proxyJump = "ssh.lip6.fr";
+        user = "weijia";
+      };
       "triade" = {
         proxyJump = "ssh.lip6.fr";
         user = "weijia";
