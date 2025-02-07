@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     neofetch
+    poetry
     rectangle
     utm
   ];
