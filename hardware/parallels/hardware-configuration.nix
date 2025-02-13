@@ -46,23 +46,10 @@
     enable = true;
     package = config.boot.kernelPackages.prl-tools.overrideAttrs (
       finalAttrs: previousAttrs: {
-        version = "20.2.0-55872";
+        version = "20.2.1-55876";
         src = previousAttrs.src.overrideAttrs {
-          outputHash = "sha256-oOilbF5MzZxZXNVQYAp/JxyMVdM0oltG8pGfzzsQ1kY=";
+          outputHash = "sha256-MZuvEjSjRqtdr22bl4NhcKZBNDmdM/axI/8wOP/SvPU=";
         };
-        installPhase =
-          builtins.replaceStrings
-            [
-              "cp prl_fs/SharedFolders/Guest/Linux/prl_fs/prl_fs.ko $out/lib/modules/${config.boot.kernelPackages.kernel.modDirVersion}/extra"
-              "mkdir -p $out/share/man/man8"
-              "install -Dm644 ../mount.prl_fs.8 $out/share/man/man8"
-            ]
-            [
-              ""
-              ""
-              ""
-            ]
-            previousAttrs.installPhase;
       }
     );
   };
