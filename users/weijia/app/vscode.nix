@@ -69,7 +69,7 @@ in
           (old: {
             inherit (package) pname version;
           });
-      userSettings = {
+      profiles.default.userSettings = {
         # C++
         "C_Cpp.default.cppStandard" = "c++20";
         # Copilot
