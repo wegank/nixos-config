@@ -1,4 +1,9 @@
 {
+  pkgs,
+  ...
+}:
+
+{
   services = {
     xserver = {
       desktopManager = {
@@ -6,4 +11,8 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs.gnomeExtensions; [
+    kimpanel
+  ];
 }
