@@ -12,6 +12,7 @@
 {
   nix =
     {
+      enable = true;
       package = pkgs.nixVersions.stable;
       gc = {
         automatic = !isDarwin && !isServer;
@@ -38,6 +39,4 @@
         trusted-users = [ owner.name ];
       };
     };
-
-  services = lib.optionalAttrs isDarwin { nix-daemon.enable = true; };
 }
