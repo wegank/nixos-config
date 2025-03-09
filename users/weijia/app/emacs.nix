@@ -8,7 +8,7 @@
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29;
+    package = pkgs.emacs30;
     extraConfig = lib.optionalString isDarwin ''
       (setq mac-right-option-modifier 'nil)
     '';
