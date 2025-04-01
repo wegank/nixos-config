@@ -77,7 +77,7 @@ in
           "*" = true;
           "yaml" = false;
           "plaintext" = false;
-          "markdown" = false;
+          "markdown" = true;
         };
         "github.copilot.editor.enableAutoCompletions" = true;
         # Git
