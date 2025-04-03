@@ -71,7 +71,14 @@ in
           });
       profiles.default.userSettings = {
         # C++
-        "C_Cpp.default.cppStandard" = "c++20";
+        "C_Cpp.default.cppStandard" = "c++23";
+        "C_Cpp.default.includePath" =
+          lib.optionals isDarwin [
+            "/opt/homebrew/include/**"
+          ]
+          ++ [
+            "\${workspaceFolder}/**"
+          ];
         # Copilot
         "github.copilot.enable" = {
           "*" = true;
