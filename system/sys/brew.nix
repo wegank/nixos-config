@@ -8,7 +8,15 @@
     };
   };
 
-  homebrew.brews = [ "gmp" ];
+  homebrew.brews = [
+    "autoconf"
+    "automake"
+    "flint"
+    "gmp"
+    "libomp"
+    "libtool"
+    "mpfr"
+  ];
 
   homebrew.taps = [
     "PlayCover/playcover"
