@@ -47,22 +47,15 @@ in
               {
                 publisher = "MS-CEINTL";
                 name = "vscode-language-pack-fr";
-                version = "1.90.2024061209";
-                sha256 = "sha256-A/NcmyxEBUKhmItK0TePgVhJkOJWU0BDeKKCtPKL3GE=";
-              }
-              # Org mode
-              {
-                publisher = "vscode-org-mode";
-                name = "org-mode";
-                version = "1.0.0";
-                sha256 = "sha256-o9CIjMlYQQVRdtTlOp9BAVjqrfFIhhdvzlyhlcOv5rY=";
+                version = "1.99.2025041609";
+                sha256 = "sha256-c4p/wVQ9GIxEkF/82ZZpRKxem7IVMK3AzCI/YfZKF4U=";
               }
               # Wolfram
               {
                 publisher = "WolframResearch";
                 name = "wolfram";
-                version = "1.7.0";
-                sha256 = "sha256-ArkYX/lRSgb+yEYVnmdSaol9VHdopE3tQ9aYUsOJL3I=";
+                version = "2.0.1";
+                sha256 = "sha256-6VwGQnsJNLlQ23H4ChSDBmIvWUIcF2NC/uqakqKVYd0=";
               }
             ];
         }).overrideAttrs
