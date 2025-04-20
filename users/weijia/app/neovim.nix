@@ -13,7 +13,10 @@
             owner = "neoclide";
             repo = "coc.nvim";
             rev = "341a73d9a4195f2a4c8056b5dc668564cc9914f5";
-            hash = "sha256-SP3qQXgeIE90nY1RVvhWxv0CExVLy+8g1ZCBLEo8uOA=";
+            postFetch = ''
+              rm -f "$out/README.md" "$out/Readme.md"
+            '';
+            hash = "sha256-RvUUYvPn7CLpSEPBgI6BhMXnA32jA6GCQQG/VYGNTu8=";
           };
         };
     };
