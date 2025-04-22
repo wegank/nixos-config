@@ -46,9 +46,9 @@
     enable = true;
     package = config.boot.kernelPackages.prl-tools.overrideAttrs (
       finalAttrs: previousAttrs: {
-        version = "20.2.2-55879";
+        version = "20.3.0-55895";
         src = previousAttrs.src.overrideAttrs {
-          outputHash = "sha256-MgToUW9H4NWjY+yBxTqg9wZ2VDNbbDu0tIeHcGZxPkM=";
+          outputHash = "sha256-Bs1hgEr5y9TYMGPXGrIOmqMgeyc6wHVo1x7OijTYifY=";
         };
       }
     );
