@@ -17,6 +17,8 @@ in
           vscode = package;
           vscodeExtensions =
             (with pkgs.vscode-extensions; [
+              # French Language Pack
+              ms-ceintl.vscode-language-pack-fr
               # Jupyter
               ms-toolsai.jupyter
               # LaTeX
@@ -43,13 +45,6 @@ in
               ]
             )
             ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-              # French Language Pack
-              {
-                publisher = "MS-CEINTL";
-                name = "vscode-language-pack-fr";
-                version = "1.99.2025041609";
-                sha256 = "sha256-c4p/wVQ9GIxEkF/82ZZpRKxem7IVMK3AzCI/YfZKF4U=";
-              }
               # Wolfram
               {
                 publisher = "WolframResearch";
