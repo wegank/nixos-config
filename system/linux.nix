@@ -38,7 +38,7 @@
     ]
     ++ lib.optionals isMobile [ ./gui/phosh.nix ]
     ++ lib.optionals isServer [
-      # ./app/qemu.nix
+      ./app/qemu.nix
       ./net/xrdp.nix
       ./www/nextcloud.nix
       ./www/nginx.nix
