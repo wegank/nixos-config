@@ -31,10 +31,10 @@ check_machine() {
         fi
         case "$model" in
         P9D-M*) machine='kimsufi' ;;
-        Microsoft*) machine='hyperv' ;;
         Parallels*) machine='parallels' ;;
         Pine64*) machine='pinephone' ;;
         Raspberry*) machine='raspberrypi' ;;
+        Virtual*) machine='hyperv' ;;
         *) echo "Unknown machine." && exit 1 ;;
         esac
         ;;
@@ -59,12 +59,12 @@ format_and_mount() {
 }
 
 install() {
-    nix-shell -p nixUnstable --run \
+    nix-shell -p nixVersions.latest --run \
         "nixos-install --no-root-passwd --root /mnt --flake .#$1"
 }
 
 netinstall() {
-    nix-shell -p nixUnstable --run \
+    nix-shell -p nixVersions.latest --run \
         "nixos-install --no-root-passwd --root /mnt --flake github:wegank/nixos-config#$1"
 }
 
