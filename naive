@@ -11,7 +11,7 @@ check_root() {
 check_os() {
     case "$OSTYPE" in
     darwin*) rebuild='darwin-rebuild' ;;
-    linux*) rebuild='nixos-rebuild --use-remote-sudo --upgrade' ;;
+    linux*) rebuild='nixos-rebuild --sudo --upgrade' ;;
     *) echo "Unknown OS type." && exit 1 ;;
     esac
 }
