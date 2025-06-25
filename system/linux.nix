@@ -13,6 +13,7 @@
   imports =
     [
       ./app/gnupg.nix
+      ./app/podman.nix
       ./app/vscode-server.nix
       ./gnome/dconf.nix
       ./media/fontconfig.nix
