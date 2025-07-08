@@ -75,6 +75,8 @@ in
           "markdown" = true;
         };
         "github.copilot.editor.enableAutoCompletions" = true;
+        # Docker
+        "docker.extension.enableComposeLanguageServer" = false;
         # Git
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
