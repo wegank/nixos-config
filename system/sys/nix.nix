@@ -13,7 +13,7 @@
   nix =
     {
       enable = true;
-      package = pkgs.nixVersions.stable;
+      package = pkgs.nixVersions.nix_2_30;
       gc = {
         automatic = !isDarwin && !isServer;
         options = "--delete-older-than 30d";
