@@ -36,7 +36,9 @@
     ./www/home-assistant.nix
     ./xfce/xfce.nix
   ]
-  ++ lib.optionals isMobile [ ./gui/phosh.nix ]
+  ++ lib.optionals isMobile [
+    ./gui/phosh.nix
+  ]
   ++ lib.optionals isServer [
     ./app/qemu.nix
     ./net/xrdp.nix

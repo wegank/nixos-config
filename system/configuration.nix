@@ -21,6 +21,10 @@
     ./app/virt-manager.nix
     ./dev/postgresql.nix
   ]
-  ++ lib.optionals isDarwin [ ./darwin.nix ]
-  ++ lib.optionals isLinux [ ./linux.nix ];
+  ++ lib.optionals isDarwin [
+    ./darwin.nix
+  ]
+  ++ lib.optionals isLinux [
+    ./linux.nix
+  ];
 }
