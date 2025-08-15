@@ -10,6 +10,11 @@ authorizedKeys = [
 ]
 initialPassword = "changeme"
 
+[machines.ctci]
+platform = "loongarch64-linux"
+profile = "desktop"
+stateVersion = "25.11"
+
 [machines.hyperv]
 platform = "x86_64-linux"
 profile = "desktop"
