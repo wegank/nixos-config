@@ -13,23 +13,29 @@ initialPassword = "changeme"
 [machines.hyperv]
 platform = "x86_64-linux"
 profile = "desktop"
+stateVersion = "22.05"
 
 [machines.kimsufi]
 platform = "x86_64-linux"
 profile = "server"
+stateVersion = "22.05"
 
 [machines.macbook]
 platform = "aarch64-darwin"
 profile = "desktop"
+stateVersion = "22.05"
 
 [machines.parallels]
 platform = "aarch64-linux"
 profile = "desktop"
+stateVersion = "22.05"
 
 [machines.pinephone]
 platform = "aarch64-linux"
 profile = "mobile"
+stateVersion = "22.05"
 
 [machines.raspberrypi]
 platform = "aarch64-linux"
 profile = "home-server"
+stateVersion = "22.05"

@@ -6,6 +6,7 @@
   isMobile,
   isHomeServer,
   isServer,
+  stateVersion,
   ...
 }:
 
@@ -99,5 +100,5 @@
   documentation.nixos.enable = false;
 
   # Set state version.
-  system.stateVersion = "22.05";
+  system.stateVersion = stateVersion;
 }

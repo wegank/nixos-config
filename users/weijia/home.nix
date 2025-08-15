@@ -5,6 +5,7 @@
   isDarwin,
   isLinux,
   isMobile,
+  stateVersion,
   ...
 }:
 
@@ -29,5 +30,5 @@
     ./linux.nix
   ];
 
-  home.stateVersion = "22.05";
+  home.stateVersion = stateVersion;
 }
