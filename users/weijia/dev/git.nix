@@ -1,4 +1,9 @@
-{ pkgs, owner, ... }:
+{
+  pkgs,
+  isDarwin,
+  owner,
+  ...
+}:
 
 {
   home = {
@@ -15,7 +20,7 @@
 
     git = {
       enable = true;
-      package = pkgs.gitAndTools.gitFull;
+      package = if isDarwin then pkgs.git else pkgs.gitAndTools.gitFull;
       userName = owner.fullName;
       userEmail = owner.gitEmail;
     };
