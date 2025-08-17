@@ -47,7 +47,7 @@ profile = "mobile"
 stateVersion = "22.05"
 
 [machines.raspberrypi]
-hostName = "home-server"
+hostName = "raspi"
 platform = "aarch64-linux"
 profile = "home-server"
 stateVersion = "22.05"
