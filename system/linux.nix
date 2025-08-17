@@ -22,7 +22,7 @@
     ./net/networkmanager.nix
     ./net/openssh.nix
     ./net/tailscale.nix
-    ./sys/fwupd.nix
+    # ./sys/fwupd.nix
     ./sys/zram.nix
   ]
   ++ lib.optionals isDesktop [
