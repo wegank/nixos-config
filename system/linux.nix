@@ -6,6 +6,7 @@
   isMobile,
   isHomeServer,
   isServer,
+  hostName,
   stateVersion,
   ...
 }:
@@ -59,13 +60,7 @@
   time.timeZone = "Europe/Paris";
 
   # Set hostname.
-  networking.hostName =
-    if isHomeServer then
-      "home-server"
-    else if isServer then
-      "server"
-    else
-      "workstation";
+  networking.hostName = hostName;
 
   # Set locale.
   i18n.defaultLocale = "fr_FR.UTF-8";

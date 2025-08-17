@@ -60,7 +60,7 @@
         owner = metadata.users.${metadata.owner.name} // {
           name = getUserName metadata.owner.name host;
         };
-        stateVersion = host.stateVersion;
+        inherit (host) hostName stateVersion;
         nur-pkgs = import nur-packages { pkgs = import nixpkgs { system = host.platform; }; };
       };
 

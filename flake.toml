@@ -11,36 +11,43 @@ authorizedKeys = [
 initialPassword = "changeme"
 
 [machines.ctci]
+hostName = "ctci"
 platform = "loongarch64-linux"
 profile = "desktop"
 stateVersion = "25.11"
 
 [machines.hyperv]
+hostName = "nixos"
 platform = "x86_64-linux"
 profile = "desktop"
 stateVersion = "22.05"
 
 [machines.kimsufi]
+hostName = "server"
 platform = "x86_64-linux"
 profile = "server"
 stateVersion = "22.05"
 
 [machines.macbook]
+hostName = "MacBook-Air-de-Weijia.local"
 platform = "aarch64-darwin"
 profile = "desktop"
 stateVersion = "22.05"
 
 [machines.parallels]
+hostName = "workstation"
 platform = "aarch64-linux"
 profile = "desktop"
 stateVersion = "22.05"
 
 [machines.pinephone]
+hostName = "pinephone"
 platform = "aarch64-linux"
 profile = "mobile"
 stateVersion = "22.05"
 
 [machines.raspberrypi]
+hostName = "home-server"
 platform = "aarch64-linux"
 profile = "home-server"
 stateVersion = "22.05"
