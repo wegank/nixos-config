@@ -32,7 +32,7 @@ stateVersion = "22.05"
 hostName = "MacBook-Air-de-Weijia.local"
 platform = "aarch64-darwin"
 profile = "desktop"
-stateVersion = "22.05"
+stateVersion = "25.11"
 
 [machines.parallels]
 hostName = "workstation"
