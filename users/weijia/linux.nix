@@ -23,7 +23,7 @@
   home = {
     packages = with pkgs; [
       # Userland.
-      neofetch
+      fastfetch
       screen
       tmux
     ];

@@ -4,7 +4,7 @@
   imports = [ ./app/texlive.nix ];
 
   home.packages = with pkgs; [
-    neofetch
+    fastfetch
     poetry
     rectangle
     utm
