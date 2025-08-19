@@ -21,6 +21,10 @@
         proxyJump = "ssh.lip6.fr";
         user = "weijia";
       };
+      "weijia.perso.lip6.fr" = {
+        proxyJump = "ssh.lip6.fr";
+        user = "weijia";
+      };
     };
   };
 }
