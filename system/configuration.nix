@@ -4,22 +4,19 @@
   lib,
   isDarwin,
   isLinux,
-  isMobile,
   ...
 }:
 
 {
   imports = [
     ./app/fish.nix
+    ./app/virt-manager.nix
     ./app/vscode.nix
     ./dev/android-tools.nix
+    ./dev/postgresql.nix
     ./media/font.nix
     ./sys/nix.nix
     ./x11/xorg-server.nix
-  ]
-  ++ lib.optionals (!isMobile) [
-    ./app/virt-manager.nix
-    ./dev/postgresql.nix
   ]
   ++ lib.optionals isDarwin [
     ./darwin.nix

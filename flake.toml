@@ -40,12 +40,6 @@ platform = "aarch64-linux"
 profile = "desktop"
 stateVersion = "22.05"
 
-[machines.pinephone]
-hostName = "pinephone"
-platform = "aarch64-linux"
-profile = "mobile"
-stateVersion = "22.05"
-
 [machines.raspberrypi]
 hostName = "raspi"
 platform = "aarch64-linux"

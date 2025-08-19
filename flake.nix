@@ -13,10 +13,6 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur-packages = {
-      url = "github:wegank/nur-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +25,6 @@
       nixpkgs,
       home-manager,
       nix-darwin,
-      nur-packages,
       vscode-server,
     }:
     let
@@ -55,13 +50,11 @@
         isLinux = lib.hasSuffix "linux" host.platform;
         isDesktop = (host.profile == "desktop");
         isHomeServer = (host.profile == "home-server");
-        isMobile = (host.profile == "mobile");
         isServer = (host.profile == "server");
         owner = metadata.users.${metadata.owner.name} // {
           name = getUserName metadata.owner.name host;
         };
         inherit (host) hostName stateVersion;
-        nur-pkgs = import nur-packages { pkgs = import nixpkgs { system = host.platform; }; };
       };
 
       # Set Home Manager template.

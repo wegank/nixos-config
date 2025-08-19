@@ -4,23 +4,20 @@
   lib,
   isDarwin,
   isLinux,
-  isMobile,
   stateVersion,
   ...
 }:
 
 {
   imports = [
+    ./app/alacritty.nix
     ./app/emacs.nix
     ./app/fish.nix
     ./app/neovim.nix
+    ./app/vscode.nix
     ./dev/git.nix
     ./net/openssh.nix
     ./sys/nix.nix
-  ]
-  ++ lib.optionals (!isMobile) [
-    ./app/alacritty.nix
-    ./app/vscode.nix
     # ./net/nodejs.nix
   ]
   ++ lib.optionals isDarwin [
