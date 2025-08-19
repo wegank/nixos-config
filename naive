@@ -33,7 +33,6 @@ check_machine() {
         CTCI*) machine='ctci' ;;
         P9D-M*) machine='kimsufi' ;;
         Parallels*) machine='parallels' ;;
-        Pine64*) machine='pinephone' ;;
         Raspberry*) machine='raspberrypi' ;;
         Virtual*) machine='hyperv' ;;
         *) echo "Unknown machine." && exit 1 ;;
