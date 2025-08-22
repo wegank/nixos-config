@@ -20,7 +20,7 @@ stateVersion = "25.11"
 hostName = "nixos"
 platform = "x86_64-linux"
 profile = "desktop"
-stateVersion = "22.05"
+stateVersion = "25.11"
 
 [machines.kimsufi]
 hostName = "server"
