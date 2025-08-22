@@ -37,6 +37,10 @@
     "/boot/efi" = {
       device = "/dev/disk/by-label/boot";
       fsType = "vfat";
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
     };
   };
 
@@ -44,6 +48,5 @@
 
   virtualisation.hypervGuest = {
     enable = true;
-    videoMode = "1280x800";
   };
 }
