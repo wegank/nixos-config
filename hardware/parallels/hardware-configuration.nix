@@ -46,10 +46,15 @@
     enable = true;
     package = config.boot.kernelPackages.prl-tools.overrideAttrs (
       finalAttrs: previousAttrs: {
-        version = "20.4.1-55996";
+        version = "26.0.0-57238";
         src = previousAttrs.src.overrideAttrs {
-          outputHash = "sha256-CEyP8YZPLzjVAAjOaUqwQ4Ilzk9ybAtTTZUGZbSRrKQ=";
+          outputHash = "sha256-UuQGW1qYLGVLqAzApPKBqfOZdS23mCPsID4D0HATHNw=";
         };
+        installPhase =
+          builtins.replaceStrings
+            [ "cp prl_fs_freeze" "cp prl_notifier" ]
+            [ "# cp prl_fs_freeze" "# cp prl_notifierre" ]
+            previousAttrs.installPhase;
       }
     );
   };
