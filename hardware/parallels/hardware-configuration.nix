@@ -53,7 +53,7 @@
         installPhase =
           builtins.replaceStrings
             [ "cp prl_fs_freeze" "cp prl_notifier" ]
-            [ "# cp prl_fs_freeze" "# cp prl_notifierre" ]
+            [ "# cp prl_fs_freeze" "# cp prl_notifier" ]
             previousAttrs.installPhase;
       }
     );
