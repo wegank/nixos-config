@@ -50,11 +50,6 @@
         src = previousAttrs.src.overrideAttrs {
           outputHash = "sha256-UuQGW1qYLGVLqAzApPKBqfOZdS23mCPsID4D0HATHNw=";
         };
-        installPhase =
-          builtins.replaceStrings
-            [ "cp prl_fs_freeze" "cp prl_notifier" ]
-            [ "# cp prl_fs_freeze" "# cp prl_notifier" ]
-            previousAttrs.installPhase;
       }
     );
   };
