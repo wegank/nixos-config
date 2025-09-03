@@ -5,6 +5,9 @@
   ...
 }:
 
+let
+  domain = "me.con.nu";
+in
 {
   services.harmonia.enable = true;
   services.harmonia.signKeyPaths = [ "/var/lib/secrets/harmonia.secret" ];
@@ -22,7 +25,7 @@
   services.nginx = {
     enable = true;
     recommendedTlsSettings = true;
-    virtualHosts."me.con.nu" = {
+    virtualHosts.${domain} = {
       enableACME = true;
       forceSSL = true;
 
