@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     fastfetch
+    msolve
     poetry
     rectangle
     utm
