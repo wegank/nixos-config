@@ -70,7 +70,6 @@ in
         # Copilot
         "github.copilot.enable" = {
           "*" = true;
-          "yaml" = false;
           "plaintext" = false;
           "markdown" = true;
         };
