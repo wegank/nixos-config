@@ -44,11 +44,11 @@
 
   hardware.parallels = {
     enable = true;
-    package = config.boot.kernelPackages.prl-tools.overrideAttrs (
+    package = pkgs.prl-tools.overrideAttrs (
       finalAttrs: previousAttrs: {
-        version = "26.0.1-57243";
+        version = "26.1.1-57288";
         src = previousAttrs.src.overrideAttrs {
-          outputHash = "sha256-jAOP9g3JCKxOFyiDdYJvvM9ecGDbMuCARCEu4sE7Cfs=";
+          outputHash = "sha256-11IyKI2oOffzSPTB65XksZI3PD9W2+0SPZIfpb0RLuU=";
         };
       }
     );
