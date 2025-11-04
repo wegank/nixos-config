@@ -20,7 +20,7 @@
 
     git = {
       enable = true;
-      package = if isDarwin then pkgs.git else pkgs.gitAndTools.gitFull;
+      package = if isDarwin then pkgs.git else pkgs.gitFull;
       settings = {
         user.name = owner.fullName;
         user.email = owner.gitEmail;
