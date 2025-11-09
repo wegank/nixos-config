@@ -15,14 +15,13 @@
     "gmp"
     "libomp"
     "libtool"
-    "M2"
+    "msolve"
     "mpfr"
   ];
 
   homebrew.taps = [
     "PlayCover/playcover"
     "homebrew/cask-drivers"
-    "Macaulay2/tap"
   ];
 
   homebrew.casks = [
