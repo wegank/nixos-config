@@ -12,6 +12,7 @@
   nix = {
     enable = true;
     package = pkgs.nixVersions.nix_2_32;
+    settings.trusted-users = [ owner.name ];
     gc = {
       automatic = !isDarwin && !isServer;
       options = "--delete-older-than 30d";
@@ -35,7 +36,6 @@
         "wegank.cachix.org-1:xHignps7GtkPP/gYK5LvA/6UFyz98+sgaxBSy7qK0Vs="
         # "cache.weijia.wang:eoqjYwQwXrRbuIpOjGG+pfMk5jD6BkjUoTHaSZE6pLU="
       ];
-      trusted-users = [ owner.name ];
     };
   };
 }
