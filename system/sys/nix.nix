@@ -12,7 +12,6 @@
   nix = {
     enable = true;
     package = pkgs.nixVersions.nix_2_32;
-    settings.trusted-users = [ owner.name ];
     gc = {
       automatic = !isDarwin && !isServer;
       options = "--delete-older-than 30d";
@@ -22,6 +21,11 @@
       min-free = ${toString (100 * 1024 * 1024)}
       max-free = ${toString (1024 * 1024 * 1024)}
     '';
+  }
+  // lib.optionalAttrs isDarwin {
+    settings = {
+      trusted-users = [ owner.name ];
+    };
   }
   // lib.optionalAttrs isLinux {
     gc.dates = "weekly";
@@ -36,6 +40,7 @@
         "wegank.cachix.org-1:xHignps7GtkPP/gYK5LvA/6UFyz98+sgaxBSy7qK0Vs="
         # "cache.weijia.wang:eoqjYwQwXrRbuIpOjGG+pfMk5jD6BkjUoTHaSZE6pLU="
       ];
+      trusted-users = [ owner.name ];
     };
   };
 }
