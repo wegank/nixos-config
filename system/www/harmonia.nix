@@ -33,4 +33,23 @@ in
       '';
     };
   };
+
+  services.frp = {
+    enable = true;
+    role = "client";
+    settings = {
+      common = {
+        server_addr = "5.39.78.26";
+        server_port = 7000;
+        "auth.tokenSource.type" = "file";
+        "auth.tokenSource.file.path" = "/var/lib/secrets/frp.secret";
+      };
+      harmonia = {
+        type = "http";
+        local_ip = "127.0.0.1";
+        local_port = 80;
+        custom_domains = domain;
+      };
+    };
+  };
 }
