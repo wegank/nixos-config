@@ -15,19 +15,12 @@ in
   nix.settings.allowed-users = [ "harmonia" ];
 
   networking.firewall.allowedTCPPorts = [
-    443
     80
   ];
 
-  security.acme.defaults.email = owner.email;
-  security.acme.acceptTerms = true;
-
   services.nginx = {
     enable = true;
-    recommendedTlsSettings = true;
     virtualHosts.${domain} = {
-      enableACME = true;
-      forceSSL = true;
 
       locations."/".extraConfig = ''
         proxy_pass http://127.0.0.1:5000;
