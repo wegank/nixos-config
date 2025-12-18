@@ -34,7 +34,7 @@ in
     };
   };
 
-  services.frp = {
+  services.frp.instances.${domain} = {
     enable = true;
     role = "client";
     settings = {
