@@ -10,7 +10,10 @@
       hostName = "120.202.241.46:32203";
       sshKey = "${config.home.homeDirectory}/.ssh/id_ed25519";
       sshUser = "wegank";
-      supportedFeatures = [ "gccarch-la64v1.0" ];
+      supportedFeatures = [
+        "big-parallel"
+        "gccarch-la64v1.0"
+      ];
       systems = [ "loongarch64-linux" ];
     })
   ];
