@@ -30,7 +30,7 @@
     packages = with pkgs; [
       cachix
       nil
-      nixfmt-rfc-style
+      nixfmt
       nixpkgs-review
     ];
   };
