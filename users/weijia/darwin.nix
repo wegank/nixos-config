@@ -5,7 +5,6 @@
 
   home.packages = with pkgs; [
     fastfetch
-    poetry
     rectangle
     utm
   ];
