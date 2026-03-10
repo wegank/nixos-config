@@ -15,7 +15,6 @@
     "gmp"
     "libomp"
     "libtool"
-    "msolve"
     "mpfr"
   ];
 
