@@ -19,7 +19,6 @@
   ];
 
   homebrew.taps = [
-    "PlayCover/playcover"
     "homebrew/cask-drivers"
   ];
 
@@ -30,7 +29,6 @@
     "iterm2"
     "libreoffice"
     "obs"
-    "playcover-community"
     "prolific-pl2303"
     "sage"
     "teamviewer"
