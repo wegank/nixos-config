@@ -9,8 +9,8 @@ let
   domain = "me.con.nu";
 in
 {
-  services.harmonia.enable = true;
-  services.harmonia.signKeyPaths = [ "/var/lib/secrets/harmonia.secret" ];
+  services.harmonia.cache.enable = true;
+  services.harmonia.cache.signKeyPaths = [ "/var/lib/secrets/harmonia.secret" ];
 
   nix.settings.allowed-users = [ "harmonia" ];
 
