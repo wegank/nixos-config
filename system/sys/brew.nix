@@ -15,6 +15,7 @@
     "gmp"
     "libomp"
     "libtool"
+    "llvm"
     "mpfr"
   ];
 
