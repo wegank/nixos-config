@@ -14,7 +14,7 @@
         source-code-pro
       ]
       ++ lib.optionals isLinux [
-        cantarell-fonts
+        adwaita-fonts
         font-awesome
         hack-font
         noto-fonts

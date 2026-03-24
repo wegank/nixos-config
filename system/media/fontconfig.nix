@@ -6,7 +6,7 @@
   fonts.fontconfig = {
     defaultFonts = {
       sansSerif = [
-        "Cantarell"
+        "Adwaita Sans"
         "Noto Sans CJK SC"
         "Noto Sans CJK TC"
         "Noto Sans CJK JP"
