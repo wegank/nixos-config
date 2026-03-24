@@ -16,6 +16,9 @@
         gtk-application-prefer-dark-theme = true;
       };
     };
+    gtk4 = {
+      theme = null;
+    };
   };
 
   home = {
