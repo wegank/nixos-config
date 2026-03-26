@@ -77,11 +77,11 @@ update() {
 }
 
 upgrade() {
-    $rebuild switch --flake ".#$1" --no-write-lock-file
+    $rebuild switch --flake ".#$1" --no-write-lock-file --show-trace
 }
 
 full_upgrade() {
-    $rebuild switch --flake ".#$1" --recreate-lock-file
+    $rebuild switch --flake ".#$1" --recreate-lock-file --show-trace
 }
 
 trap 'exit 1' ERR
