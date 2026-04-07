@@ -46,9 +46,9 @@
     enable = true;
     package = pkgs.prl-tools.overrideAttrs (
       finalAttrs: previousAttrs: {
-        version = "26.2.2-57373";
+        version = "26.3.0-57392";
         src = previousAttrs.src.overrideAttrs {
-          outputHash = "sha256-QsMMPzF7RRw2etxHLiOHc8ofSrO+rk/3T1Y3+zAnwnM=";
+          outputHash = "sha256-pVTlGXZVb/Q/6/i7B07KWb3Kg+5Lm06+v4ERxUjoW7o=";
         };
       }
     );
