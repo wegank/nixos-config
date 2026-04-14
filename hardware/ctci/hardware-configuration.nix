@@ -59,7 +59,7 @@
     };
   };
   nix.extraOptions = ''
-    extra-substituters = https://cache.nix4loong.cn https://mirrors.nju.edu.cn/nix-channels/store
+    extra-substituters = https://cache.nix4loong.cn https://mirrors.nju.edu.cn/nix4loong/store
     extra-trusted-public-keys = cache.nix4loong.cn-1:zmkwLihdSUyy6OFSVgvK3br0EaUEczLiJgDfvOmm3pA=
   '';
 
