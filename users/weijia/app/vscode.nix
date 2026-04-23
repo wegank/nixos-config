@@ -77,6 +77,7 @@ in
         # Docker
         "docker.extension.enableComposeLanguageServer" = false;
         # Git
+        "git.addAICoAuthor" = "chatAndAgent";
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
         # Java
