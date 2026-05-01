@@ -29,6 +29,7 @@
   home = {
     packages = with pkgs; [
       nil
+      nixd
       nixfmt
       nixpkgs-review
     ];
