@@ -23,6 +23,9 @@
       kernelModules = [ ];
     };
     kernelModules = [ ];
+    kernelParams = [
+      "iomem=relaxed"
+    ];
     blacklistedKernelModules = [
       "r8188eu"
       "rtl8xxxu"
