@@ -2,50 +2,50 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        forwardAgent = false;
-        addKeysToAgent = "no";
-        compression = false;
-        serverAliveInterval = 0;
-        serverAliveCountMax = 3;
-        hashKnownHosts = false;
-        userKnownHostsFile = "~/.ssh/known_hosts";
-        controlMaster = "no";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "no";
+        AddKeysToAgent = false;
+        Compression = false;
+        ControlMaster = false;
+        ControlPath = "~/.ssh/master-%r@%n:%p";
+        ControlPersist = false;
+        ForwardAgent = false;
+        ServerAliveCountMax = 3;
+        ServerAliveInterval = 0;
+        HashKnownHosts = false;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
       };
       "nanmen" = {
-        hostname = "120.202.241.46";
-        port = 32203;
-        user = "wegank";
+        HostName = "120.202.241.46";
+        Port = 32203;
+        User = "wegank";
       };
       "ssh.lip6.fr" = {
-        user = "weijia";
+        User = "weijia";
       };
       "groebner" = {
-        proxyJump = "ssh.lip6.fr";
-        user = "weijia";
+        ProxyJump = "ssh.lip6.fr";
+        User = "weijia";
       };
       "posso" = {
-        proxyJump = "ssh.lip6.fr";
-        user = "weijia";
+        ProxyJump = "ssh.lip6.fr";
+        User = "weijia";
       };
       "sysal" = {
-        proxyJump = "ssh.lip6.fr";
-        user = "weijia";
+        ProxyJump = "ssh.lip6.fr";
+        User = "weijia";
       };
       "tibre" = {
-        proxyJump = "ssh.lip6.fr";
-        user = "weijia";
+        ProxyJump = "ssh.lip6.fr";
+        User = "weijia";
       };
       "triade" = {
-        proxyJump = "ssh.lip6.fr";
-        user = "weijia";
+        ProxyJump = "ssh.lip6.fr";
+        User = "weijia";
       };
       "weijia.perso.lip6.fr" = {
-        proxyJump = "ssh.lip6.fr";
-        user = "weijia";
+        ProxyJump = "ssh.lip6.fr";
+        User = "weijia";
       };
     };
   };
