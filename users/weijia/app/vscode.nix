@@ -118,6 +118,7 @@ in
         # Python
         "[python]" = {
           "editor.formatOnType" = true;
+          "editor.defaultFormatter" = "ms-python.black-formatter";
         };
         # Miscellaneous
         "diffEditor.ignoreTrimWhitespace" = false;
