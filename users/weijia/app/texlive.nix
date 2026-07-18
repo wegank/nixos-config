@@ -2,6 +2,6 @@
 
 {
   home = {
-    packages = with pkgs; [ texlive.combined.scheme-full ];
+    packages = with pkgs; [ texliveFull ];
   };
 }
