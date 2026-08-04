@@ -24,8 +24,6 @@
   home = {
     packages = with pkgs; [
       gsettings-desktop-schemas
-      gtk-engine-murrine
-      gtk_engines
       lxappearance
     ];
   };
