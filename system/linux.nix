@@ -46,7 +46,6 @@
     ./www/nix-serve.nix
     ./www/wordpress.nix
     ./www/wsus-proxy.nix
-    ./xfce/xfce.nix
   ];
 
   # Use the latest Linux kernel.
