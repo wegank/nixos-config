@@ -16,6 +16,8 @@
     ./app/podman.nix
     ./app/vscode-server.nix
     ./gnome/dconf.nix
+    ./gnome/gdm.nix
+    ./gnome/gnome.nix
     ./media/fontconfig.nix
     ./media/pipewire.nix
     ./net/networkmanager.nix
@@ -27,20 +29,14 @@
   ++ lib.optionals isDesktop [
     # ./app/qemu.nix
     # ./app/waydroid.nix
-    ./gnome/gdm.nix
-    ./gnome/gnome.nix
     ./gui/sway.nix
     ./net/cups.nix
   ]
   ++ lib.optionals isHomeServer [
-    ./gnome/gdm.nix
-    ./gnome/gnome.nix
     ./www/home-assistant.nix
   ]
   ++ lib.optionals isServer [
     ./app/qemu.nix
-    ./gnome/gdm.nix
-    ./gnome/gnome.nix
     ./www/nextcloud.nix
     ./www/nginx.nix
     ./www/nix-serve.nix
