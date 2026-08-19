@@ -33,9 +33,9 @@
     ./net/cups.nix
   ]
   ++ lib.optionals isHomeServer [
-    ./net/xrdp.nix
+    ./gnome/gdm.nix
+    ./gnome/gnome.nix
     ./www/home-assistant.nix
-    ./xfce/xfce.nix
   ]
   ++ lib.optionals isServer [
     ./app/qemu.nix
