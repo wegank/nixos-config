@@ -77,6 +77,13 @@ in
 
   powerManagement.cpuFreqGovernor = "ondemand";
 
+  systemd.sleep.settings.Sleep = {
+    AllowHibernation = "no";
+    AllowHybridSleep = "no";
+    AllowSuspend = "no";
+    AllowSuspendThenHibernate = "no";
+  };
+
   hardware = {
     cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
