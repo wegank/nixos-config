@@ -31,15 +31,7 @@
       "rtl8xxxu"
     ];
     extraModulePackages = [
-      (config.boot.kernelPackages.rtl8188eus-aircrack.overrideAttrs {
-        src = pkgs.fetchFromGitHub {
-          owner = "gglluukk";
-          repo = "rtl8188eus";
-          rev = "52bd147aac056a865bfa1e52375c3cffd93364ec";
-          hash = "sha256-euh+aWxCxmC3cW7AP9ZssZJckp4rz4picYqy33rJ6AI=";
-        };
-        meta.broken = false;
-      })
+      config.boot.kernelPackages.rtl8188eus-aircrack
     ];
     loader = {
       systemd-boot.enable = true;
