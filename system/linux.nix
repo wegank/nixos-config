@@ -39,7 +39,8 @@
   ]
   ++ lib.optionals isServer [
     ./app/qemu.nix
-    ./net/xrdp.nix
+    ./gnome/gdm.nix
+    ./gnome/gnome.nix
     ./www/nextcloud.nix
     ./www/nginx.nix
     ./www/nix-serve.nix
