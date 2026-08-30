@@ -33,6 +33,7 @@
     "obs"
     "prolific-pl2303"
     "sage"
+    "shichizip-zs"
     "teamviewer"
     "tunnelblick"
     "vlc"
