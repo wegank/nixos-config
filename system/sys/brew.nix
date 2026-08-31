@@ -28,6 +28,7 @@
     "altserver"
     "element"
     "gimp"
+    "iloader"
     "iterm2"
     "libreoffice"
     "obs"
