@@ -25,7 +25,6 @@
   ];
 
   homebrew.casks = [
-    "altserver"
     "element"
     "gimp"
     "iloader"
