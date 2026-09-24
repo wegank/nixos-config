@@ -27,6 +27,7 @@
     ./sys/zram.nix
   ]
   ++ lib.optionals isDesktop [
+    ./app/ibus.nix
     # ./app/qemu.nix
     # ./app/waydroid.nix
     ./gui/sway.nix
