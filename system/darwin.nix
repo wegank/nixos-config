@@ -1,5 +1,6 @@
 {
   owner,
+  pkgs,
   ...
 }:
 
@@ -9,6 +10,10 @@
   users.users.${owner.name} = {
     home = "/Users/${owner.name}";
   };
+
+  environment.systemPackages = with pkgs; [
+    macaulay2
+  ];
 
   system.primaryUser = owner.name;
 
