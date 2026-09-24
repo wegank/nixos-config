@@ -13,7 +13,6 @@
     ./www/chromium.nix
   ]
   ++ lib.optionals isDesktop [
-    ./app/fcitx.nix
     ./app/texlive.nix
     ./gnome/dconf.nix
     ./gui/sway.nix
