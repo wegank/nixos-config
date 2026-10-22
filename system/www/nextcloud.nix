@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  owner,
   pkgs,
   ...
 }:
@@ -14,8 +13,6 @@ in
     enable = true;
     package = pkgs.nextcloud35;
     config = {
-      adminuser = owner.name;
-      adminpassFile = "${pkgs.writeText "adminPass" owner.initialPassword}";
       dbtype = "mysql";
     };
     database.createLocally = true;
