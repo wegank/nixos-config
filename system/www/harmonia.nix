@@ -14,10 +14,6 @@ in
 
   nix.settings.allowed-users = [ "harmonia" ];
 
-  networking.firewall.allowedTCPPorts = [
-    80
-  ];
-
   services.nginx = {
     enable = true;
     virtualHosts.${domain} = {
@@ -28,6 +24,7 @@ in
         proxy_redirect http:// https://;
         proxy_http_version 1.1;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
       '';
